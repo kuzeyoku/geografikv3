@@ -1,74 +1,105 @@
-<footer class="site-footer">
-    <div class="container">
-        <div class="site-footer__top">
-            <div class="row">
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                    <div class="footer-widget__column footer-widget__usefull-link">
-                        <div class="footer-widget__title-box">
-                            <h3 class="footer-widget__title">Classic Series</h3>
+<footer>
+    <section class="footer-area pt-80 pb-40">
+        <div class="container">
+            <div class="row wow fadeInUp">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-widget mb-40">
+                        <div class="question-area">
+                            <div class="question-icon">
+                                <i class="flaticon-support"></i>
+                            </div>
+                            <div class="question-text">
+                                <p>Have a question? Call us 24/7</p>
+                                <span><a href="tel:987547587587">(987) 547587587</a></span>
+                            </div>
                         </div>
-                        <div class="footer-widget__link-box">
-                            <ul class="footer-widget__link list-unstyled">
-                                <li><a href="/product/10/share-102s-pro-v2">SHARE 102S PRO V2</a></li>
-                                <li><a href="/product/9/share-202s-rpo-v2">SHARE 202S PRO V2</a></li>
-                                <li><a href="/product/8/share-303s-pro-v2">SHARE 303S PRO V2</a></li>
+                        <div class="footer-address">
+                            <h5>Contact Info</h5>
+                            <p>Street House, Greater London NW1 8JR, UK</p>
+                        </div>
+                        <div class="grb__social footer-social">
+                            <ul>
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                    <div class="footer-widget__column footer-widget__usefull-link">
-                        <div class="footer-widget__title-box">
-                            <h3 class="footer-widget__title">GİMBAL SERİES</h3>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget mb-40 cat-m">
+                        <div class="footer-widget-title">
+                            <h4>Categories</h4>
                         </div>
-                        <div class="footer-widget__link-box">
-                            <ul class="footer-widget__link list-unstyled">
-                                <li><a href="/product/7/share-t2">SHARE T2</a></li>
-                                <li><a href="/product/6/psdk-102s-v3">PSDK 102S V3</a></li>
-                                <li><a href="/product/5/share-203s-pro">SHARE 203S PRO</a></li>
-                                <li><a href="/product/4/share-304s-pro">SHARE 304S PRO</a></li>
-                                <li><a href="/product/1/share-100m-pro">SHARE 100M PRO</a></li>
-                                <li><a href="/product/2/share-6100x">SHARE 6100X</a></li>
-                                <li><a href="/product/3/share-2600-sdk">SHARE 2600 SDK</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                    <div class="footer-widget__column footer-widget__services">
-                        <div class="footer-widget__title-box">
-                            <h3 class="footer-widget__title">SHARE SLAM</h3>
-                        </div>
-                        <ul class="footer-widget__link list-unstyled">
-                            <li><a href="#">SHARE Image Module</a></li>
-                            <li><a href="#">SHARE Capture</a></li>
+                        <ul class="footer-list">
+                            <li><a href="#">Laptops & Computers</a></li>
+                            <li><a href="#">Home & Life Style</a></li>
+                            <li><a href="#">Men's Fashion</a></li>
+                            <li><a href="#">Women's Fashion</a></li>
+                            <li><a href="#">Sport & Gyms</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                    <div class="footer-widget__column footer-widget__services">
-                        <div class="footer-widget__title-box">
-                            <h3 class="footer-widget__title">SUPPORT</h3>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-widget mb-40">
+                        <div class="footer-widget-title">
+                            <h4>About Company</h4>
                         </div>
-                        <ul class="footer-widget__link list-unstyled">
-                            <li><a href="#">SHARE Data Manager</a></li>
-                            <li><a href="#">Online Model</a></li>
-                            <li><a href="#">About Us</a></li>
+                        <ul class="footer-list">
+                            <li><a href="about.html.htm">About Company</a></li>
+                            <li><a href="contact.html.htm">Contact Us</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><a href="#">Mission & Vision</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="footer-widget mb-40 srv-m">
+                        <div class="footer-widget-title">
+                            <h4>Service Schedule</h4>
+                        </div>
+                        <ul class="worktime-list">
+                            <li>
+                                <h5>Saturday - Sunday - Mon</h5>
+                                <span>8:30 AM - 10 PM</span>
+                            </li>
+                            <li>
+                                <h5>Tuesday - Wed - Thurs</h5>
+                                <span>9:30 AM - 12 PM</span>
+                            </li>
+                            <li>
+                                <h5>Friday : <span>Closed</span></h5>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="site-footer__bottom">
+    </section>
+    <div class="copyright-area">
         <div class="container">
-            <div class="site-footer__bottom-inner">
-                <p class="site-footer__bottom-text">@lang('front/footer.copyright', ['year' => date('Y'), 'title' => config('general.title')])</p>
-                <ul class="list-unstyled site-footer__bottom-menu">
-                    <li><a href="{{ route('contact.index') }}">@lang('front/footer.contact')</a></li>
-                    <li><a href="#">@lang('front/footer.terms')</a></li>
-                    <li><a href="#">@lang('front/footer.privacy')</a></li>
-                </ul>
+            <div class="row wow fadeInUp align-items-center">
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="copyright-logo logo-shape">
+                        <a href="index.html.htm">
+                            <img src="assets/img/logo/logo-white.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="copyright-text">
+                        <p>Copyrighted by <a href="#">@Bdevs</a> | All Right Reserved</p>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-6">
+                    <ul class="copyright-list f-right">
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="about.html.htm">About Us</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

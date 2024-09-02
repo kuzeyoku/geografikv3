@@ -1,98 +1,92 @@
-<section class="blog-one">
+<section class="blog-area pt-120 pb-90">
     <div class="container">
-        <div class="blog-one__top">
-            <div class="section-title text-left">
-                <div class="section-title__tagline-box">
-                    <span class="section-title__tagline">blog & News</span>
-                </div>
-                <div class="section-title__title-box sec-title-animation animation-style2">
-                    <h2 class="section-title__title title-animation">Your Brightest Choice<br> in Repairs</h2>
+        <div class="row wow fadeInUp align-items-center counter-head">
+            <div class="col-lg-6 col-md-8">
+                <div class="blog-left">
+                    <div class="section-title mb-55">
+                        <div class="border-left">
+                            <p>Blog Posts</p>
+                        </div>
+                        <h2>Our Recent Blogs</h2>
+                    </div>
                 </div>
             </div>
-            <div class="blog-one__btn-box">
-                <a href="blog.html" class="blog-one__btn thm-btn">View all Blog</a>
+            <div class="col-lg-6 col-md-4">
+                <div class="blog-right mb-30 f-right">
+                    <a href="blog.html.htm" class="grb-btn">Read More</a>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <!--Blog One Single Start-->
-            <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="100ms">
-                <div class="blog-one__single">
-                    <div class="blog-one__img-box">
-                        <div class="blog-one__img">
-                            <img src="assets/images/blog/blog-1-1.jpg" alt="@@title">
-                            <img src="assets/images/blog/blog-1-1.jpg" alt="@@title">
-                            <a href="blog-details.html" class="blog-one__link"><span
-                                    class="sr-only"></span></a>
+        <div class="row wow fadeInUp">
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-single mb-30 p-relative">
+                    <div class="blog-date">
+                        <div class="blog-date-shape">
+                            <img src="assets/img/shape/blog-date-shape.png" alt="">
                         </div>
-                        <div class="blog-one__date">
-                            <p>12<br>Nov</p>
-                        </div>
+                        <i class="fal fa-calendar-alt"></i>
+                        <span>22</span>
+                        <p>Jan 2020</p>
                     </div>
-                    <div class="blog-one__content">
-                        <div class="blog-one__user">
-                            <p><span class="icon-user"></span>By Admin</p>
-                        </div>
-                        <h3 class="blog-one__title"><a href="blog-details.html">Elase They Endures Pains to
-                                Avoid The Worse Pains Taken </a></h3>
-                        <a href="blog-details.html" class="blog-one__learn-more">Learn More<span
-                                class="icon-arrow-right"></span></a>
+                    <div class="blog-img">
+                        <a href="blog-details.html.htm"><img src="assets/img/blog/blog1.jpg"
+                                alt=""></a>
+                    </div>
+                    <div class="blog-content">
+                        <h4><a href="blog-details.html.htm">There Is a Risk On Investing Money For Finance
+                                Business</a></h4>
+                        <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as
+                            [……]</p>
+                        <a href="blog-details.html.htm" class="read-btn">Read More</a>
                     </div>
                 </div>
             </div>
-            <!--Blog One Single End-->
-            <!--Blog One Single Start-->
-            <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="300ms">
-                <div class="blog-one__single">
-                    <div class="blog-one__img-box">
-                        <div class="blog-one__img">
-                            <img src="assets/images/blog/blog-1-2.jpg" alt="@@title">
-                            <img src="assets/images/blog/blog-1-2.jpg" alt="@@title">
-                            <a href="blog-details.html" class="blog-one__link"><span
-                                    class="sr-only"></span></a>
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-single mb-30 p-relative">
+                    <div class="blog-date">
+                        <div class="blog-date-shape">
+                            <img src="assets/img/shape/blog-date-shape.png" alt="">
                         </div>
-                        <div class="blog-one__date">
-                            <p>12<br>Nov</p>
-                        </div>
+                        <i class="fal fa-calendar-alt"></i>
+                        <span>16</span>
+                        <p>Dec 2020</p>
                     </div>
-                    <div class="blog-one__content">
-                        <div class="blog-one__user">
-                            <p><span class="icon-user"></span>By Admin</p>
-                        </div>
-                        <h3 class="blog-one__title"><a href="blog-details.html">Regular maintenance cleaning
-                                or
-                                replacing air filters</a></h3>
-                        <a href="blog-details.html" class="blog-one__learn-more">Learn More<span
-                                class="icon-arrow-right"></span></a>
+                    <div class="blog-img">
+                        <a href="blog-details.html.htm"><img src="assets/img/blog/blog2.jpg"
+                                alt=""></a>
+                    </div>
+                    <div class="blog-content">
+                        <h4><a href="blog-details.html.htm">Seven Operational Tips & Tricks For Constriction
+                                Business</a></h4>
+                        <p>We adapt our delivery to the way your work, whether as an external provider or by
+                            [……]</p>
+                        <a href="blog-details.html.htm" class="read-btn">Read More</a>
                     </div>
                 </div>
             </div>
-            <!--Blog One Single End-->
-            <!--Blog One Single Start-->
-            <div class="col-xl-4 col-lg-4 wow fadeInUp" data-wow-delay="600ms">
-                <div class="blog-one__single">
-                    <div class="blog-one__img-box">
-                        <div class="blog-one__img">
-                            <img src="assets/images/blog/blog-1-3.jpg" alt="@@title">
-                            <img src="assets/images/blog/blog-1-3.jpg" alt="@@title">
-                            <a href="blog-details.html" class="blog-one__link"><span
-                                    class="sr-only"></span></a>
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-single mb-30 p-relative">
+                    <div class="blog-date">
+                        <div class="blog-date-shape">
+                            <img src="assets/img/shape/blog-date-shape.png" alt="">
                         </div>
-                        <div class="blog-one__date">
-                            <p>12<br>Nov</p>
-                        </div>
+                        <i class="fal fa-calendar-alt"></i>
+                        <span>07</span>
+                        <p>Nov 2020</p>
                     </div>
-                    <div class="blog-one__content">
-                        <div class="blog-one__user">
-                            <p><span class="icon-user"></span>By Admin</p>
-                        </div>
-                        <h3 class="blog-one__title"><a href="blog-details.html">Water leakage can be due to a
-                                clogged drain line</a></h3>
-                        <a href="blog-details.html" class="blog-one__learn-more">Learn More<span
-                                class="icon-arrow-right"></span></a>
+                    <div class="blog-img">
+                        <a href="blog-details.html.htm"><img src="assets/img/blog/blog3.jpg"
+                                alt=""></a>
+                    </div>
+                    <div class="blog-content">
+                        <h4><a href="blog-details.html.htm">Forging Relationships Between Multi-national
+                                Corporations</a></h4>
+                        <p>Over more than 20 years, we’ve fostered trusted relationships across government [……]
+                        </p>
+                        <a href="blog-details.html.htm" class="read-btn">Read More</a>
                     </div>
                 </div>
             </div>
-            <!--Blog One Single End-->
         </div>
     </div>
 </section>

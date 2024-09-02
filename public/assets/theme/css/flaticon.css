@@ -1,231 +1,170 @@
 @font-face {
-  font-family: 'icomoon';
-  src: url('../fonts/icomoon.eot');
-  src: url('../fonts/icomoon.eot') format('embedded-opentype'),
-    url('../fonts/icomoon.ttf') format('truetype'),
-    url('../fonts/icomoon.woff') format('woff'),
-    url('../fonts/icomoon.svg') format('svg');
-  font-weight: normal;
-  font-style: normal;
-  font-display: block;
+	font-family: "flaticon";
+	src: url("../fonts/flaticon.ttf")
+			format("truetype"),
+		url("../fonts/flaticon.woff")
+			format("woff"),
+		url("../fonts/flaticon.woff2")
+			format("woff2"),
+		url("../fonts/flaticon.eot")
+			format("embedded-opentype"),
+		url("../fonts/flaticon.svg")
+			format("svg");
 }
 
-[class^="icon-"],
-[class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  speak: never;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+i[class^="flaticon-"]:before,
+i[class*=" flaticon-"]:before {
+	font-family: flaticon !important;
+	font-style: normal;
+	font-weight: normal !important;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-.icon-laptop:before {
-  content: "\e911";
+.flaticon-call:before {
+	content: "\f101";
 }
-
-.icon-mobile-phone:before {
-  content: "\e912";
+.flaticon-message:before {
+	content: "\f102";
 }
-
-.icon-tablet:before {
-  content: "\e918";
+.flaticon-clock:before {
+	content: "\f103";
 }
-
-.icon-damage:before {
-  content: "\e919";
+.flaticon-facebook:before {
+	content: "\f104";
 }
-
-.icon-send:before {
-  content: "\e91b";
+.flaticon-twitter:before {
+	content: "\f105";
 }
-
-.icon-settings:before {
-  content: "\e91d";
+.flaticon-instagram:before {
+	content: "\f106";
 }
-
-.icon-product-return:before {
-  content: "\e925";
+.flaticon-pinterest:before {
+	content: "\f107";
 }
-
-.icon-settings-1:before {
-  content: "\e92a";
+.flaticon-magnifying-glass:before {
+	content: "\f108";
 }
-
-.icon-smart-lighting:before {
-  content: "\e92b";
+.flaticon-play-button-arrowhead:before {
+	content: "\f109";
 }
-
-.icon-customer-support:before {
-  content: "\e931";
+.flaticon-award:before {
+	content: "\f10a";
 }
-
-.icon-envelope:before {
-  content: "\e900";
+.flaticon-team:before {
+	content: "\f10b";
 }
-
-.icon-location:before {
-  content: "\e901";
+.flaticon-creative-team:before {
+	content: "\f10c";
 }
-
-.icon-search-interface-symbol:before {
-  content: "\e902";
+.flaticon-healthcare:before {
+	content: "\f10d";
 }
-
-.icon-call:before {
-  content: "\e903";
+.flaticon-consultation:before {
+	content: "\f10e";
 }
-
-.icon-clock:before {
-  content: "\e904";
+.flaticon-idea:before {
+	content: "\f10f";
 }
-
-.icon-speech-bubbles:before {
-  content: "\e905";
+.flaticon-youtube:before {
+	content: "\f110";
 }
-
-.icon-send1:before {
-  content: "\e906";
+.flaticon-new-product:before {
+	content: "\f111";
 }
-
-.icon-user:before {
-  content: "\e907";
+.flaticon-employee:before {
+	content: "\f112";
 }
-
-.icon-hands-on-experience:before {
-  content: "\e908";
+.flaticon-delivery-box:before {
+	content: "\f113";
 }
-
-.icon-phone-call:before {
-  content: "\e909";
+.flaticon-crm:before {
+	content: "\f114";
 }
-
-.icon-ac:before {
-  content: "\e90a";
+.flaticon-star:before {
+	content: "\f115";
 }
-
-.icon-ac1:before {
-  content: "\e90b";
+.flaticon-skype:before {
+	content: "\f116";
 }
-
-.icon-affordable-price:before {
-  content: "\e90c";
+.flaticon-calendar:before {
+	content: "\f117";
 }
-
-.icon-air-conditioning:before {
-  content: "\e90d";
+.flaticon-paper-plane:before {
+	content: "\f118";
 }
-
-.icon-angle-left:before {
-  content: "\e90e";
+.flaticon-headphones:before {
+	content: "\f119";
 }
-
-.icon-angle-right:before {
-  content: "\e90f";
+.flaticon-trophy:before {
+	content: "\f11a";
 }
-
-.icon-arrow-right:before {
-  content: "\e910";
+.flaticon-layers:before {
+	content: "\f11b";
 }
-
-.icon-ceiling-lamp:before {
-  content: "\e913";
+.flaticon-add-group:before {
+	content: "\f11c";
 }
-
-.icon-ceiling-lamp-2:before {
-  content: "\e914";
+.flaticon-businessman:before {
+	content: "\f11d";
 }
-
-.icon-certified:before {
-  content: "\e915";
+.flaticon-trophy-1:before {
+	content: "\f11e";
 }
-
-.icon-check:before {
-  content: "\e916";
+.flaticon-analytics:before {
+	content: "\f11f";
 }
-
-.icon-chirger:before {
-  content: "\e917";
+.flaticon-digital-marketing:before {
+	content: "\f120";
 }
-
-.icon-down-arrow:before {
-  content: "\e91a";
+.flaticon-web-maintenance:before {
+	content: "\f121";
 }
-
-.icon-facebook:before {
-  content: "\e91c";
+.flaticon-chatting:before {
+	content: "\f122";
 }
-
-.icon-happy-customer:before {
-  content: "\e91e";
+.flaticon-user:before {
+	content: "\f123";
 }
-
-.icon-instagram:before {
-  content: "\e91f";
+.flaticon-chat:before {
+	content: "\f124";
 }
-
-.icon-lamp:before {
-  content: "\e920";
+.flaticon-menu:before {
+	content: "\f125";
 }
-
-.icon-like:before {
-  content: "\e921";
+.flaticon-marketing:before {
+	content: "\f126";
 }
-
-.icon-link-in:before {
-  content: "\e922";
+.flaticon-vector:before {
+	content: "\f127";
 }
-
-.icon-medal:before {
-  content: "\e923";
+.flaticon-copy:before {
+	content: "\f128";
 }
-
-.icon-minus:before {
-  content: "\e924";
+.flaticon-repairing-service:before {
+	content: "\f129";
 }
-
-.icon-play:before {
-  content: "\e926";
+.flaticon-like:before {
+	content: "\f12a";
 }
-
-.icon-plus:before {
-  content: "\e927";
+.flaticon-dislike:before {
+	content: "\f12b";
 }
-
-.icon-project-complete:before {
-  content: "\e928";
+.flaticon-speech-bubbles-comment-option:before {
+	content: "\f12c";
 }
-
-.icon-quote:before {
-  content: "\e929";
+.flaticon-like-1:before {
+	content: "\f12d";
 }
-
-.icon-services:before {
-  content: "\e92c";
+.flaticon-dislike-1:before {
+	content: "\f12e";
 }
-
-.icon-setting:before {
-  content: "\e92d";
+.flaticon-view:before {
+	content: "\f12f";
 }
-
-.icon-share-alt:before {
-  content: "\e92e";
-}
-
-.icon-socket:before {
-  content: "\e92f";
-}
-
-.icon-technician-1:before {
-  content: "\e930";
-}
-
-.icon-xpa:before {
-  content: "\e932";
+.flaticon-map:before {
+	content: "\f130";
 }
