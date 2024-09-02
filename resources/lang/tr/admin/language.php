@@ -1,0 +1,27 @@
+<?php
+return [
+    "title" => "Çeviriler",
+    "menu_title" => "Çeviri Yönetimi",
+    "description" => "Çevirileri Yönetin",
+    "create" => "Yeni Çeviri",
+    "create_description" => "Yeni Çeviri Oluştur",
+    "edit" => "Çeviri Düzenle",
+    "edit_description" => "Çeviri Düzenle",
+    "list" => "Çeviri Listesi",
+    "code_exists" => "Bu dil kodu zaten kullanılıyor.",
+    "default_delete_error" => "Varsayılan dil silinemez.",
+    "file_not_found" => "Dil dosyası bulunamadı.",
+    "form_title" => "Dil Başlığı",
+    "form_title_placeholder" => "Dil Başlığı Giriniz",
+    "form_code" => "Dil Kodu",
+    "form_code_placeholder" => "Dil Kodu Giriniz",
+    "form_status" => "Durum",
+    "form_admin_files" => "Admin Panel Dil Dosyaları",
+    "form_site_files" => "Site Dil Dosyaları",
+    "table_title" => "Başlık",
+    "table_code" => "Kod",
+    "files_title" => "Dil Dosyası İçeriği",
+    "files_description" => "Dil Dosyası İçeriğini Düzenleyin",
+    "files_select_title" => "Dil Dosyaları",
+    "files_table_empty" => "Henüz dosya seçmediniz. Lütfen düzenlemek istediğiniz dil dosyasını seçiniz."
+];
