@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ModuleEnum;
 use App\Models\Blog;
 use App\Models\Slider;
 use App\Models\Product;
+use App\Models\Category;
 use App\Services\SeoService;
 use Illuminate\Support\Facades\Cache;
 
@@ -24,6 +26,10 @@ class HomeController extends Controller
 
         $data["blog"] = Cache::remember("blog_home_" . app()->getLocale(), config("cache.time"), function () {
             return Blog::active()->order()->limit(3)->get();
+        });
+
+        $data["service_category"] = Cache::remember("service_category_home_" . app()->getLocale(), config("cache.time"), function () {
+            return Category::active()->module(ModuleEnum::Service->value)->order()->get();
         });
         return view("index", $data);
     }

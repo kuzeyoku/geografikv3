@@ -97,7 +97,7 @@ enum ModuleEnum: string
         };
     }
 
-    
+
     public static function toSelectArray(): array
     {
         return [
@@ -119,6 +119,7 @@ enum ModuleEnum: string
     public function COVER_COLLECTION()
     {
         return match ($this) {
+            self::Category => "cover",
             self::Blog => "cover",
             self::Service => "cover",
             self::Brand => "cover",

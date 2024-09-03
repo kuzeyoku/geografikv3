@@ -4,12 +4,14 @@ namespace App\Models;
 
 use App\Enums\StatusEnum;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class Category extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $fillable = [
         'slug',
@@ -32,6 +34,11 @@ class Category extends Model
     public function scopeActive($query)
     {
         return $query->whereStatus(StatusEnum::Active->value);
+    }
+
+    public function scopeModule($query, $module)
+    {
+        return $query->whereModule($module);
     }
 
     public function scopeOrder($query)

@@ -29,6 +29,8 @@ class UpdateCategoryRequest extends FormRequest
             "module" => [new Enum(ModuleEnum::class)],
             "parent" => "nullable|numeric",
             "order" => "required|numeric|min:0",
+            "image" => "image|mimes:png,jpeg,jpg,gif",
+            "imageDelete" => "nullable",
             "status" => "required",
         ];
     }

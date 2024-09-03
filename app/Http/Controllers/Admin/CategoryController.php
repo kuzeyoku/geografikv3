@@ -18,6 +18,7 @@ class CategoryController extends Controller
         View::share([
             "categories" => $this->service->getCategories(),
             "modules" => ModuleEnum::toSelectArray(),
+            "module" => $this->service->module(),
             "route" => $this->service->route(),
             "folder" => $this->service->folder()
         ]);

@@ -4,6 +4,7 @@
     @include('layout.brand')
     @include('layout.portfolio')
     @include('layout.about')
+    @include('layout.hire-area')
     @include('layout.service')
     @include('layout.choose')
     @include('layout.counter')
