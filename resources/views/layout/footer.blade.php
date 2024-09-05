@@ -20,9 +20,14 @@
                         </div>
                         <div class="grb__social footer-social">
                             <ul>
-                                @foreach (config('social', []) as $social)
-                                    <li><a href="{{ config('social.' . $social) }}"><i
-                                                class="fab fa-{{ config('social.' . $social) }}"></i></a></li>
+                                @foreach (config('social', []) as $key => $value)
+                                    @if (config('social.' . $key))
+                                        <li>
+                                            <a onclick="this.href" href="{{ config('social.' . $key) }}">
+                                                <i class="fab fa-{{ $key }}"></i>
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>

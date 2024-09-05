@@ -35,12 +35,14 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="grb__social f-right st-1">
                         <ul>
-                            @foreach (config('social', []) as $social)
-                                <li>
-                                    <a href="{{ config('social.' . $social) }}">
-                                        <i class="fab fa-{{ $social }}"></i>
-                                    </a>
-                                </li>
+                            @foreach (config('social', []) as $key => $value)
+                                @if (config("social.{$key}"))
+                                    <li>
+                                        <a href="{{ config("social.{$key}") }}">
+                                            <i class="fab fa-{{ $key }}"></i>
+                                        </a>
+                                    </li>
+                                @endif
                             @endforeach
                         </ul>
                     </div>
