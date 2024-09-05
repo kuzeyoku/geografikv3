@@ -5,11 +5,10 @@
             <div class="col-lg-8 col-md-11">
                 <div class="hire-content text-center">
                     <div class="section-title mb-55">
-                        <h2 class="white-color">Do You Have Some Projects
-                            In Your Mind ?</h2>
+                        <h2 class="white-color">ÜRÜNLERİMİZİ İNCELEDİNİZ Mİ ?</h2>
                     </div>
                     <div class="hire-btn">
-                        <a href="contact.html" class="grb-btn st-3">HIRE US NOW</a>
+                        <a href="{{ route('product.index') }}" class="grb-btn st-3">ÜRÜNLERİMİZ</a>
                     </div>
                 </div>
             </div>

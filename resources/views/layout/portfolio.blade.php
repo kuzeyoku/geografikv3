@@ -1,32 +1,53 @@
-<div class="portfolio-area-slide grey-bg pt-70 pb-50">
+<section class="portfolio-area">
     <div class="container">
-        <div class="row wow fadeInUp justify-content-center" style="visibility: visible; animation-name: fadeInUp;">
-            <div class="col-lg-8">
-                <div class="section-title mb-55 text-center">
-                    <h2>Coğrafi Çözümlerimiz</h2>
+        <div class="row wow fadeInUp align-items-center counter-head"
+            style="visibility: visible; animation-name: fadeInUp;">
+            <div class="col-lg-6 col-md-7">
+                <div class="portfolio-left">
+                    <div class="section-title mb-55">
+                        <div class="border-left">
+                            <p>Portfolio</p>
+                        </div>
+                        <h2>Explore some Recent Projects</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-5">
+                <div class="portfolio-right mb-30 text-md-end">
+                    <a href="{{ route('project.index') }}" class="grb-border-btn st-1">
+                        All Projects
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="portfolio-slide-wrapper p-relative">
-            <div
-                class="swiper-container portfolio-slide swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
-                <div class="swiper-wrapper" aria-live="off">
-                    @foreach ($service_category as $category)
+    </div>
+    <div class="portfolio-container">
+        <div class="portfolio-inner">
+            <div class="swiper-container portfolio-active swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+                <div class="swiper-wrapper">
+                    @foreach ($project as $project)
                         <div class="swiper-slide">
-                            <div class="portfolio-slide-single p-relative mb-30">
-                                <a href="{{ $category->url }}">
-                                    <img src="{{ $category->getFirstMediaUrl('cover') }}" alt="">
-                                    <div class="portfolio-slide-title">
-                                        {{ $category->title }}
-                                    </div>
-                                </a>
+                            <div class="single-portfolio">
+                                <div class="portfolio-img">
+                                    <a href="portfolio-details.html"><img
+                                            src="{{ $project->getFirstMediaUrl('cover') }}" alt=""></a>
+                                </div>
+                                <div class="portfolio-content">
+                                    <h5><a href="{{ $project->url }}">{{ $project->title }}</a></h5>
+                                    <a class="p-link" href="{{ $project->url }}"><i class="fal fa-link"></i></a>
+                                </div>
                             </div>
                         </div>
                     @endforeach
-
+                </div>
+                <div class="portfolio-nav">
+                    <div class="swiper-button-prev" tabindex="0" role="button" aria-label="Previous slide"
+                        aria-controls="swiper-wrapper-ff1dcba42f10adc4f"><i class="far fa-arrow-left"></i></div>
+                    <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"
+                        aria-controls="swiper-wrapper-ff1dcba42f10adc4f"><i class="far fa-arrow-right"></i></div>
                 </div>
                 <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
             </div>
         </div>
     </div>
-</div>
+</section>

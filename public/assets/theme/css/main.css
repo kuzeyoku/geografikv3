@@ -4716,7 +4716,7 @@ select {
 .service-box-content.st-3:hover {
   background: none;
 }
-.service-box-content.st-3:hover .service-box-content-icon i {
+.service-box-content.st-3:hover .service-box-content-icon img {
   background: #ffc400;
   border-radius: 50%;
   border-color: #ffc400;
@@ -4731,10 +4731,11 @@ select {
   float: left;
   margin-right: 30px;
 }
-.service-box-content.st-3 .service-box-content-icon i {
+.service-box-content.st-3 .service-box-content-icon img {
   color: #040021;
   width: 70px;
   height: 70px;
+  padding: 10px;
   background: none;
   line-height: 78px;
   border-radius: 0 50% 50% 50%;

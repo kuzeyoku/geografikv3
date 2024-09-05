@@ -8,6 +8,8 @@ use App\Models\Slider;
 use App\Models\Product;
 use App\Models\Category;
 use App\Enums\ModuleEnum;
+use App\Models\Project;
+use App\Models\Testimonial;
 use App\Services\SeoService;
 use Illuminate\Support\Facades\Cache;
 
@@ -27,6 +29,14 @@ class HomeController extends Controller
         $data["product"] = Cache::remember("product_home_" . app()->getLocale(), config("cache.time"), function () {
             $product = Product::active()->order()->get();
             return $product->whereIn("category_id", [2, 3]);
+        });
+
+        $data["project"] = Cache::remember("project_home_" . app()->getLocale(), config("cache.time"), function () {
+            return Project::active()->order()->limit(6)->get();
+        });
+
+        $data["testimonial"] = Cache::remember("testimonial_home_" . app()->getLocale(), config("cache.time"), function () {
+            return Testimonial::active()->order()->get();
         });
 
         $data["blog"] = Cache::remember("blog_home_" . app()->getLocale(), config("cache.time"), function () {
