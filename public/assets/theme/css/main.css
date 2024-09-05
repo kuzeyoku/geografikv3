@@ -2039,6 +2039,9 @@ select {
   .logo {
     line-height: 80px;
   }
+  .logo img{
+    max-height: 40px;
+  }
 }
 
 .header__main {
@@ -3110,6 +3113,17 @@ select {
   -o-transition: all 8s ease-out 0s;
   transition: all 8s ease-out 0s;
 }
+
+.slide-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Yarı saydam siyah karartma */
+    z-index: 1; /* İçerikten önce görünmesini sağlar */
+  }
 
 .single-slider {
   background-position: center;
@@ -9097,7 +9111,11 @@ input.main-search-input::placeholder {
 .copyright-logo {
   background: #6639ff;
   text-align: center;
-  line-height: 100px;
+  line-height: 90px;
+}
+
+.copyright-logo img {
+    max-width: 200px;
 }
 
 .logo-shape {

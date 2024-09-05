@@ -11,5 +11,4 @@
     @include('layout.portfolio')
     @include('layout.testimonial')
     @include('layout.blog')
-    @include('layout.newsletter')
 @endsection

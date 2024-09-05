@@ -1,4 +1,4 @@
-<div class="brand-area pt-100 pb-100">
+<div class="brand-area pt-100 pb-100 d-none d-lg-block">
     <div class="container">
         <div class="wow fadeInUp">
             <div class="swiper-container brand-active">

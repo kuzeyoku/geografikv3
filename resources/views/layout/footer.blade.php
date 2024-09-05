@@ -9,20 +9,21 @@
                                 <i class="flaticon-support"></i>
                             </div>
                             <div class="question-text">
-                                <p>Have a question? Call us 24/7</p>
-                                <span><a href="tel:987547587587">(987) 547587587</a></span>
+                                <p>Bir sorunuz mu var? Bizi 7/24 arayın</p>
+                                <span><a
+                                        href="tel:{{ config('contact.phone') }}">{{ config('contact.phone') }}</a></span>
                             </div>
                         </div>
                         <div class="footer-address">
-                            <h5>Contact Info</h5>
-                            <p>Street House, Greater London NW1 8JR, UK</p>
+                            <h5>İletişim Bilgileri</h5>
+                            <p>{{ config('contact.address') }}</p>
                         </div>
                         <div class="grb__social footer-social">
                             <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                @foreach (config('social', []) as $social)
+                                    <li><a href="{{ config('social.' . $social) }}"><i
+                                                class="fab fa-{{ config('social.' . $social) }}"></i></a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -30,7 +31,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget mb-40 cat-m">
                         <div class="footer-widget-title">
-                            <h4>Categories</h4>
+                            <h4>Ürünlerimiz</h4>
                         </div>
                         <ul class="footer-list">
                             <li><a href="#">Laptops & Computers</a></li>
@@ -44,14 +45,12 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-widget-title">
-                            <h4>About Company</h4>
+                            <h4>Bağlantlar</h4>
                         </div>
                         <ul class="footer-list">
-                            <li><a href="about.html.htm">About Company</a></li>
-                            <li><a href="contact.html.htm">Contact Us</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Mission & Vision</a></li>
+                            @foreach ($footer['quickLinks'] as $quicklink)
+                                <li><a href="{{ $quicklink->url }}">{{ $quicklink->title }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -83,21 +82,19 @@
             <div class="row wow fadeInUp align-items-center">
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="copyright-logo logo-shape">
-                        <a href="index.html.htm">
-                            <img src="assets/img/logo/logo-white.png" alt="">
+                        <a href="{{ route('home') }}">
+                            <img src="{{ $themeAsset->logo_light }}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="copyright-text">
-                        <p>Copyrighted by <a href="#">@Bdevs</a> | All Right Reserved</p>
+                        <p>@lang('front/footer.copyright', ['year' => date('Y'), 'title' => config('general.title')])</p>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6">
                     <ul class="copyright-list f-right">
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="about.html.htm">About Us</a></li>
+                        <li><a href="{{ route('sitemap.index') }}">@lang('front/footer.sitemap')</a></li>
                     </ul>
                 </div>
             </div>

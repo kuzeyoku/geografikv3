@@ -60,7 +60,7 @@
                             <img src="{{ themeAsset('front', 'img/logo/logo.png') }}" alt="">
                         </a>
                         <a class="logo-text-black" href="{{ route('home') }}">
-                            <img src="{{ themeAsset('front', 'img/logo/logo-text-black.png') }}" alt="">
+                            <img src="{{ $themeAsset->logo_dark }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -110,8 +110,8 @@
         <div class="side-info-content">
             <div class="offset-widget offset-logo mb-30 pb-20">
                 <div class="row align-items-center">
-                    <div class="col-9"><a href="{{ route('home') }}"><img
-                                src="{{ themeAsset('front', 'img/logo/logo.png') }}" alt="Logo"></a>
+                    <div class="col-9"><a href="{{ route('home') }}"><img src="{{ $themeAsset->logo_dark }}"
+                                alt="Logo"></a>
                     </div>
                     <div class="col-3 text-end"><button class="side-info-close"><i class="fal fa-times"></i></button>
                     </div>
