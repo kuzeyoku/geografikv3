@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
@@ -94,6 +95,11 @@ class Category extends Model implements HasMedia
     public function getDescriptionsAttribute()
     {
         return $this->translate->pluck("description", "lang")->all();
+    }
+
+    public function getUrlAttribute()
+    {
+        return route($this->module . ".category", ["category" => $this, "slug" => $this->slug]);
     }
 
     public static function boot()

@@ -19,12 +19,13 @@
     <link rel="stylesheet" href="{{ themeAsset('front', 'css/meanmenu.css') }}">
     <link rel="stylesheet" href="{{ themeAsset('front', 'css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ themeAsset('front', 'css/main.css') }}">
+    @stack('style')
 </head>
 
 <body>
     @include('layout.header')
     <main>
-        @yield("content")
+        @yield('content')
     </main>
     @include('layout.footer')
     <script src="{{ themeAsset('front', 'js/vendor/jquery-3.6.0.min.js') }}"></script>

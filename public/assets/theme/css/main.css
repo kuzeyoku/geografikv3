@@ -4685,16 +4685,17 @@ select {
 }
 
 .service-box-content {
-  padding: 0 30px 25px;
   box-shadow: 20px 10px 30px rgba(16, 0, 71, 0.07);
   background: #ffffff;
-  border-radius: 5px;
+  border-radius: 25px;
+  border: 2px solid #f6f6f6;
   -webkit-transition: all 0.3s ease-out 0s;
   -moz-transition: all 0.3s ease-out 0s;
   -ms-transition: all 0.3s ease-out 0s;
   -o-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
 }
+
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   .service-box-content {
     padding: 0 25px 25px;
@@ -4784,6 +4785,10 @@ select {
 .service-box-content-icon.st-1 i {
   color: #6639ff;
   background: #f1f4fe;
+}
+
+.service-box-content-text{
+    padding: 0 25px 25px;
 }
 
 .service-box-content-text h4 {

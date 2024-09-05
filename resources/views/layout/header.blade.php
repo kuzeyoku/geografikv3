@@ -6,11 +6,16 @@
                     <div class="grb__cta header-cta">
                         <ul>
                             <li>
+                                <div class="cta__content">
+                                    @include('common.language_selector')
+                                </div>
+                            </li>
+                            <li>
                                 <div class="cta__icon">
                                     <span><i class="fas fa-phone-alt"></i></span>
                                 </div>
                                 <div class="cta__content">
-                                    <p>Call Us:</p>
+                                    <p>@lang('front/header.txt1')</p>
                                     <span>
                                         <a href="tel:{{ config('contact.phone') }}">{{ config('contact.phone') }}</a>
                                     </span>
@@ -21,10 +26,10 @@
                                     <span><i class="fas fa-envelope"></i></span>
                                 </div>
                                 <div class="cta__content">
-                                    <p>Mail Us:</p>
+                                    <p>@lang('front/header.txt2')</p>
                                     <span>
-                                        <a href="mailto:{{ config('contact.email', '') }}">
-                                            <span>{{ config('contact.email', '') }}</span>
+                                        <a href="mailto:{{ config('contact.email') }}">
+                                            <span>{{ config('contact.email') }}</span>
                                         </a>
                                     </span>
                                 </div>
@@ -89,16 +94,13 @@
                             </nav>
                         </div>
                         <div class="header__search">
-                            <a class="search-btn nav-search search-trigger d-none d-sm-inline-block" href="#">
-                                <i class="fal fa-search"></i>
-                            </a>
                             <a class="side-toggle d-lg-none" href="javascript:void(0)">
                                 <i class="fal fa-bars"></i>
                             </a>
                         </div>
                         <div class="header__btn d-none d-xl-inline-block">
                             <a href="{{ route('contact.index') }}" class="grb-btn">
-                                Get Reserved<i class="fas fa-arrow-right"></i>
+                                @lang('front/header.txt3')<i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -110,19 +112,24 @@
 <div class="fix">
     <div class="side-info">
         <div class="side-info-content">
-            <div class="offset-widget offset-logo mb-30 pb-20">
+            <div class="offset-widget offset-logo">
                 <div class="row align-items-center">
-                    <div class="col-9"><a href="{{ route('home') }}"><img src="{{ $themeAsset->logo_dark }}"
-                                alt="Logo"></a>
+                    <div class="col-9">
+                        <a href="{{ route('home') }}">
+                            <img src="{{ $themeAsset->logo_light }}" alt="Logo">
+                        </a>
                     </div>
-                    <div class="col-3 text-end"><button class="side-info-close"><i class="fal fa-times"></i></button>
+                    <div class="col-3 text-end">
+                        <button class="side-info-close">
+                            <i class="fal fa-times"></i>
+                        </button>
                     </div>
                 </div>
             </div>
             <div class="mobile-menu"></div>
             <div class="contact-infos mt-30 mb-30">
                 <div class="contact-list mb-30">
-                    <h4>İletişim Bilgilerimiz</h4>
+                    <h4>@lang('front/header.txt4')</h4>
                     <a href="#" class="">
                         <i class="fal fa-map-marker-alt"></i>
                         <span>{{ config('contact.address') }}</span>
@@ -138,12 +145,14 @@
                 </div>
                 <div class="grb__social footer-social offset-social">
                     <ul>
-                        @foreach (config('social', []) as $social)
-                            <li>
-                                <a href="{{ config('social.' . $social) }}">
-                                    <i class="fab fa-{{ $social }}"></i>
-                                </a>
-                            </li>
+                        @foreach (config('social', []) as $key => $value)
+                            @if (config("social.{$key}"))
+                                <li>
+                                    <a href="{{ config("social.{$key}") }}">
+                                        <i class="fab fa-{{ $key }}"></i>
+                                    </a>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
@@ -152,15 +161,3 @@
     </div>
 </div>
 <div class="offcanvas-overlay"></div>
-<div class="search-wrap">
-    <div class="search-inner">
-        <i class="fal fa-times search-close" id="search-close"></i>
-        <div class="search-cell">
-            <form method="get">
-                <div class="search-field-holder">
-                    <input type="search" class="main-search-input" placeholder="Search Your Keyword...">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
