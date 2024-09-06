@@ -14,6 +14,5 @@ return [
     "send_success" => "Mesajınız Başarıyla Gönderildi",
     "send_error" => "Mesajınız gönderilirken bir hata oluştu",
     "required" => "Bu alan zorunludur",
-    "recaptcha_failed" => "Robot doğrulaması başarısız oldu",
     "blocked" => "Mesaj gönderiminiz yönetici tarafından yasaklanmıştır.",
 ];

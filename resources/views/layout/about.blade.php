@@ -4,12 +4,12 @@
             <div class="col-xl-6 col-lg-5">
                 <div class="about__img p-relative mb-30">
                     <div class="about__img-inner">
-                        <img src="{{ themeAsset('front', 'img/about/about.jpg') }}" alt="">
+                        <img src="{{ $themeAsset->about1 }}" alt="">
                     </div>
                     <div class="p-element">
                         <div class="ab-border d-none d-lg-block"></div>
                         <div class="ab-image">
-                            <img src="{{ themeAsset('front', 'img/about/abp-img.png') }}" alt="">
+                            <img src="{{ $themeAsset->about2 }}" alt="">
                         </div>
                     </div>
                 </div>

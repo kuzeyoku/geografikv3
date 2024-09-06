@@ -45,7 +45,7 @@ Route::middleware(CountVisitors::class, Maintenance::class)->group(function () {
         Route::controller(App\Http\Controllers\ProductController::class)->prefix("product")->group(function () {
             Route::get("/", "index")->name("product.index");
             Route::get("/{product}/{slug}", "show")->name("product.show");
-            Route::get("/{category}", "category")->name("product.category");
+            Route::get("/category/{category}/{slug}", "category")->name("product.category");
         });
     }
 
@@ -53,7 +53,7 @@ Route::middleware(CountVisitors::class, Maintenance::class)->group(function () {
         Route::controller(App\Http\Controllers\ProjectController::class)->prefix("project")->group(function () {
             Route::get("/", "index")->name("project.index");
             Route::get("/{project}/{slug}", "show")->name("project.show");
-            Route::get("/{category}", "category")->name("project.category");
+            Route::get("/category/{category}/{slug}", "category")->name("project.category");
         });
     }
 });

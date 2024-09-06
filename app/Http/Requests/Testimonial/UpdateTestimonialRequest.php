@@ -13,7 +13,7 @@ class UpdateTestimonialRequest extends FormRequest
         return true;
     }
 
-    protected $folder;
+    protected string $folder;
 
     public function __construct()
     {
@@ -23,7 +23,7 @@ class UpdateTestimonialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // "image" => "image|mimes:jpeg,png,jpg,gif",
+            "image" => "image|mimes:jpeg,png,jpg,gif",
             "name" => "required",
             "company" => "nullable",
             "position" => "nullable",
@@ -37,7 +37,7 @@ class UpdateTestimonialRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            // "image" => __("admin/{$this->folder}.form_image"),
+            "image" => __("admin/{$this->folder}.form_image"),
             "name" => __("admin/{$this->folder}.form_name"),
             "company" => __("admin/{$this->folder}.form_company"),
             "position" => __("admin/{$this->folder}.form_position"),

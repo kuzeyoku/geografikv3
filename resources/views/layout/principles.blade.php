@@ -1,13 +1,13 @@
 <section class="service-box-area pt-80">
     <div class="container">
-        <div class="row wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="row wow fadeInUp">
             <div class="col-lg-12">
                 <div class="section-title mb-55">
                     <h2>Temel İlkelerimiz</h2>
                 </div>
             </div>
         </div>
-        <div class="row wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="row wow fadeInUp">
             <div class="col-lg-4 col-md-6">
                 <div class="service-box-single mb-40">
                     <div class="service-box-content st-3">

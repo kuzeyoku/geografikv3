@@ -23,7 +23,7 @@ class StoreTestimonialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // "image" => "required|image|mimes:jpeg,png,jpg,gif",
+            "image" => "required|image|mimes:jpeg,png,jpg,gif",
             "name" => "required",
             "company" => "nullable",
             "position" => "nullable",
@@ -36,7 +36,7 @@ class StoreTestimonialRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            // "image" => __("admin/{$this->folder}.form_image"),
+            "image" => __("admin/{$this->folder}.form_image"),
             "name" => __("admin/{$this->folder}.form_name"),
             "company" => __("admin/{$this->folder}.form_company"),
             "position" => __("admin/{$this->folder}.form_position"),

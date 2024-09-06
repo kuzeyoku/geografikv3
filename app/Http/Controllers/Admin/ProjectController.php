@@ -39,11 +39,11 @@ class ProjectController extends Controller
     public function imageStore(ImageProjectRequest $request, Project $project): object
     {
         if ($this->service->imageUpload($request, $project)) {
-            return (object) [
+            return (object)[
                 "message" => __("admin/alert.default_success")
             ];
         } else {
-            return (object) [
+            return (object)[
                 "message" => __("admin/alert.default_error")
             ];
         }

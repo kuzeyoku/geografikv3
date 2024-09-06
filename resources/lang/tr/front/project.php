@@ -1,6 +1,9 @@
 <?php
 return [
-    "txt1" => "Projelerimiz",
-    "txt2" => "Tamamlanan Projelerimiz",
-    "txt3" => "Diğer Projelerimizi İncelediniz mi ?"
+    "txt1" => "PROJELERİMİZ",
+    "txt2" => "TAMAMLADIĞIMIZ BAZI PROJELERE GÖZ ATIN",
+    "txt3" => "TÜMÜ",
+    "txt4" => "Detaylar",
+    "txt5" => "Proje Bilgileri",
+    "txt6" => "Modeli Görüntüle"
 ];

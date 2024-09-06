@@ -51,9 +51,4 @@ enum SettingCategoryEnum: string
     {
         return array_map(fn ($value) => $value->value, self::cases());
     }
-
-    public function existsViewFile(): bool
-    {
-        return view()->exists("admin.setting." . $this->value);
-    }
 }

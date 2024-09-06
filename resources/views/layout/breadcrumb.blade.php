@@ -1,4 +1,4 @@
-<section class="page-title-area" data-background="{{ themeAsset('front', 'img/bg/page-title-bg.jpg') }}">
+<section class="page-title-area" data-background="{{$themeAsset->breadcrumb}}">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -8,7 +8,9 @@
                     </div>
                     <nav class="grb-breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}">Ana Sayfa</a></li>
+                            <li class="breadcrumb-item">
+                                <a href="{{ route('home') }}">@lang("front/breadcrumb.txt1")</a>
+                            </li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
                         </ol>
                     </nav>

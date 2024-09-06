@@ -35,7 +35,7 @@ class HomeController extends Controller
             return Project::active()->order()->limit(6)->get();
         });
 
-        $data["testimonial"] = Cache::remember("testimonial_home_" . app()->getLocale(), config("cache.time"), function () {
+        $data["testimonials"] = Cache::remember("testimonial_home_" . app()->getLocale(), config("cache.time"), function () {
             return Testimonial::active()->order()->get();
         });
 

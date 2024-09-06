@@ -16,24 +16,17 @@
                     <div class="testimonial-content-inner">
                         <div class="swiper-container testimonial-active">
                             <div class="swiper-wrapper">
-                                @foreach ($testimonial as $testimonial)
+                                @foreach ($testimonials as $testimonial)
                                     <div class="swiper-slide">
                                         <div class="testimonial-single st-1 text-center">
                                             <div class="testimonial-img">
-                                                <img src="{{ $testimonial->getFirstMediaUrl('cover') }}" alt="">
+                                                <img src="{{ $testimonial->getFirstMediaUrl('avatar') }}" alt="">
                                             </div>
                                             <p class="mb-30">{{ $testimonial->message }}</p>
                                             <div class="testimonial-name">
                                                 <h5>{{ $testimonial->name }}</h5>
                                                 <p>{{ $testimonial->position }}</p>
                                             </div>
-                                            <ul class="testimonial-review">
-                                                <li><i class="fas fa-star"></i></li>
-                                                <li><i class="fas fa-star"></i></li>
-                                                <li><i class="fas fa-star"></i></li>
-                                                <li><i class="fas fa-star"></i></li>
-                                                <li><i class="fas fa-star"></i></li>
-                                            </ul>
                                         </div>
                                     </div>
                                 @endforeach

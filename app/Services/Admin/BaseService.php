@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseService
 {
-    public function __construct(private Model $model, private ModuleEnum $module) {}
+    public function __construct(private Model $model, private ModuleEnum $module)
+    {
+    }
 
     public function folder()
     {
@@ -64,6 +66,7 @@ class BaseService
                         "title" => array_key_exists("title", $request) ? $request["title"][$lang->code] : null,
                         "description" => array_key_exists("description", $request) ? $request["description"][$lang->code] : null,
                         "tags" => array_key_exists("tags", $request) ? $request["tags"][$lang->code] : null,
+                        "features" => array_key_exists("features", $request) ? $request["features"][$lang->code] : null,
                     ]
                 );
             });

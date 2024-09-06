@@ -1,5 +1,7 @@
 @extends(themeView('admin', 'layout.create'), ['tab' => false])
 @section('form')
+    {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
+    <br>
     {{ html()->label(__("admin/{$folder}.form_name")) }}
     {{ html()->text('name')->placeholder(__("admin/{$folder}.form_name_placeholder"))->class('form-control') }}
     {{ html()->label(__("admin/{$folder}.form_company")) }}

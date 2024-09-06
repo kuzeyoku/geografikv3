@@ -87,9 +87,8 @@ class SettingService
         $asset->breadcrumb = null;
         $asset->about1 = null;
         $asset->about2 = null;
-        $asset->about3 = null;
-        $asset->why_us1 = null;
-        $asset->why_us2 = null;
+        $asset->hire_area = null;
+        $asset->counter = null;
         return $asset;
     }
 }

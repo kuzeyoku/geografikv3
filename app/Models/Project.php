@@ -88,7 +88,7 @@ class Project extends Model implements HasMedia
         return $this->translate->pluck("features", "lang")->toArray();
     }
 
-    public function getFeatureAttribute()
+    public function getFeatureAttribute(): array
     {
         $result = [];
         if (array_key_exists($this->locale, $this->features)) {
@@ -103,33 +103,28 @@ class Project extends Model implements HasMedia
         return $result;
     }
 
-    public function getShortDescriptionAttribute()
+    public function getShortDescriptionAttribute(): string
     {
         return Str::limit("strip_tags($this->description)", 100);
     }
 
-    public function getMetaDescriptionAttribute()
+    public function getMetaDescriptionAttribute(): string
     {
         $description = $this->translate->where("lang", app()->getFallbackLocale())->pluck('description')->first();
         return Str::limit(strip_tags($description), 160);
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return route(ModuleEnum::Project->route() . ".show", [$this, $this->slug]);
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }
 
-    public function getModuleAttribute()
-    {
-        return ModuleEnum::Project->singleTitle();
-    }
-
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
         static::creating(function ($model) {

@@ -8,12 +8,12 @@
                     <div class="col-lg-4 col-sm-6 grid-item">
                         <div class="portfolio-item mb-30">
                             <div class="portfolio-item-img p-relative">
-                                <img src="{{$project->getFirstMediaUrl("cover")}}" alt="">
+                                <img src="{{ $project->getFirstMediaUrl("cover") }}" alt="{{ $project->title }}">
                                 <div class="portfolio-hover-contnet">
                                     <div class="portfolio-hover-inner text-center">
                                         <a class="p-h-icon pm-s" href="{{$project->url}}">
                                             <i class="fas fa-paper-plane"></i>
-                                            View Project
+                                            @lang("front/project.txt4")
                                         </a>
                                     </div>
                                 </div>
