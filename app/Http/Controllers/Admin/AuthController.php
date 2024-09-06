@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use App\Services\RecaptchaService;
+use App\Services\ValidationService;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
     public function authenticate(LoginRequest $request)
     {
-        RecaptchaService::check($request->validated());
+        ValidationService::checkRecaptcha($request->validated());
         if (Auth::attempt($request->only("email", "password"))) {
             $request->session()->regenerate();
             $user = User::where("email", $request->email)->first();
@@ -70,7 +70,7 @@ class AuthController extends Controller
 
     public function forgot_password(ForgotPasswordRequest $request)
     {
-        RecaptchaService::check($request->validated());
+        ValidationService::checkRecaptcha($request->validated());
         $status = Password::sendResetLink($request->only("email"));
         return $status === Password::RESET_LINK_SENT ? redirect()->route("admin.auth.login")->withSuccess(__($status)) : back()->withInput()->withError(__($status));
     }

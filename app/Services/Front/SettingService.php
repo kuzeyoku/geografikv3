@@ -48,4 +48,9 @@ class SettingService
     {
         return config("cache.status", StatusEnum::Passive->value) == StatusEnum::Active->value;
     }
+
+    public static function recaptchaIsActive(): bool
+    {
+        return config("recaptcha.status", StatusEnum::Passive->value) == StatusEnum::Active->value;
+    }
 }
