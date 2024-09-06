@@ -21,6 +21,9 @@ enum StatusEnum: string
         return __("admin/status." . $this->value);
     }
 
+    /**
+     * @throws Exception
+     */
     public function color(): string
     {
         return match ($this) {
@@ -31,9 +34,13 @@ enum StatusEnum: string
             self::Read => "linesuccess",
             self::Unread => "linedanger",
             self::Answered => "lineinfo",
+            default => throw new \Exception('Unexpected match value'),
         };
     }
 
+    /**
+     * @throws Exception
+     */
     public function icon(): string
     {
         return match ($this) {
@@ -41,15 +48,19 @@ enum StatusEnum: string
             self::Passive => "ban",
             self::Draft => "edit",
             self::Pending => "clock",
+            default => throw new \Exception('Unexpected match value'),
         };
     }
 
+    /**
+     * @throws Exception
+     */
     public function badge(): string
     {
         return sprintf('<span class="badge badge-%s">%s</span>', $this->color(), $this->title());
     }
 
-    public static function getValues()
+    public static function getValues(): array
     {
         return [
             StatusEnum::Active->value,
@@ -59,7 +70,10 @@ enum StatusEnum: string
         ];
     }
 
-    public static function fromValue($value)
+    /**
+     * @throws Exception
+     */
+    public static function fromValue($value): StatusEnum
     {
         $statusList = [
             'active' => StatusEnum::Active,
@@ -78,7 +92,7 @@ enum StatusEnum: string
         throw new Exception(__("admin/general.invalid_value"));
     }
 
-    public static function toSelectArray()
+    public static function toSelectArray(): array
     {
         return [
             StatusEnum::Active->value => StatusEnum::Active->title(),
@@ -88,16 +102,7 @@ enum StatusEnum: string
         ];
     }
 
-    public static function getMessageStatusSelectArray()
-    {
-        return [
-            StatusEnum::Read->value => StatusEnum::Read->title(),
-            StatusEnum::Unread->value => StatusEnum::Unread->title(),
-            StatusEnum::Answered->value => StatusEnum::Answered->title(),
-        ];
-    }
-
-    public static function getOnOffSelectArray()
+    public static function getOnOffSelectArray(): array
     {
         return [
             StatusEnum::Passive->value => StatusEnum::Passive->title(),
@@ -105,7 +110,7 @@ enum StatusEnum: string
         ];
     }
 
-    public static function getTrueFalseSelectArray()
+    public static function getTrueFalseSelectArray(): array
     {
         return [
             false => StatusEnum::No->title(),
@@ -113,7 +118,7 @@ enum StatusEnum: string
         ];
     }
 
-    public static function getYesNoSelectArray()
+    public static function getYesNoSelectArray(): array
     {
         return [
             StatusEnum::No->value => StatusEnum::No->title(),

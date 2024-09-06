@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @method static active()
+ */
 class Category extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;

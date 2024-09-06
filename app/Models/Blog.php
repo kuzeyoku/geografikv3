@@ -4,12 +4,17 @@ namespace App\Models;
 
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @method static active()
+ */
 class Blog extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
@@ -39,22 +44,22 @@ class Blog extends Model implements HasMedia
         return $query->orderBy("view_count", "desc");
     }
 
-    public function translate()
+    public function translate(): HasMany
     {
         return $this->hasMany(BlogTranslate::class);
     }
 
-    public function comments()
+    public function comments(): HasMany
     {
         return $this->hasMany(BlogComment::class);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

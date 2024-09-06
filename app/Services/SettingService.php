@@ -2,13 +2,16 @@
 
 namespace App\Services;
 
+use App\Enums\StatusEnum;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Collection;
 
 class SettingService
 {
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     public static function getAll(): Collection
     {
@@ -17,7 +20,7 @@ class SettingService
         });
     }
 
-    public static function toArray()
+    public static function toArray(): array
     {
         $settings = self::getAll();
         $config = [];
@@ -39,5 +42,10 @@ class SettingService
         return Cache::remember("setting.cache_time", config("cache.time"), function () {
             return intval(Setting::where('key', 'cache_time')->first()->value ?: 60 * 60);
         });
+    }
+
+    public static function cacheIsActive(): bool
+    {
+        return config("cache.status", StatusEnum::Passive->value) == StatusEnum::Active->value;
     }
 }

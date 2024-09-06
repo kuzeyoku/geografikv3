@@ -18,7 +18,7 @@ class BlogController extends Controller
     public function index()
     {
         SeoService::set(["title" => __("front/blog.meta_title"), "description" => __("front/blog.meta_description")]);
-        if (config("cache.status", StatusEnum::Passive->value) == StatusEnum::Active->value) {
+        if (config("cache.status") == StatusEnum::Active->value) {
             $cacheKey = ModuleEnum::Blog->value . "_list_" . (Paginator::resolveCurrentPage() ?: 1) . "_" . app()->getLocale();
             $data = Cache::remember($cacheKey, config("cache.time", 3600), function () {
                 return [
@@ -42,7 +42,7 @@ class BlogController extends Controller
         SeoService::set($blog);
         $cacheKey = ModuleEnum::Blog->value . "_detail_" . $blog->id . "_" . app()->getLocale();
         $blog->increment("view_count");
-        if (config("cache.status", StatusEnum::Passive->value) == StatusEnum::Active->value) {
+        if (config("cache.status") == StatusEnum::Active->value) {
             $data = Cache::remember($cacheKey, config("cache.time", 3600), function () use ($blog) {
                 return [
                     "blog" => $blog,
