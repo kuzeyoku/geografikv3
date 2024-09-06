@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use Illuminate\Support\Facades\View;
+use App\Enums\StatusEnum;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Notifications\AdminNotification;
 use Illuminate\Support\Facades\Password;
@@ -38,13 +39,22 @@ class AuthController extends Controller
         return view(themeView("admin", "{$this->folder}.login"));
     }
 
+    private static function checkRecaptcha($request)
+    {
+        if (config("integration.recaptcha_status") === StatusEnum::Active->value) {
+            $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . config("integration.recaptcha_secret_key") . '&response=' . $request["g-recaptcha-response"]);
+            if (($recaptcha = json_decode($response)) && $recaptcha->success && $recaptcha->score >= 0.5) {
+                return true;
+            }
+            throw new \Exception(__("front/contact.recaptcha_failed"));
+        }
+
+        return true;
+    }
+
     public function authenticate(LoginRequest $request)
     {
-        if (!recaptcha()) {
-            return back()
-                ->withInput()
-                ->withError(__("admin/{$this->folder}.recaptcha_error"));
-        }
+        $this->checkRecaptcha($request->validated());
         if (Auth::attempt($request->only("email", "password"))) {
             $request->session()->regenerate();
             $user = User::where("email", $request->email)->first();
