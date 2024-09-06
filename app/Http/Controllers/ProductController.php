@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Services\SeoService;
+use App\Services\Front\SeoService;
 
 class ProductController extends Controller
 {

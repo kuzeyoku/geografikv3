@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
 use App\Models\Category;
-use App\Services\SeoService;
+use App\Models\Service;
+use App\Services\Front\SeoService;
 
 class ServiceController extends Controller
 {

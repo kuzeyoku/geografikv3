@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ModuleEnum;
 use App\Models\Blog;
 use App\Models\Brand;
-use App\Models\Slider;
-use App\Models\Product;
 use App\Models\Category;
-use App\Enums\ModuleEnum;
+use App\Models\Product;
 use App\Models\Project;
+use App\Models\Slider;
 use App\Models\Testimonial;
-use App\Services\SeoService;
+use App\Services\Front\SeoService;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller

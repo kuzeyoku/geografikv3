@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Slider;
-use App\Services\SeoService;
-use App\Services\ContactService;
 use App\Http\Requests\ContactRequest;
+use App\Models\Slider;
+use App\Services\Front\ContactService;
+use App\Services\Front\SeoService;
 
 class ContactController extends Controller
 {

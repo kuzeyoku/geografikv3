@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Front;
 
 use Artesaos\SEOTools\Facades\SEOTools;
 
 class SeoService
 {
-    public static function set(object|array|null $item = null)
+    public static function set(object|array|null $item = null): void
     {
         $themeAsset = ThemeService::getThemeAssets();
         SEOTools::opengraph()->addProperty('type', 'website');

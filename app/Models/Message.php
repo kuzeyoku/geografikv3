@@ -6,6 +6,9 @@ use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+/**
+ * @method static create(array $array)
+ */
 class Message extends Model
 {
     use HasFactory;

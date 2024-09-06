@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Front;
 
 use App\Models\ThemeAsset;
-use Illuminate\Support\Facades\Cache;
 use App\Services\Admin\SettingService;
+use Illuminate\Support\Facades\Cache;
 
 class ThemeService
 {

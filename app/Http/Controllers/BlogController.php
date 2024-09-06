@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use App\Models\Category;
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
 use App\Http\Requests\CommentRequest;
+use App\Models\Blog;
 use App\Models\BlogComment;
-use App\Services\SeoService;
+use App\Models\Category;
+use App\Services\Front\SeoService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 

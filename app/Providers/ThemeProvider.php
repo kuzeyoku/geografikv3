@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Enums\StatusEnum;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -22,27 +21,27 @@ class ThemeProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer(["layout.*", "contact", "admin.setting.asset"], function ($view) {
-            $themeAsset = \App\Services\ThemeService::getThemeAssets();
+            $themeAsset = \App\Services\Front\ThemeService::getThemeAssets();
             $view->with(compact("themeAsset"));
         });
 
         View::composer(["common.popup"], function ($view) {
-            $popup = \App\Services\ThemeService::getPopup();
+            $popup = \App\Services\Front\ThemeService::getPopup();
             $view->with(compact("popup"));
         });
 
         View::composer("layout.about", function ($view) {
-            $about = \App\Services\ThemeService::getAbout();
+            $about = \App\Services\Front\ThemeService::getAbout();
             $view->with(compact("about"));
         });
 
         View::composer("layout.header", function ($view) {
-            $menu = \App\Services\ThemeService::getMenu();
+            $menu = \App\Services\Front\ThemeService::getMenu();
             $view->with(compact("menu"));
         });
 
         View::composer('layout.footer', function ($view) {
-            $footer = \App\Services\ThemeService::getFooter();
+            $footer = \App\Services\Front\ThemeService::getFooter();
             $view->with(compact("footer"));
         });
     }

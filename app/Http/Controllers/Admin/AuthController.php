@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use App\Enums\StatusEnum;
+use App\Services\RecaptchaService;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +18,8 @@ use App\Http\Requests\Auth\ForgotPasswordRequest;
 
 class AuthController extends Controller
 {
-    protected $route;
-    protected $folder;
+    protected string $route;
+    protected string $folder;
 
     public function __construct()
     {
@@ -39,22 +39,9 @@ class AuthController extends Controller
         return view(themeView("admin", "{$this->folder}.login"));
     }
 
-    private static function checkRecaptcha($request)
-    {
-        if (config("integration.recaptcha_status") === StatusEnum::Active->value) {
-            $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . config("integration.recaptcha_secret_key") . '&response=' . $request["g-recaptcha-response"]);
-            if (($recaptcha = json_decode($response)) && $recaptcha->success && $recaptcha->score >= 0.5) {
-                return true;
-            }
-            throw new \Exception(__("front/contact.recaptcha_failed"));
-        }
-
-        return true;
-    }
-
     public function authenticate(LoginRequest $request)
     {
-        $this->checkRecaptcha($request->validated());
+        RecaptchaService::check($request->validated());
         if (Auth::attempt($request->only("email", "password"))) {
             $request->session()->regenerate();
             $user = User::where("email", $request->email)->first();
@@ -83,11 +70,7 @@ class AuthController extends Controller
 
     public function forgot_password(ForgotPasswordRequest $request)
     {
-        if (!recaptcha()) {
-            return back()
-                ->withInput()
-                ->withError(__("admin/{$this->folder}.recaptcha_error"));
-        }
+        RecaptchaService::check($request->validated());
         $status = Password::sendResetLink($request->only("email"));
         return $status === Password::RESET_LINK_SENT ? redirect()->route("admin.auth.login")->withSuccess(__($status)) : back()->withInput()->withError(__($status));
     }
@@ -134,6 +117,6 @@ class AuthController extends Controller
         }
         return redirect()
             ->route("admin.{$this->route}.login")
-            ->withSuccess(__("admin/{$this->folder}.logout_success"));
+            ->with("success", __("admin/{$this->folder}.logout_success"));
     }
 }

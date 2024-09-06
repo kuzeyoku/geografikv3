@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Services\SeoService;
-use Artesaos\SEOTools\Facades\SEOTools;
+use App\Services\Front\SeoService;
 
 
 class PageController extends Controller

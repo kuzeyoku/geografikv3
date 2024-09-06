@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Services\SeoService;
+use App\Services\Front\SeoService;
 
 class ProjectController extends Controller
 {

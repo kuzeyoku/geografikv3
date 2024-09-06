@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +17,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         \Illuminate\Support\Facades\Schema::defaultStringLength(191);
-        config()->set(\App\Services\SettingService::toArray());
+        config()->set(\App\Services\Front\SettingService::toArray());
     }
 }

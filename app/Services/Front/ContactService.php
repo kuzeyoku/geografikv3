@@ -1,18 +1,23 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Front;
 
-use App\Models\Message;
 use App\Enums\StatusEnum;
 use App\Models\BlockedUser;
+use App\Models\Message;
+use App\Services\RecaptchaService;
+use Exception;
 use Illuminate\Support\Facades\Mail;
 
 class ContactService
 {
 
-    public static function sendMail($request)
+    /**
+     * @throws \Exception
+     */
+    public static function sendMail($request): void
     {
-        self::checkRecaptcha($request);
+        RecaptchaService::check($request);
         self::checkBlocked($request);
         self::createMessage($request);
         self::setEmailSettings();
@@ -20,30 +25,20 @@ class ContactService
             ->send(new \App\Mail\Contact($request));
     }
 
-    private static function checkRecaptcha($request)
-    {
-        if (config("integration.recaptcha_status") === StatusEnum::Active->value) {
-            $response = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . config("integration.recaptcha_secret_key") . '&response=' . $request["g-recaptcha-response"]);
-            if (($recaptcha = json_decode($response)) && $recaptcha->success && $recaptcha->score >= 0.5) {
-                return true;
-            }
-            throw new \Exception(__("front/contact.recaptcha_failed"));
-        }
-
-        return true;
-    }
-
-    private static function checkBlocked($request)
+    /**
+     * @throws Exception
+     */
+    private static function checkBlocked($request): void
     {
         $blockedUser = BlockedUser::where("email", $request->email)
             ->orWhere("ip", $request->ip())
             ->exists();
         if ($blockedUser) {
-            throw new \Exception(__("front/contact.blocked"));
+            throw new Exception(__("front/contact.blocked"));
         }
     }
 
-    private static function createMessage($request)
+    private static function createMessage($request): void
     {
         Message::create([
             "name" => $request->name,
@@ -58,7 +53,7 @@ class ContactService
         ]);
     }
 
-    private static function setEmailSettings()
+    private static function setEmailSettings(): void
     {
         config([
             'mail.mailers.smtp.host' => config("smtp.host"),

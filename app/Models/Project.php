@@ -23,7 +23,7 @@ class Project extends Model implements HasMedia
         "status"
     ];
 
-    protected $locale;
+    protected mixed $locale;
 
     protected $with = ["translate", "category"];
 
