@@ -108,37 +108,29 @@ enum ModuleEnum: string
         ];
     }
 
-    public function IMAGE_COLLECTION()
+    public function IMAGE_COLLECTION(): string
     {
         return match ($this) {
-            self::Product => "images",
-            self::Project => "images",
+            self::Product, self::Project => "images",
+            default => throw new \Exception('Unexpected match value'),
         };
     }
 
-    public function COVER_COLLECTION()
+    public function COVER_COLLECTION(): string
     {
         return match ($this) {
-            self::Category => "cover",
-            self::Blog => "cover",
-            self::Service => "cover",
-            self::Brand => "cover",
-            self::Reference => "cover",
-            self::Product => "cover",
-            self::Project => "cover",
-            self::Slider => "cover",
+            self::Category, self::Blog, self::Service, self::Brand, self::Reference, self::Product, self::Project, self::Slider, self::Popup => "cover",
             self::Testimonial => "avatar",
-            self::Popup => "cover",
             self::Menu => "null",
+            default => throw new \Exception('Unexpected match value'),
         };
     }
 
-    public function DOCUMENT_COLLECTION()
+    public function DOCUMENT_COLLECTION(): string
     {
         return match ($this) {
-            self::Service => "documents",
-            self::Product => "documents",
-            self::Project => "documents",
+            self::Service, self::Project, self::Product => "documents",
+            default => throw new \Exception('Unexpected match value'),
         };
     }
 }
