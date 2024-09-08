@@ -1,0 +1,135 @@
+.product-image {
+    background-image: linear-gradient(
+        355deg,
+        rgba(233, 233, 233, 0.31) 0%,
+        rgb(252, 252, 252) 34%
+    );
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: background-color 0.5s;
+}
+
+.product-image:hover {
+    background-color: #adadad;
+}
+
+.product-container {
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.product-container:hover .product-title {
+    bottom: 20px;
+    /* Hover durumunda yukarı taşı */
+}
+
+.product-title {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transition: bottom 0.5s;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.custom-col {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+@media (min-width: 1200px) {
+    .custom-col {
+        flex: 0 0 20%; /* Her bir sütun için */
+        max-width: 20%; /* Her bir sütun için */
+    }
+}
+
+/* Orta boy ekranlar için */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .custom-col {
+        flex: 0 0 25%; /* Her bir sütun için */
+        max-width: 25%; /* Her bir sütun için */
+    }
+}
+
+/* Küçük ekranlar için */
+@media (min-width: 768px) and (max-width: 991px) {
+    .custom-col {
+        flex: 0 0 33.33333%; /* Her bir sütun için */
+        max-width: 33.33333%; /* Her bir sütun için */
+    }
+}
+
+/* Çok küçük ekranlar için */
+@media (max-width: 767px) {
+    .custom-col {
+        flex: 0 0 50%; /* Her bir sütun için */
+        max-width: 50%; /* Her bir sütun için */
+    }
+}
+
+/* Ekstra küçük ekranlar için, her sütun tam genişlik alır */
+@media (max-width: 575px) {
+    .custom-col {
+        flex: 0 0 100%; /* Her bir sütun için */
+        max-width: 100%; /* Her bir sütun için */
+    }
+}
+
+.product-detail {
+    background-color: #333;
+}
+
+.product-detail .first-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-detail .container {
+    padding: 0;
+}
+
+.product-detail .overlay {
+    position: relative;
+}
+
+.product-detail .overlay img {
+    width: 100%;
+}
+
+.product-detail .overlay .overlay-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 50px;
+    color: white;
+}
+
+.product-detail .overlay .overlay-text h3 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+.product-detail .overlay .overlay-text p {
+    color: white;
+    font-size: 18px;
+}
+
+.product-end-item img {
+    width: 100%;
+}
+
+.product-end-item .overlay-section {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 50px;
+    color: white;
+}
