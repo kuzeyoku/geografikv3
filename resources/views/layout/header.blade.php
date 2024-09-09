@@ -67,7 +67,7 @@
                             <img src="{{ themeAsset('front', 'img/logo/logo.png') }}" alt="">
                         </a>
                         <a class="logo-text-black" href="{{ route('home') }}">
-                            <img src="{{ $themeAsset->logo_dark }}" alt="">
+                            <img src="{{ config('asset.logo_dark') }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                 <div class="row align-items-center">
                     <div class="col-9">
                         <a href="{{ route('home') }}">
-                            <img src="{{ $themeAsset->logo_light }}" alt="Logo">
+                            <img src="{{ config('asset.logo_light') }}" alt="Logo">
                         </a>
                     </div>
                     <div class="col-3 text-end">

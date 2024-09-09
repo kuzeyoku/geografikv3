@@ -1,4 +1,4 @@
-<div class="counter-board-area" data-background="{{$themeAsset->counter}}">
+<div class="counter-board-area" data-background="{{config("asset.counter")}}">
     <div class="container">
         <div class="row wow fadeInUp counter-board-content" style="visibility: visible; animation-name: fadeInUp;">
             <div class="col-lg-3 col-sm-6">

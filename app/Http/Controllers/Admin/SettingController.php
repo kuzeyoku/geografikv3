@@ -11,11 +11,7 @@ class SettingController extends Controller
 {
     public function __construct(private SettingService $service)
     {
-        View::share([
-            "route" => $service->route(),
-            "folder" => $service->folder(),
-            "service" => $service
-        ]);
+
     }
 
     public function index($category = null)

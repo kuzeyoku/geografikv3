@@ -88,7 +88,7 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="copyright-logo logo-shape">
                         <a href="{{ route('home') }}">
-                            <img src="{{ $themeAsset->logo_light }}" alt="">
+                            <img src="{{ config("asset.logo_light") }}" alt="">
                         </a>
                     </div>
                 </div>

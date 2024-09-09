@@ -117,7 +117,6 @@ return [
     "seo_twitter_card" => "Twitter Card",
     "seo_schema" => "Schema.org İşaretleme",
     "recaptcha" => "Google Recaptcha",
-    "analytics" => "Google Analytics",
     "recaptcha_status" => "Recaptcha Durumu",
     "recaptcha_site_key" => "Site Anahtarı",
     "recaptcha_site_key_placeholder" => "Site Anahtarı Giriniz",

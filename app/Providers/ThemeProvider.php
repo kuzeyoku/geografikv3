@@ -20,11 +20,6 @@ class ThemeProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer(["layout.*", "contact", "admin.setting.asset"], function ($view) {
-            $themeAsset = \App\Services\Front\ThemeService::getThemeAssets();
-            $view->with(compact("themeAsset"));
-        });
-
         View::composer(["common.popup"], function ($view) {
             $popup = \App\Services\Front\ThemeService::getPopup();
             $view->with(compact("popup"));

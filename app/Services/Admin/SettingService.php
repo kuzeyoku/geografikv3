@@ -8,16 +8,6 @@ use stdClass;
 
 class SettingService
 {
-    public function route(): string
-    {
-        return "setting";
-    }
-
-    public function folder(): string
-    {
-        return "setting";
-    }
-
     public function update(Request $request)
     {
         if ($request->category == "asset") return $this->assetUpload($request);
@@ -34,9 +24,9 @@ class SettingService
             if ($request->hasFile($key)) {
                 $setting = Setting::where("key", $key)->where("category", "asset")->first();
                 if (!$setting) {
-                    $setting = Setting::create(["key" => $key, "category" => "asset", "value" => "image"]);
-                } else {
                     $setting->clearMediaCollection($key);
+                } else {
+                    $setting = Setting::create(["key" => $key, "category" => "asset", "value" => "image"]);
                 }
                 $setting->addMediaFromRequest($key)->usingFileName($key . "." . $request->{$key}->extension())->toMediaCollection();
             }
@@ -48,22 +38,11 @@ class SettingService
         $settings = Setting::where("category", $category)->get();
         if ($category == "asset") {
             $settings->each(function ($setting) {
-                $setting->{"media_url"} = $setting->getFirstMediaUrl();
+                $setting->media_url = $setting->getFirstMediaUrl();
             });
             return $settings->pluck("media_url", "key");
         }
         return $settings->pluck("value", "key");
-    }
-
-    public static function getSitemapModuleList()
-    {
-        $arr = ["home"];
-        if (config("module.page.status")) array_push($arr, "static_pages");
-        if (config("module.blog.status")) array_push($arr, "blog", "blog_category", "blog_detail");
-        if (config("module.service.status")) array_push($arr, "service", "service_category", "service_detail");
-        if (config("module.product.status")) array_push($arr, "product", "product_category", "product_detail");
-        if (config("module.project.status")) array_push($arr, "project", "project_category", "project_detail");
-        return $arr;
     }
 
     public static function getChangeFreqList(): array
@@ -77,20 +56,5 @@ class SettingService
             "yearly" => __("admin/setting.sitemap_changefreq_yearly"),
             "never" => __("admin/setting.sitemap_changefreq_never"),
         ];
-    }
-
-    public static function getThemeAssets(): stdClass
-    {
-        $asset = new stdClass();
-        $asset->logo_light = null;
-        $asset->logo_dark = null;
-        $asset->favicon = null;
-        $asset->cover = null;
-        $asset->breadcrumb = null;
-        $asset->about1 = null;
-        $asset->about2 = null;
-        $asset->hire_area = null;
-        $asset->counter = null;
-        return $asset;
     }
 }

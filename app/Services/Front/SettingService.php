@@ -20,21 +20,23 @@ class SettingService
         });
     }
 
-    public static function toArray(): array
-    {
-        $settings = self::getAll();
-        $config = [];
-        $settings->each(function ($setting) use (&$config) {
-            $config[$setting->category][$setting->key] = $setting->value;
-        });
-        return $config;
-    }
-
     public static function get($category, $key)
     {
         return Cache::remember("setting.{$key}", config("cache.time"), function () use ($key, $category) {
             return self::getAll()->where(["category" => $category, "key" => $key])->first()?->value;
         });
+    }
+
+    public static function toArray(): array
+    {
+        $settings = self::getAll();
+        return $settings->map(function ($setting) {
+            return [
+                $setting->category => [
+                    $setting->key => $setting->category === 'asset' ? $setting->getFirstMediaUrl() : $setting->value,
+                ],
+            ];
+        })->collapse()->toArray();
     }
 
     public function getCacheTime()

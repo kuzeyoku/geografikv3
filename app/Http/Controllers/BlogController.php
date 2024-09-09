@@ -20,7 +20,7 @@ class BlogController extends Controller
 
     public function index()
     {
-        SeoService::set(["title" => __("front/blog.meta_title"), "description" => __("front/blog.meta_description")]);
+        SeoService::module(ModuleEnum::Blog);
         if (SettingService::cacheIsActive()) {
             $cacheKey = ModuleEnum::Blog . "_list_" . (Paginator::resolveCurrentPage() ?: 1) . "_" . app()->getLocale();
             $data = Cache::remember($cacheKey, config("cache.time"), function () {
@@ -42,7 +42,7 @@ class BlogController extends Controller
 
     public function show(Blog $blog)
     {
-        SeoService::set($blog);
+        SeoService::show($blog);
         $cacheKey = ModuleEnum::Blog->value . "_detail_" . $blog->id . "_" . app()->getLocale();
         $blog->increment("view_count");
         if (SettingService::cacheIsActive()) {

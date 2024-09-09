@@ -4,8 +4,8 @@
         <div class="page-header">
             <div class="add-item d-flex">
                 <div class="page-title">
-                    <h4>@lang("admin/{$folder}.title")</h4>
-                    <h6>@lang("admin/{$folder}.description")</h6>
+                    <h4>@lang("admin/setting.title")</h4>
+                    <h6>@lang("admin/setting.description")</h6>
                 </div>
             </div>
         </div>
@@ -13,7 +13,7 @@
         {{ html()->hidden('category', request()->category) }}
         <div class="card">
             <div class="card-header">
-                <h4>@lang("admin/{$folder}.category_" . request()->category)</h4>
+                <h4>@lang("admin/setting.category_" . request()->category)</h4>
             </div>
             <div class="card-body">
                 @yield('setting_form')
