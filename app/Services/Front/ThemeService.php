@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Cache;
 
 class ThemeService
 {
+    public static function get($file)
+    {
+        return self::getThemeAssets()->where("name", $file)->getFirstMediaUrl($file);
+    }
+
     public static function getThemeAssets()
     {
-        return Cache::rememberForever('theme_assets', function () {
-            $assetData = ThemeAsset::all();
-            $response = SettingService::getThemeAssets();
-            foreach ($assetData as $asset) {
-                $response->{$asset->name} = $asset->getFirstMediaUrl($asset->name);
-            }
-            return $response;
+        return Cache::remember('theme_assets', config("cache.time"), function () {
+            return ThemeAsset::all();
         });
     }
 

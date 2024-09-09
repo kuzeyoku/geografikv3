@@ -1,10 +1,10 @@
 @extends('layout.main')
 @section('content')
-    @include('layout.breadcrumb', ['title' => 'Hizmetlerimiz'])
+    @include('layout.breadcrumb', ['title' => __("front/service.txt1")])
     <section class="service-box-area service-box-area-main pt-150 pb-80">
         <div class="container">
             <div class="row wow fadeInUp">
-                @foreach ($service as $service)
+                @foreach ($services as $service)
                     <div class="col-lg-4 col-md-6">
                         <div class="service-box-single mb-40">
                             <div class="service-box-content">

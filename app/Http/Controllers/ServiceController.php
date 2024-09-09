@@ -11,8 +11,15 @@ class ServiceController extends Controller
     public function index()
     {
         SeoService::set();
-        $service = Service::active()->order()->get();
-        return view("service.index", compact("service"));
+        $services = Service::active()->order()->get();
+        return view("service.index", compact("services"));
+    }
+
+    public function category(Category $category)
+    {
+        SeoService::set($category);
+        $services = Service::active()->order()->whereBelongsTo($category)->get();
+        return view("service.index", compact("category", "services"));
     }
 
     public function show(Service $service)
@@ -22,10 +29,4 @@ class ServiceController extends Controller
         return view("service.show", compact("service", "otherServices"));
     }
 
-    public function category(Category $category)
-    {
-        SeoService::set($category);
-        $service = Service::active()->order()->whereBelongsTo($category)->get();
-        return view("service.index", compact("category", "service"));
-    }
 }

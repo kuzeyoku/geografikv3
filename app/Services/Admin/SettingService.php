@@ -3,7 +3,6 @@
 namespace App\Services\Admin;
 
 use App\Models\Setting;
-use App\Models\ThemeAsset;
 use Illuminate\Http\Request;
 use stdClass;
 
@@ -21,25 +20,7 @@ class SettingService
 
     public function update(Request $request)
     {
-        if ($request->category == "asset") {
-            foreach ($request->files as $key => $file) {
-                if ($request->hasFile($key)) {
-                    $asset = ThemeAsset::where("name", $key)->first();
-                    if ($asset) {
-                        $asset->clearMediaCollection($key);
-                    } else {
-                        $asset = ThemeAsset::create(["name" => $key]);
-                    }
-                    try {
-                        $asset->addMediaFromRequest($key)->usingFileName($key . "." . $request->{$key}->extension())->toMediaCollection($key);
-                        cache()->forget("theme_assets");
-                    } catch (\Exception $e) {
-                        //Exception
-                    }
-                }
-            }
-            return;
-        }
+        if ($request->category == "asset") return $this->assetUpload($request);
         $except = $request->except("_token", "_method", "category");
         $settings = array_map(function ($key, $value) use ($request) {
             return ["key" => $key, "value" => $value, "category" => $request->category];
@@ -47,10 +28,31 @@ class SettingService
         return Setting::upsert($settings, ["key", "category"], ["value"]);
     }
 
+    public function assetUpload($request): void
+    {
+        foreach ($request->files as $key => $value) {
+            if ($request->hasFile($key)) {
+                $setting = Setting::where("key", $key)->where("category", "asset")->first();
+                if (!$setting) {
+                    $setting = Setting::create(["key" => $key, "category" => "asset", "value" => "image"]);
+                } else {
+                    $setting->clearMediaCollection($key);
+                }
+                $setting->addMediaFromRequest($key)->usingFileName($key . "." . $request->{$key}->extension())->toMediaCollection();
+            }
+        }
+    }
+
     public function getCategory($category)
     {
         $settings = Setting::where("category", $category)->get();
-        return config()->set($category, $settings->pluck("value", "key"));
+        if ($category == "asset") {
+            $settings->each(function ($setting) {
+                $setting->{"media_url"} = $setting->getFirstMediaUrl();
+            });
+            return $settings->pluck("media_url", "key");
+        }
+        return $settings->pluck("value", "key");
     }
 
     public static function getSitemapModuleList()

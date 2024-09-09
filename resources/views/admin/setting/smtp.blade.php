@@ -14,6 +14,6 @@
     @endphp
     @foreach ($formElementList as $element)
         {{ html()->label(__("admin/{$folder}.smtp_{$element}")) }}
-        {{ html()->text($element, config('smtp.' . $element))->placeholder(__("admin/{$folder}.smtp_{$element}_placeholder"))->class('form-control') }}
+        {{ html()->text($element, $settings[$element] ?? null)->placeholder(__("admin/{$folder}.smtp_{$element}_placeholder"))->class('form-control') }}
     @endforeach
 @endsection

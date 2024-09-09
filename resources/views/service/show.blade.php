@@ -5,7 +5,7 @@
         <div class="container">
             <div class="service-details-img wow fadeInUp">
                 <div class="service-details-single-img">
-                    <img src="{{ $service->getFirstMediaUrl('cover') }}" alt="">
+                    <img src="{{ $service->getFirstMediaUrl('cover') }}" alt="{{$service->title}}">
                 </div>
             </div>
             <div class="service-details-content wow fadeInUp">

@@ -23,7 +23,7 @@ class BlogController extends Controller
         SeoService::set(["title" => __("front/blog.meta_title"), "description" => __("front/blog.meta_description")]);
         if (SettingService::cacheIsActive()) {
             $cacheKey = ModuleEnum::Blog . "_list_" . (Paginator::resolveCurrentPage() ?: 1) . "_" . app()->getLocale();
-            $data = Cache::remember($cacheKey, config("cache.time", 3600), function () {
+            $data = Cache::remember($cacheKey, config("cache.time"), function () {
                 return [
                     "blogs" => Blog::active()->order()->paginate(config("pagination.front", 10)),
                     "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
@@ -46,7 +46,7 @@ class BlogController extends Controller
         $cacheKey = ModuleEnum::Blog->value . "_detail_" . $blog->id . "_" . app()->getLocale();
         $blog->increment("view_count");
         if (SettingService::cacheIsActive()) {
-            $data = Cache::remember($cacheKey, config("cache.time", 3600), function () use ($blog) {
+            $data = Cache::remember($cacheKey, config("cache.time"), function () use ($blog) {
                 return [
                     "blog" => $blog,
                     "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),

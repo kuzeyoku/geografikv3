@@ -5,6 +5,6 @@
     @endphp
     @foreach ($formElementList as $element)
         {{ html()->label(__("admin/{$folder}.social_{$element}")) }}
-        {{ html()->text($element, config('social.' . $element))->placeholder(__("admin/{$folder}.social_{$element}_placeholder"))->class('form-control') }}
+        {{ html()->text($element, $settings[$element] ?? null)->placeholder(__("admin/{$folder}.social_{$element}_placeholder"))->class('form-control') }}
     @endforeach
 @endsection
