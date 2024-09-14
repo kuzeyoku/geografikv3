@@ -17,7 +17,7 @@
                                 <div class="cta__content">
                                     <p>@lang('front/header.txt1')</p>
                                     <span>
-                                        <a href="tel:{{ config('contact.phone') }}">{{ config('contact.phone') }}</a>
+                                        <a href="tel:@setting('contact','phone')">@setting("contact","phone")</a>
                                     </span>
                                 </div>
                             </li>
@@ -28,8 +28,8 @@
                                 <div class="cta__content">
                                     <p>@lang('front/header.txt2')</p>
                                     <span>
-                                        <a href="mailto:{{ config('contact.email') }}">
-                                            <span>{{ config('contact.email') }}</span>
+                                        <a href="mailto:@setting('contact','email')">
+                                            <span>@setting("contact","email")</span>
                                         </a>
                                     </span>
                                 </div>
@@ -40,10 +40,10 @@
                 <div class="col-lg-3 d-none d-lg-block">
                     <div class="grb__social f-right st-1">
                         <ul>
-                            @foreach (config('social', []) as $key => $value)
-                                @if (config("social.{$key}"))
+                            @foreach (setting("social") as $key => $value)
+                                @if (setting("social",$key))
                                     <li>
-                                        <a href="{{ config("social.{$key}") }}">
+                                        <a href="{{setting("social",$key)}}">
                                             <i class="fab fa-{{ $key }}"></i>
                                         </a>
                                     </li>
@@ -64,10 +64,10 @@
                             <img src="{{ themeAsset('front', 'img/shape/logo-bg-1.png') }}" alt="">
                         </div>
                         <a class="logo-text-white" href="{{ route('home') }}">
-                            <img src="{{ themeAsset('front', 'img/logo/logo.png') }}" alt="">
+                            <img src="{{ themeAsset('front', 'img/logo/logo.png') }}" alt="@setting('general','title')">
                         </a>
                         <a class="logo-text-black" href="{{ route('home') }}">
-                            <img src="{{ config('asset.logo_dark') }}" alt="">
+                            <img src="@setting('asset','logo_dark')" alt="@setting('general','title')">
                         </a>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                 <div class="row align-items-center">
                     <div class="col-9">
                         <a href="{{ route('home') }}">
-                            <img src="{{ config('asset.logo_light') }}" alt="Logo">
+                            <img src="@setting('asset','logo_light')" alt="@setting('general','title')">
                         </a>
                     </div>
                     <div class="col-3 text-end">
@@ -132,23 +132,23 @@
                     <h4>@lang('front/header.txt4')</h4>
                     <a href="#" class="">
                         <i class="fal fa-map-marker-alt"></i>
-                        <span>{{ config('contact.address') }}</span>
+                        <span>@setting('contact','address')</span>
                     </a>
-                    <a href="tel:{{ config('contact.phone') }}" class="">
+                    <a href="tel:@setting('contact','phone')" class="">
                         <i class="fal fa-phone"></i>
-                        <span>{{ config('contact.phone') }}</span>
+                        <span>@setting('contact','phone')</span>
                     </a>
-                    <a href="mailto:{{ config('contact.email') }}" class="">
+                    <a href="mailto:@setting('contact','email')" class="">
                         <i class="far fa-envelope"></i>
-                        <span>{{ config('contact.email') }}</span>
+                        <span>@setting('contact','email')</span>
                     </a>
                 </div>
                 <div class="grb__social footer-social offset-social">
                     <ul>
-                        @foreach (config('social', []) as $key => $value)
-                            @if (config("social.{$key}"))
+                        @foreach (setting("social") as $key => $value)
+                            @if (setting("social",$key))
                                 <li>
-                                    <a href="{{ config("social.{$key}") }}">
+                                    <a href="{{setting("social",$key)}}">
                                         <i class="fab fa-{{ $key }}"></i>
                                     </a>
                                 </li>

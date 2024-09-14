@@ -26,3 +26,12 @@ function themeAsset($folder, $file)
 {
     return asset("assets/" . config("template.{$folder}.asset") . "/" . $file);
 }
+
+function setting($category, $key = null)
+{
+    $settings = App\Services\Front\SettingService::toArray();
+    if (is_null($key)) {
+        return $settings[$category] ?? [];
+    }
+    return $settings[$category][$key] ?? null;
+}

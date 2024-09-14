@@ -12,7 +12,7 @@ class ContactController extends Controller
 
     public function index()
     {
-        SeoService::set(["title" => __("front/contact.title")]);
+        SeoService::index();
         $slider = Slider::active()->order()->get();
         return view('contact', compact('slider'));
     }
@@ -22,11 +22,11 @@ class ContactController extends Controller
         try {
             ContactService::sendMail($request);
             return back()
-                ->withSuccess(__("front/contact.send_success"));
+                ->with("success", __("front/contact.send_success"));
         } catch (\Exception $e) {
             return back()
                 ->withInput()
-                ->withError($e->getMessage());
+                ->with("error", $e->getMessage());
         }
     }
 }

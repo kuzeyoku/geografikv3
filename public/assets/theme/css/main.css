@@ -4144,11 +4144,14 @@ select {
     color: #040021;
 }
 
-.about__img .p-element .ab-image {
+.about__img .p-element .ab-image img {
     position: absolute;
     bottom: -50px;
     left: -210px;
+    border-radius: 20px;
+    max-width: 300px;
 }
+
 
 @media only screen and (min-width: 1401px) and (max-width: 1600px), only screen and (min-width: 1201px) and (max-width: 1400px) {
     .about__img .p-element .ab-image {
@@ -7858,17 +7861,6 @@ select {
     font-weight: 500;
 }
 
-.bms-title {
-    overflow: hidden;
-}
-
-.bms-title h4 {
-    font-size: 28px;
-    margin-bottom: 0;
-    line-height: 40px;
-    text-transform: uppercase;
-}
-
 @media only screen and (min-width: 992px) and (max-width: 1200px), only screen and (min-width: 768px) and (max-width: 991px) {
     .bms-title h4 {
         font-size: 22px;
@@ -7895,8 +7887,21 @@ select {
 }
 
 .bm-details .bms-title h4 {
-    font-size: 36px;
+    font-size: 28px;
     line-height: 46px;
+    margin-bottom: 30px;
+    border-left: 10px solid #6639ff;
+    padding-left: 15px;
+}
+
+.bm-details p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.bm-details p, .bm-details ul li {
+    color: #040021;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
@@ -8355,6 +8360,29 @@ select {
 
 .bms-content hr {
     border-color: #707070;
+}
+
+.bms-content p {
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.bms-content ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.bms-content ul li {
+    font-size: 16px;
+    line-height: 28px;
+    list-style: disc;
+}
+
+.bms-content img{
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top:20px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 
 .bms-tags span {

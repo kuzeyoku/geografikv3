@@ -41,6 +41,7 @@
 <script src="{{ themeAsset('front', 'js/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ themeAsset('front', 'js/plugins.js') }}"></script>
 <script src="{{ themeAsset('front', 'js/main.js') }}"></script>
+@stack('script')
 </body>
 
 </html>

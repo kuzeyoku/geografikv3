@@ -17,21 +17,20 @@ class HomeController extends Controller
 {
     public function index()
     {
-        SeoService::index();
-        $data["brand"] = Cache::remember("brand_home_" . app()->getLocale(), config("cache.time"), function () {
+        $data["brands"] = Cache::remember("brand_home_" . app()->getLocale(), config("cache.time"), function () {
             return Brand::active()->order()->get();
         });
 
-        $data["slider"] = Cache::remember("slider_home_" . app()->getLocale(), config("cache.time"), function () {
+        $data["sliders"] = Cache::remember("slider_home_" . app()->getLocale(), config("cache.time"), function () {
             return Slider::active()->order()->get();
         });
 
-        $data["product"] = Cache::remember("product_home_" . app()->getLocale(), config("cache.time"), function () {
+        $data["products"] = Cache::remember("product_home_" . app()->getLocale(), config("cache.time"), function () {
             $product = Product::active()->order()->get();
             return $product->whereIn("category_id", [2, 3]);
         });
 
-        $data["project"] = Cache::remember("project_home_" . app()->getLocale(), config("cache.time"), function () {
+        $data["projects"] = Cache::remember("project_home_" . app()->getLocale(), config("cache.time"), function () {
             return Project::active()->order()->limit(6)->get();
         });
 
@@ -39,11 +38,11 @@ class HomeController extends Controller
             return Testimonial::active()->order()->get();
         });
 
-        $data["blog"] = Cache::remember("blog_home_" . app()->getLocale(), config("cache.time"), function () {
+        $data["blogs"] = Cache::remember("blog_home_" . app()->getLocale(), config("cache.time"), function () {
             return Blog::active()->order()->limit(3)->get();
         });
 
-        $data["service_category"] = Cache::remember("service_category_home_" . app()->getLocale(), config("cache.time"), function () {
+        $data["service_categories"] = Cache::remember("service_category_home_" . app()->getLocale(), config("cache.time"), function () {
             return Category::active()->module(ModuleEnum::Service->value)->order()->get();
         });
         return view("index", $data);

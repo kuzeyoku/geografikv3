@@ -1,4 +1,4 @@
-<section class="page-title-area" data-background="{{$themeAsset->breadcrumb}}">
+<section class="page-title-area" data-background="@setting('asset','readcrumb')">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -11,7 +11,9 @@
                             <li class="breadcrumb-item">
                                 <a href="{{ route('home') }}">@lang("front/breadcrumb.txt1")</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ $title }}</li>
+                            @isset($parent)
+                                <li class="breadcrumb-item active" aria-current="page">{{$parent}}</li>
+                            @endisset
                         </ol>
                     </nav>
                 </div>

@@ -5,23 +5,24 @@ namespace App\Services\Front;
 use App\Enums\StatusEnum;
 use App\Models\BlockedUser;
 use App\Models\Message;
-use App\Services\RecaptchaService;
+use App\Services\ValidationService;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactService
 {
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
-    public static function sendMail($request): void
+    public static function sendMail(Request $request): void
     {
-        RecaptchaService::check($request);
+        ValidationService::checkRecaptcha($request);
         self::checkBlocked($request);
         self::createMessage($request);
         self::setEmailSettings();
-        Mail::to(config("contact.email"))
+        Mail::to(setting("contact", "email"))
             ->send(new \App\Mail\Contact($request));
     }
 
@@ -56,13 +57,13 @@ class ContactService
     private static function setEmailSettings(): void
     {
         config([
-            'mail.mailers.smtp.host' => config("smtp.host"),
-            'mail.mailers.smtp.port' => config("smtp.port"),
-            'mail.mailers.smtp.encryption' => config("smtp.encryption"),
-            'mail.mailers.smtp.username' => config("smtp.username"),
-            'mail.mailers.smtp.password' => config("smtp.password"),
-            "mail.from.address" => config("smtp.from_address"),
-            "mail.from.name" => config("smtp.from_name"),
+            'mail.mailers.smtp.host' => setting("smtp", "host"),
+            'mail.mailers.smtp.port' => setting("smtp", "port"),
+            'mail.mailers.smtp.encryption' => setting("smtp", "encryption"),
+            'mail.mailers.smtp.username' => setting("smtp", "username"),
+            'mail.mailers.smtp.password' => setting("smtp", "password"),
+            "mail.from.address" => setting("smtp", "from_address"),
+            "mail.from.name" => setting("smtp", "from_name"),
         ]);
     }
 }

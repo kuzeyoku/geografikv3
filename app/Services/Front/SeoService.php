@@ -8,26 +8,26 @@ use Artesaos\SEOTools\Facades\SEOTools;
 class SeoService
 {
 
-    private static function default()
+    private static function default(): void
     {
         SEOTools::opengraph()->addProperty("type", "website");
     }
 
-    public static function index()
+    public static function index(): void
     {
         self::default();
         SEOTools::setTitle(config("general.title"));
         SEOTools::setDescription(config("general.description"));
     }
 
-    public static function module($module)
+    public static function module($module): void
     {
         self::default();
-        SEOTools::setTitle(__("front/$module.meta_title") ?: config("general.title"));
-        SEOTools::setDescription(__("front/$module.meta_description") ?: config("general.description"));
+        SEOTools::setTitle(__("front/$module->value.meta_title") ?: config("general.title"));
+        SEOTools::setDescription(__("front/$module->value.meta_description") ?: config("general.description"));
     }
 
-    public static function show($item)
+    public static function show($item): void
     {
         self::default();
         SEOTools::setTitle($item->title);

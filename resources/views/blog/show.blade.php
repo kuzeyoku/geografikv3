@@ -1,15 +1,18 @@
 @extends("layout.main")
 @section("content")
-    @include("layout.breadcrumb",["title" => $blog->title])
+    @include("layout.breadcrumb",["title" => $blog->title, "parent" => __("front/blog.txt1")])
     <div class="blog-main-area pt-150">
         <div class="container">
             <div class="row wow fadeInUp">
                 <div class="col-lg-8">
                     <div class="blog-main">
                         <div class="blog-main-single bm-details">
-                            <div class="bms-img mb-30">
-                                <a href="{{$blog->url}}"><img src="{{$blog->getFirstMediaUrl("cover")}}"
-                                                              alt="{{$blog->title}}"></a>
+                            <div class="bms-img mb-20">
+                                <img src="{{$blog->getFirstMediaUrl("cover")}}"
+                                     alt="{{$blog->title}}">
+                            </div>
+                            <div class="bms-title">
+                                <h4>{{$blog->title}}</h4>
                             </div>
                             <div class="bms-content">
                                 {!! $blog->description !!}

@@ -1,6 +1,6 @@
 @extends("layout.main")
 @section("content")
-    @include("layout.breadcrumb",["title" => __("front/blog.txt1")])
+    @include("layout.breadcrumb",["title" => __("front/blog.txt1"),"parent" => __("front/blog.txt1")])
     <div class="blog-main-area pt-150">
         <div class="container">
             <div class="row wow fadeInUp">

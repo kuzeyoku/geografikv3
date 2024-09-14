@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row wow fadeInUp">
-            @foreach ($blog as $blog)
+            @foreach ($blogs as $blog)
                 <div class="col-lg-4 col-md-6">
                     <div class="blog-single mb-30 p-relative">
                         <div class="blog-date">
@@ -30,11 +30,12 @@
                             <p>{{ $blog->created_at->translatedFormat('M Y') }}</p>
                         </div>
                         <div class="blog-img">
-                            <a href="{{ $blog->url }}"><img src="{{ $blog->getFirstMediaUrl('cover') }}"
-                                    alt=""></a>
+                            <a href="{{ $blog->url }}">
+                                <img src="{{ $blog->getFirstMediaUrl('cover') }}" alt="{{$blog->title}}">
+                            </a>
                         </div>
                         <div class="blog-content">
-                            <h4><a href="{{ $blog->url }}">{{ $blog->title }}</a></h4>
+                            <h4><a href="{{ $blog->url }}">{{ \Illuminate\Support\Str::limit($blog->title,30) }}</a></h4>
                             <p>{{ $blog->short_description }}</p>
                             <a href="{{ $blog->url }}" class="read-btn">@lang('front/blog.txt4')</a>
                         </div>

@@ -22,13 +22,15 @@ class SettingService
     {
         foreach ($request->files as $key => $value) {
             if ($request->hasFile($key)) {
-                $setting = Setting::where("key", $key)->where("category", "asset")->first();
-                if (!$setting) {
-                    $setting->clearMediaCollection($key);
-                } else {
-                    $setting = Setting::create(["key" => $key, "category" => "asset", "value" => "image"]);
-                }
-                $setting->addMediaFromRequest($key)->usingFileName($key . "." . $request->{$key}->extension())->toMediaCollection();
+                $setting = Setting::updateOrCreate(
+                    ["key" => $key, "category" => "asset"],
+                    ["value" => "image"]
+                );
+
+                $setting->clearMediaCollection();
+                $setting->addMediaFromRequest($key)
+                    ->usingFileName($key . "." . $request->{$key}->extension())
+                    ->toMediaCollection();
             }
         }
     }

@@ -1,7 +1,7 @@
 <section class="slider-area p-relative fix">
     <div class="slider-active swiper-container">
         <div class="swiper-wrapper">
-            @foreach ($slider as $slider)
+            @foreach ($sliders as $slider)
                 <div class="single-slider slider-height swiper-slide slider-overlay" data-swiper-autoplay="5000">
                     <div class="slide-bg" data-background="{{ $slider->getFirstMediaUrl('cover') }}"></div>
                     <div class="container">

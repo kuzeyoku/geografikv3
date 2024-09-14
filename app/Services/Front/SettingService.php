@@ -27,22 +27,26 @@ class SettingService
         });
     }
 
-    public static function toArray(): array
+    public static function toArray()
     {
         $settings = self::getAll();
-        return $settings->map(function ($setting) {
-            return [
-                $setting->category => [
-                    $setting->key => $setting->category === 'asset' ? $setting->getFirstMediaUrl() : $setting->value,
-                ],
-            ];
-        })->collapse()->toArray();
+        return Cache::remember("setting.array", config("cache.time"), function () use ($settings) {
+            return $settings->groupBy('category')->map(function ($group) {
+                if ($group->first()->category == "asset") {
+                    $group->each(function ($setting) {
+                        $setting->media = $setting->getFirstMediaUrl();
+                    });
+                    return $group->pluck('media', 'key');
+                }
+                return $group->pluck('value', 'key');
+            })->toArray();
+        });
     }
 
-    public function getCacheTime()
+    public static function getCacheTime()
     {
         return Cache::remember("setting.cache_time", config("cache.time"), function () {
-            return intval(Setting::where('key', 'cache_time')->first()->value ?: 60 * 60);
+            return intval(Setting::where('key', 'time')->first()?->value ?: 60 * 60);
         });
     }
 

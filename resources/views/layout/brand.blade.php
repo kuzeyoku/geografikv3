@@ -3,7 +3,7 @@
         <div class="wow fadeInUp">
             <div class="swiper-container brand-active">
                 <div class="swiper-wrapper">
-                    @foreach ($brand as $brand)
+                    @foreach ($brands as $brand)
                         <div class="swiper-slide">
                             <div class="single-brand">
                                 <a href="{{ $brand->url }}">
