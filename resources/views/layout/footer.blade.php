@@ -43,7 +43,7 @@
                         <ul class="footer-list">
                             @foreach($footer["product_categories"] as $category)
                                 <li>
-                                    <a href="{{route('product.category',$category->slug)}}">{{$category->title}}</a>
+                                    <a href="{{ route('product.category',[$category,$category->slug])}}">{{$category->title }}</a>
                                 </li>
                             @endforeach
                         </ul>

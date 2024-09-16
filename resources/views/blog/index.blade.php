@@ -52,6 +52,9 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="mb-30 d-flex align-items-center justify-content-center">
+                        {{ $blogs->links("pagination::bootstrap-4") }}
+                    </div>
                 </div>
                 <div class="col-lg-4">
                     @include("blog.sidebar")

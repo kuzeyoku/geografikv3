@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    @include('layout.breadcrumb', ['title' => __('front/product.txt1')])
+    @include('layout.breadcrumb', ['title' => __('front/product.txt1'), "parent" => __('front/product.txt1'), "parent_url" => route('product.index')])
     <style>
         .product-container {
             text-align: center;

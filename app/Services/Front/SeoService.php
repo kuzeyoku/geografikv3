@@ -27,6 +27,15 @@ class SeoService
         SEOTools::setDescription(__("front/$module->value.meta_description") ?: config("general.description"));
     }
 
+    public static function category($category): void
+    {
+        self::default();
+        SEOTools::setTitle($category->title);
+        SEOTools::setDescription($category->meta_description);
+        SEOTools::opengraph()->addImage($category->getFirstMediaUrl("cover") ?: asset("assets/common/cover.jpg"));
+        SEOTools::twitter()->setImage($category->getFirstMediaUrl("cover") ?: asset("assets/common/cover.jpg"));
+    }
+
     public static function show($item): void
     {
         self::default();

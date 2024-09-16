@@ -1,6 +1,6 @@
 @extends("layout.main")
 @section("content")
-    @include("layout.breadcrumb",["title" => $blog->title, "parent" => __("front/blog.txt1")])
+    @include("layout.breadcrumb",["title" => $blog->title, "parent" => __("front/blog.txt1"),"parent_url" => route("blog.index")])
     <div class="blog-main-area pt-150">
         <div class="container">
             <div class="row wow fadeInUp">
@@ -76,7 +76,7 @@
                                                                 <div class="avatar-name">
                                                                     <h5>{{$comment->name}}</h5>
                                                                     <span
-                                                                            class="post-date">{{$comment->created_at->translatedFormat("d M Y")}}</span>
+                                                                        class="post-date">{{$comment->created_at->translatedFormat("d M Y")}}</span>
                                                                 </div>
                                                                 <p>{{$comment->comment}}</p>
                                                             </div>

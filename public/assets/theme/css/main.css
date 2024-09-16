@@ -4907,19 +4907,22 @@ select {
 .single__service {
     background: #ffffff;
     box-shadow: 0 20px 40px rgba(16, 0, 71, 0.1);
-    padding: 50px 25px;
-    border-radius: 5px;
+    border-radius: 30px;
+}
+
+.single__service img{
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.single__service-content {
+    padding: 10px 10px 30px 20px;
 }
 
 .single__service:hover .service__icon a {
     color: #ffffff;
     background: #6639ff;
     border-color: #6639ff;
-}
-
-.single__service h4 {
-    margin-top: 8px;
-    margin-bottom: 16px;
 }
 
 @media (max-width: 767px) {
@@ -8378,10 +8381,10 @@ select {
     list-style: disc;
 }
 
-.bms-content img{
+.bms-content img {
     width: 100%;
     margin-bottom: 20px;
-    margin-top:20px;
+    margin-top: 20px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 }
 

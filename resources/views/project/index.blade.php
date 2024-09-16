@@ -1,6 +1,6 @@
 @extends("layout.main")
 @section("content")
-    @include("layout.breadcrumb",["title" => __("front/project.txt1")])
+    @include("layout.breadcrumb",["title" => __("front/project.txt1"), "parent" => __("front/project.txt1")])
     <section class="portfolio-main pt-150">
         <div class="container">
             <div class="row wow fadeInUp grid portfolio-main-items">

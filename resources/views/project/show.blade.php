@@ -1,6 +1,6 @@
 @extends("layout.main")
 @section("content")
-    @include("layout.breadcrumb", ["title" => $project->title])
+    @include("layout.breadcrumb", ["title" => $project->title, "parent" => __("front/project.txt1"), "parent_url" => route("project.index")])
     <section class="portfolio-details-area pt-150 pb-80">
         <div class="container">
             <div class="portfolio-details-content">
