@@ -35,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="footer-widget mb-40 cat-m">
                         <div class="footer-widget-title">
                             <h4>@lang("front/footer.txt3")</h4>
@@ -49,7 +49,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="footer-widget mb-40">
                         <div class="footer-widget-title">
                             <h4>@lang("front/footer.txt4")</h4>
@@ -58,26 +58,6 @@
                             @foreach ($footer['quickLinks'] as $quicklink)
                                 <li><a href="{{ $quicklink->url }}">{{ $quicklink->title }}</a></li>
                             @endforeach
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
-                    <div class="footer-widget mb-40 srv-m">
-                        <div class="footer-widget-title">
-                            <h4>Service Schedule</h4>
-                        </div>
-                        <ul class="worktime-list">
-                            <li>
-                                <h5>Saturday - Sunday - Mon</h5>
-                                <span>8:30 AM - 10 PM</span>
-                            </li>
-                            <li>
-                                <h5>Tuesday - Wed - Thurs</h5>
-                                <span>9:30 AM - 12 PM</span>
-                            </li>
-                            <li>
-                                <h5>Friday : <span>Closed</span></h5>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -101,7 +81,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <ul class="copyright-list f-right">
-                        <li><a href="{{ route('sitemap.index') }}">@lang('front/footer.sitemap')</a></li>
+                        <li><a onclick="return!window.open(this.href)" href="{{ route('sitemap.index') }}">@lang('front/footer.sitemap')</a></li>
                     </ul>
                 </div>
             </div>
