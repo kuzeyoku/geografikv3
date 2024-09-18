@@ -6532,10 +6532,6 @@ select {
     margin-bottom: 15px;
 }
 
-.portfolio-details-img-left {
-    margin-right: -30px;
-}
-
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
     .portfolio-details-img-left {
         margin-right: 0;

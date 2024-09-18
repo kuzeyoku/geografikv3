@@ -4,9 +4,9 @@
             <div class="col-lg-12">
                 <div class="section-title mb-55 text-center">
                     <div class="border-c-bottom">
-                        <p>Yorumlar</p>
+                        <p>@lang("front/testimonial.txt1")</p>
                     </div>
-                    <h2>Müşterilerimiz Ne Diyor ?</h2>
+                    <h2>@lang("front/testimonial.txt2")</h2>
                 </div>
             </div>
         </div>
@@ -31,7 +31,6 @@
                                     </div>
                                 @endforeach
                             </div>
-
                         </div>
                     </div>
                     <div class="testimonial-nav-1 testimonial-nav-arrow">
