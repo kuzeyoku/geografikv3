@@ -48,14 +48,13 @@
     </style>
     <section class="portfolio-main pt-120">
         <div class="container">
-            <div class="row wow fadeInUp grid portfolio-main-items">
+            <div class="row wow fadeInUp">
                 @foreach ($categories as $category)
-                    <div class="col-lg-4 col-sm-6 grid-item">
+                    <div class="col-lg-4 col-sm-6">
                         <a href="{{ $category->url }}">
                             <div class="product-container mb-55">
                                 <div class="product-image">
                                     <img src="{{ $category->getFirstMediaUrl('cover') }}" alt="">
-
                                 </div>
                                 <div class="product-title">
                                     {{ $category->title }}

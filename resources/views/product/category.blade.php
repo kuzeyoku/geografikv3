@@ -60,9 +60,9 @@
     </style>
     <section class="portfolio-main pt-120">
         <div class="container">
-            <div class="row wow fadeInUp grid portfolio-main-items">
+            <div class="row wow fadeInUp">
                 @foreach ($products as $product)
-                    <div class="col-lg-3 col-sm-6 grid-item">
+                    <div class="col-lg-4 col-sm-6">
                         <a href="{{ $product->url }}">
                             <div class="product-container mb-55">
                                 <div class="product-image">
