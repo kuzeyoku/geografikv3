@@ -15,19 +15,17 @@ class MenuService extends BaseService
 
     public function getUrlList(): array
     {
-
-        $pages = Page::active()->get()->each(function ($item) {
-            $item->title = $item->title;
-            $item->url = $item->url;
-        })->pluck("title", "url");
-
-        return [
+        $urlList = [
             route("home") => __("admin/general.home"),
             route(ModuleEnum::Blog->Route() . ".index") => ModuleEnum::Blog->title(),
             route(ModuleEnum::Product->Route() . ".index") => ModuleEnum::Product->title(),
             route(ModuleEnum::Project->Route() . ".index") => ModuleEnum::Project->title(),
             route("contact.index") => __("front/contact.txt1"),
-            "Sayfalar" => $pages ?? [],
         ];
+        $pages = Page::active()->get()->pluck("title", "url")->toArray();
+        if (!empty($pages)) {
+            $urlList[__("admin/page.title")] = $pages;
+        }
+        return $urlList;
     }
 }
