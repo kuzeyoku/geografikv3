@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 use App\Models\User;
 use App\Enums\UserRole;
@@ -14,7 +15,7 @@ use App\Http\Requests\User\UserUpdateRequest;
 class UserController extends Controller
 {
 
-    public function __construct(private UserService $service)
+    public function __construct(private readonly UserService $service)
     {
         View::share([
             "route" => $service->route(),
@@ -40,11 +41,11 @@ class UserController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -59,11 +60,11 @@ class UserController extends Controller
             $this->service->update($request->validated(), $user);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -71,22 +72,22 @@ class UserController extends Controller
     {
         if (User::count() == 1) {
             return back()
-                ->withError(__("admin/{$this->service->folder()}.delete_error_last"));
-        } else if ($user->id == \Illuminate\Support\Facades\Auth::user()->id) {
+                ->with("error",__("admin/{$this->service->folder()}.delete_error_last"));
+        } else if ($user->id == Auth::user()->id) {
             return back()
-                ->withError(__("admin/{$this->service->folder()}.delete_error_self"));
+                ->with("error",__("admin/{$this->service->folder()}.delete_error_self"));
         } else if (User::where("role", UserRole::ADMIN)->count() == 1) {
             return back()
-                ->withError(__("admin/{$this->service->folder()}.delete_error_last_admin"));
+                ->with("error",__("admin/{$this->service->folder()}.delete_error_last_admin"));
         } else {
             try {
                 $this->service->delete($user);
                 return redirect()
                     ->route("admin.{$this->service->route()}.index")
-                    ->withSuccess(__("admin/alert.default_success"));
-            } catch (Throwable $e) {
+                    ->with("success",__("admin/alert.default_success"));
+            } catch (Throwable) {
                 return back()
-                    ->withError(__("admin/alert.default_error"));
+                    ->with("error",__("admin/alert.default_error"));
             }
         }
     }

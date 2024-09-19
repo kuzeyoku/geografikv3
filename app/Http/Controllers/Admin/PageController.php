@@ -12,7 +12,7 @@ use App\Http\Requests\Page\UpdatePageRequest;
 
 class PageController extends Controller
 {
-    public function __construct(private PageService $service)
+    public function __construct(private readonly PageService $service)
     {
         View::share([
             'route' => $service->route(),
@@ -37,11 +37,11 @@ class PageController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -56,11 +56,11 @@ class PageController extends Controller
             $this->service->update($request->validated(), $page);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -69,10 +69,10 @@ class PageController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $page);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -82,10 +82,10 @@ class PageController extends Controller
             $this->service->delete($page);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

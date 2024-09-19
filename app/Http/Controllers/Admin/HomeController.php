@@ -27,7 +27,7 @@ class HomeController extends Controller
     public function cacheClear()
     {
         Cache::flush();
-        return redirect()->back()->withSuccess(__('admin/general.cache_clear_success'));
+        return redirect()->back()->with("success",__('admin/general.cache_clear_success'));
     }
 
     public function clearVisitorCounter()
@@ -35,9 +35,9 @@ class HomeController extends Controller
         try {
             Cache::forget("visits");
             Visitor::truncate();
-            return back()->withSuccess(__('admin/home.visitor_counter_clear_success'));
+            return back()->with("success",__('admin/home.visitor_counter_clear_success'));
         } catch (Exception $e) {
-            return back()->withError(__('admin/home.visitor_counter_clear_error'));
+            return back()->with("error",__('admin/home.visitor_counter_clear_error'));
         }
     }
 

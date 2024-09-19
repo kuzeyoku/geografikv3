@@ -20,7 +20,7 @@ class MediaController extends Controller
     public function index()
     {
         $items = Media::orderByDesc("id")->paginate(18);
-        return view(themeView("admin", "" . ModuleEnum::Media->folder() . ".index"), compact("items"));
+        return view(themeView("admin", ModuleEnum::Media->folder() . ".index"), compact("items"));
     }
 
     public function destroy($media_id)
@@ -28,7 +28,7 @@ class MediaController extends Controller
         try {
             $media = Media::findOrFail($media_id);
             $media->delete();
-            return back()->withSuccess(__("admin/" . ModuleEnum::Media->folder() . ".delete_success"));
+            return back()->with("success",__("admin/" . ModuleEnum::Media->folder() . ".delete_success"));
         } catch (\Exception $e) {
             return back()->withErrors(__("admin/" . ModuleEnum::Media->folder() . ".delete_error"));
         }

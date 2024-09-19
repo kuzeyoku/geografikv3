@@ -12,7 +12,7 @@ use App\Http\Requests\Menu\UpdateMenuRequest;
 
 class MenuController extends Controller
 {
-    public function __construct(private MenuService $service)
+    public function __construct(private readonly MenuService $service)
     {
         View::share([
             'route' => $service->route(),
@@ -50,11 +50,11 @@ class MenuController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Exception $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -64,11 +64,11 @@ class MenuController extends Controller
             $this->service->update($request->validated(), $menu);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Exception $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -78,10 +78,10 @@ class MenuController extends Controller
             $this->service->delete($menu);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Exception $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

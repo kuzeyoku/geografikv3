@@ -13,7 +13,7 @@ use App\Http\Requests\Language\UpdateLanguageRequest;
 class LanguageController extends Controller
 {
 
-    public function __construct(private LanguageService $service)
+    public function __construct(private readonly LanguageService $service)
     {
         View::share([
             'route' => $service->route(),
@@ -38,11 +38,11 @@ class LanguageController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -66,9 +66,9 @@ class LanguageController extends Controller
     {
         try {
             $this->service->updateFileContent($language);
-            return back()->withSuccess(__("admin/alert.default_success"));
+            return back()->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
-            return back()->withError(__("admin/alert.default_error"));
+            return back()->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -78,11 +78,11 @@ class LanguageController extends Controller
             $this->service->update($request->validated(), $language);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -91,10 +91,10 @@ class LanguageController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $language);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -104,10 +104,10 @@ class LanguageController extends Controller
             $this->service->delete($language);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

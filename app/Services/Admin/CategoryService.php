@@ -11,4 +11,14 @@ class CategoryService extends BaseService
     {
         parent::__construct($category, ModuleEnum::Category);
     }
+
+    public function modulesToSelectArray(): array
+    {
+        return [
+            ModuleEnum::Blog->value => ModuleEnum::Blog->title(),
+            ModuleEnum::Service->value => ModuleEnum::Service->title(),
+            ModuleEnum::Product->value => ModuleEnum::Product->title(),
+            ModuleEnum::Project->value => ModuleEnum::Project->title(),
+        ];
+    }
 }

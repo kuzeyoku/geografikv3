@@ -11,7 +11,7 @@ use App\Http\Requests\Message\ReplyMessageRequest;
 class MessageController extends Controller
 {
 
-    public function __construct(private MessageService $service)
+    public function __construct(private readonly MessageService $service)
     {
         View::share([
             "route" => $service->route(),
@@ -42,10 +42,10 @@ class MessageController extends Controller
             $this->service->sendReply($request, $message);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -55,10 +55,10 @@ class MessageController extends Controller
             $this->service->delete($message);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -68,10 +68,10 @@ class MessageController extends Controller
             $this->service->block($message);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError($e->getMessage());
+                ->with("error",$e->getMessage());
         }
     }
 
@@ -87,10 +87,10 @@ class MessageController extends Controller
             $this->service->unblock($user_id);
             return redirect()
                 ->route("admin.{$this->service->route()}.blocked")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

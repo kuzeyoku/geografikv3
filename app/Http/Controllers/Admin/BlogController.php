@@ -13,13 +13,12 @@ use App\Http\Requests\GeneralStatusRequest;
 
 class BlogController extends Controller
 {
-    public function __construct(private BlogService $service)
+    public function __construct(private readonly BlogService $service)
     {
         View::share([
             "categories" => $service->getCategories(),
             "route" => $service->route(),
             "folder" => $service->folder(),
-            "module" => $service->module()
         ]);
     }
 
@@ -40,11 +39,11 @@ class BlogController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -59,11 +58,11 @@ class BlogController extends Controller
             $this->service->update($request->validated(), $blog);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -72,10 +71,10 @@ class BlogController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $blog);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -85,10 +84,10 @@ class BlogController extends Controller
             $this->service->delete($blog);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -108,9 +107,9 @@ class BlogController extends Controller
     {
         try {
             $comment->update($request->validated());
-            return back()->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
-            return back()->withError(__("admin/alert.default_error"));
+            return back()->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
+            return back()->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -118,9 +117,9 @@ class BlogController extends Controller
     {
         try {
             $comment->delete();
-            return back()->withSuccess(__("admin/alert.default_success"));
-        } catch (\Exception $e) {
-            return back()->withError(__("admin/alert.default_error"));
+            return back()->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
+            return back()->with("error",__("admin/alert.default_error"));
         }
     }
 }

@@ -21,7 +21,7 @@ class Service extends Model implements HasMedia
         "category_id",
     ];
 
-    protected $locale;
+    protected mixed $locale;
 
     protected $with = ["translate", "category"];
 

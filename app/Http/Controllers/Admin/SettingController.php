@@ -9,7 +9,7 @@ use App\Services\Admin\SettingService;
 
 class SettingController extends Controller
 {
-    public function __construct(private SettingService $service)
+    public function __construct(private readonly SettingService $service)
     {
 
     }
@@ -25,10 +25,10 @@ class SettingController extends Controller
         try {
             $this->service->update($request);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

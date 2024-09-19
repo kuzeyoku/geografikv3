@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Throwable;
 use App\Models\Category;
-use App\Enums\ModuleEnum;
 use Illuminate\Support\Facades\View;
 use App\Services\Admin\CategoryService;
 use App\Http\Requests\Category\StoreCategoryRequest;
@@ -13,12 +12,11 @@ use App\Http\Requests\GeneralStatusRequest;
 
 class CategoryController extends Controller
 {
-    public function __construct(private CategoryService $service)
+    public function __construct(private readonly CategoryService $service)
     {
         View::share([
             "categories" => $this->service->getCategories(),
-            "modules" => ModuleEnum::toSelectArray(),
-            "module" => $this->service->module(),
+            "modules" => $this->service->modulesToSelectArray(),
             "route" => $this->service->route(),
             "folder" => $this->service->folder()
         ]);
@@ -41,11 +39,11 @@ class CategoryController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success", __("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 
@@ -60,11 +58,11 @@ class CategoryController extends Controller
             $this->service->update($request->validated(), $category);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success", __("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 
@@ -73,10 +71,10 @@ class CategoryController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $category);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success", __("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 
@@ -86,10 +84,10 @@ class CategoryController extends Controller
             $this->service->delete($category);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success", __("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 }

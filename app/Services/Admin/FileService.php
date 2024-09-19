@@ -6,9 +6,11 @@ use Illuminate\Support\Str;
 
 class FileService
 {
-    public function __construct(private string $input, private string $collection) {}
+    public function __construct(private string $input, private string $collection = "default")
+    {
+    }
 
-    public function upload($item, $request)
+    public function upload($item, $request): void
     {
         if (array_key_exists("imageDelete", $request)) {
             $this->delete($item);
@@ -21,7 +23,7 @@ class FileService
         }
     }
 
-    public function delete($item)
+    public function delete($item): void
     {
         $item->clearMediaCollection($this->collection);
     }

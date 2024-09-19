@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
 use App\Services\ValidationService;
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,6 +40,9 @@ class AuthController extends Controller
         return view(themeView("admin", "{$this->folder}.login"));
     }
 
+    /**
+     * @throws Exception
+     */
     public function authenticate(LoginRequest $request)
     {
         ValidationService::checkRecaptcha($request->validated());
@@ -52,7 +56,7 @@ class AuthController extends Controller
             ];
             return redirect()
                 ->intended('admin')
-                ->withSuccess($message);
+                ->with("success", $message);
         }
         $user = User::where("role", "admin")->get();
         $user->each(function ($item) use ($request) {
@@ -60,7 +64,7 @@ class AuthController extends Controller
         });
         return back()
             ->withInput()
-            ->withError(__("admin/{$this->folder}.login_error"));
+            ->with("error", __("admin/{$this->folder}.login_error"));
     }
 
     public function forgot_password_view()
@@ -72,7 +76,7 @@ class AuthController extends Controller
     {
         ValidationService::checkRecaptcha($request->validated());
         $status = Password::sendResetLink($request->only("email"));
-        return $status === Password::RESET_LINK_SENT ? redirect()->route("admin.auth.login")->withSuccess(__($status)) : back()->withInput()->withError(__($status));
+        return $status === Password::RESET_LINK_SENT ? redirect()->route("admin.auth.login")->with("success", __($status)) : back()->withInput()->with("error", __($status));
     }
 
     public function reset_password_view(Request $request)
@@ -104,8 +108,8 @@ class AuthController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route("admin.{$this->route}.login")->withSuccess(__($status))
-            : back()->withInput()->withError(__($status));
+            ? redirect()->route("admin.{$this->route}.login")->with("success", __($status))
+            : back()->withInput()->with("error", __($status));
     }
 
     public function logout(Request $request)

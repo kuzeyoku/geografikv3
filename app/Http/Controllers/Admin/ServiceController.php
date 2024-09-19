@@ -14,13 +14,13 @@ use App\Http\Requests\Service\UpdateServiceRequest;
 class ServiceController extends Controller
 {
 
-    public function __construct(private ServiceService $service)
+    public function __construct(private readonly ServiceService $service)
     {
         View::share([
             "categories" => $service->getCategories(ModuleEnum::Service),
             "route" => $service->route(),
             "folder" => $service->folder(),
-            "module" => $service->module()
+            "module" => ModuleEnum::Service
         ]);
     }
 
@@ -41,11 +41,11 @@ class ServiceController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -60,11 +60,11 @@ class ServiceController extends Controller
             $this->service->update($request->validated(), $service);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -73,10 +73,10 @@ class ServiceController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $service);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -86,10 +86,10 @@ class ServiceController extends Controller
             $this->service->delete($service);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

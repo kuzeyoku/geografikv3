@@ -13,7 +13,7 @@ use App\Http\Requests\Testimonial\UpdateTestimonialRequest;
 class TestimonialController extends Controller
 {
 
-    public function __construct(private TestimonialService $service)
+    public function __construct(private readonly TestimonialService $service)
     {
         View::share([
             "route" => $service->route(),
@@ -38,11 +38,11 @@ class TestimonialController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -57,11 +57,11 @@ class TestimonialController extends Controller
             $this->service->update($request->validated(), $testimonial);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -70,10 +70,10 @@ class TestimonialController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $testimonial);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -83,10 +83,10 @@ class TestimonialController extends Controller
             $this->service->delete($testimonial);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

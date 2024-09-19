@@ -16,7 +16,7 @@ class MenuService extends BaseService
     public function getUrlList(): array
     {
 
-        $pages =  Page::active()->get()->each(function ($item) {
+        $pages = Page::active()->get()->each(function ($item) {
             $item->title = $item->title;
             $item->url = $item->url;
         })->pluck("title", "url");

@@ -9,23 +9,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseService
 {
-    public function __construct(private Model $model, private ModuleEnum $module)
+    public function __construct(private readonly Model $model, private ModuleEnum $module)
     {
     }
 
-    public function folder()
+    public function folder(): string
     {
         return $this->module->folder();
     }
 
-    public function route()
+    public function route(): string
     {
         return $this->module->route();
-    }
-
-    public function module()
-    {
-        return $this->module;
     }
 
     public function all()
@@ -33,28 +28,28 @@ class BaseService
         return $this->model->orderByDesc("id")->paginate(config("pagination.admin", 15));
     }
 
-    public function create(array $request)
+    public function create(array $request): void
     {
         $item = $this->model->create($request);
         $this->translations($item, $request);
         if (method_exists($item, 'hasMedia')) {
-            $fileService = new FileService("image", $this->module->COVER_COLLECTION());
+            $fileService = new FileService("image");
             $fileService->upload($item, $request);
         }
         // Log::channel("custom_info")->info(auth()->user()->name . " tarafından bir " . $this->module->name . " içeriği oluşturuldu. " . $item->title);
     }
 
-    public function update(array $request, Model $item)
+    public function update(array $request, Model $item): void
     {
         $item->update($request);
         $this->translations($item, $request);
         if (method_exists($item, 'hasMedia')) {
-            $fileService = new FileService("image", $this->module->COVER_COLLECTION());
+            $fileService = new FileService("image");
             $fileService->upload($item, $request);
         }
     }
 
-    public function translations($item, $request)
+    public function translations($item, $request): void
     {
         if (method_exists($item, 'translate')) {
             languageList()->each(function ($lang) use ($item, $request) {
@@ -73,27 +68,27 @@ class BaseService
         }
     }
 
-    public function statusUpdate($request, Model $item)
+    public function statusUpdate($request, Model $item): bool
     {
         return $item->update($request);
     }
 
-    public function delete(Model $item)
+    public function delete(Model $item): ?bool
     {
         return $item->delete();
     }
 
-    public function imageDelete(Model $item)
+    public function imageDelete(Model $item): ?bool
     {
         return $item->delete();
     }
 
     public function imageAllDelete(Model $item)
     {
-        return $item->clearMediaCollection($this->module->IMAGE_COLLECTION());
+        return $item->clearMediaCollection("images");
     }
 
-    public function getCategories()
+    public function getCategories(): array
     {
         $categories = Category::whereStatus(StatusEnum::Active->value)
             ->when($this->module !== null, function ($query) {

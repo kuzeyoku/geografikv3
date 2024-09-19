@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ModuleEnum;
 use Throwable;
 use App\Models\Product;
 use Illuminate\Support\Facades\View;
@@ -15,13 +16,13 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class ProductController extends Controller
 {
 
-    public function __construct(private ProductService $service)
+    public function __construct(private readonly ProductService $service)
     {
         View::share([
             "categories" => $service->getCategories(),
             "route" => $service->route(),
             "folder" => $service->folder(),
-            "module" => $service->module()
+            "module" => ModuleEnum::Product
         ]);
     }
 
@@ -47,11 +48,11 @@ class ProductController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -83,10 +84,10 @@ class ProductController extends Controller
         try {
             $this->service->imageDelete($image);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -95,10 +96,10 @@ class ProductController extends Controller
         try {
             $this->service->imageAllDelete($product);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -108,11 +109,11 @@ class ProductController extends Controller
             $this->service->update($request->validated(), $product);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -123,7 +124,7 @@ class ProductController extends Controller
             return back();
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -133,10 +134,10 @@ class ProductController extends Controller
             $this->service->delete($product);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

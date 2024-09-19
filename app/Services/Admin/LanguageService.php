@@ -17,11 +17,14 @@ class LanguageService extends BaseService
         parent::__construct($language, ModuleEnum::Language);
     }
 
-    public function create(array $request)
+    /**
+     * @throws Exception
+     */
+    public function create(array $request): void
     {
         $code = strtolower($request["code"]);
         $default = resource_path("lang/" . app()->getFallbackLocale());
-        $new = resource_path("lang/{$code}");
+        $new = resource_path("lang/$code");
         if (!File::exists($new))
             File::copyDirectory($default, $new);
         else
@@ -29,14 +32,17 @@ class LanguageService extends BaseService
         parent::create($request);
     }
 
-    public function delete(Model $language)
+    /**
+     * @throws Exception
+     */
+    public function delete(Model $item): ?bool
     {
-        if ($language->code == app()->getLocale())
+        if ($item->code == app()->getLocale())
             throw new Exception(__("admin/language.default_delete_error"));
-        $from = resource_path("lang/{$language->code}");
+        $from = resource_path("lang/$item->code");
         if (File::exists($from))
             File::deleteDirectory($from);
-        parent::delete($language);
+        return parent::delete($item);
     }
 
     static function toArray()
@@ -46,7 +52,7 @@ class LanguageService extends BaseService
         });
     }
 
-    public function files(Language $language)
+    public function files(Language $language): array
     {
         $langDisk = Storage::disk("lang");
 
@@ -54,7 +60,7 @@ class LanguageService extends BaseService
             return [strtolower(basename($file, ".php")) => ucfirst(basename($file, ".php"))];
         };
         $getFiles = function ($folder) use ($langDisk, $extractFileData, $language) {
-            return array_reduce($langDisk->files("{$language->code}/{$folder}"), function ($carry, $file) use ($extractFileData) {
+            return array_reduce($langDisk->files("$language->code/$folder"), function ($carry, $file) use ($extractFileData) {
                 return array_merge($carry, $extractFileData($file));
             }, []);
         };
@@ -77,16 +83,17 @@ class LanguageService extends BaseService
         return compact('frontFiles', 'adminFiles');
     }
 
-    public function updateFileContent(Language $language)
+    public function updateFileContent(Language $language): bool
     {
         $folder = request()->folder;
         $filename = request()->filename;
         $request = request()->except("_token", "_method", "filename", "folder");
         $content = "<?php\nreturn [\n" . implode(",\n", array_map(function ($key, $value) {
-            if (!is_null($key) && !is_null($value)) {
-                return "'{$key}' => '" . addslashes($value) . "'";
-            }
-        }, array_keys($request), $request)) . "\n];";
+                if (!is_null($key) && !is_null($value)) {
+                    return "'$key' => '" . addslashes($value) . "'";
+                }
+                return null;
+            }, array_keys($request), $request)) . "\n];";
         return Storage::disk("lang")->put($language->code . "/" . $folder . "/" . $filename . ".php", $content);
     }
 }

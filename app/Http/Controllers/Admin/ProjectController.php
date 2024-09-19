@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ModuleEnum;
 use Throwable;
 use App\Models\Project;
 use Illuminate\Support\Facades\View;
@@ -15,13 +16,13 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 class ProjectController extends Controller
 {
 
-    public function __construct(private ProjectService $service)
+    public function __construct(private readonly ProjectService $service)
     {
         View::share([
             "categories" => $service->getCategories(),
             "route" => $service->route(),
             "folder" => $service->folder(),
-            "module" => $service->module()
+            "module" => ModuleEnum::Service
         ]);
     }
 
@@ -54,10 +55,10 @@ class ProjectController extends Controller
         try {
             $this->service->imageDelete($image);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -66,10 +67,10 @@ class ProjectController extends Controller
         try {
             $this->service->imageAllDelete($project);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -84,11 +85,11 @@ class ProjectController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -103,11 +104,11 @@ class ProjectController extends Controller
             $this->service->update($request->validated(), $project);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -116,10 +117,10 @@ class ProjectController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $project);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -129,10 +130,10 @@ class ProjectController extends Controller
             $this->service->delete($project);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

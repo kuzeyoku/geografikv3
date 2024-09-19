@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ModuleEnum;
 use Throwable;
 use App\Models\Popup;
 use Illuminate\Http\Request;
@@ -14,12 +15,12 @@ use App\Http\Requests\Popup\UpdatePopupRequest;
 class PopupController extends Controller
 {
 
-    public function __construct(private PopupService $service)
+    public function __construct(private readonly PopupService $service)
     {
         View::share([
             "route" => $service->route(),
             "folder" => $service->folder(),
-            "module" => $service->module()
+            "module" => ModuleEnum::Popup
         ]);
     }
 
@@ -40,11 +41,11 @@ class PopupController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -59,11 +60,11 @@ class PopupController extends Controller
             $this->service->update($request->validated(), $popup);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -72,10 +73,10 @@ class PopupController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $popup);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -85,10 +86,10 @@ class PopupController extends Controller
             $this->service->delete($popup);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
+                ->with("success",__("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

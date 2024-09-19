@@ -12,7 +12,7 @@ use App\Http\Requests\GeneralStatusRequest;
 
 class BrandController extends Controller
 {
-    public function __construct(private BrandService $service)
+    public function __construct(private readonly BrandService $service)
     {
         View::share([
             "route" => $service->route(),
@@ -37,11 +37,11 @@ class BrandController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -56,11 +56,11 @@ class BrandController extends Controller
             $this->service->update($request->validated, $brand);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -69,10 +69,10 @@ class BrandController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $brand);
             return back()
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 
@@ -82,10 +82,10 @@ class BrandController extends Controller
             $this->service->delete($brand);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->withSuccess(__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success",__("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
-                ->withError(__("admin/alert.default_error"));
+                ->with("error",__("admin/alert.default_error"));
         }
     }
 }

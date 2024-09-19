@@ -96,41 +96,4 @@ enum ModuleEnum: string
             self::Popup => "popup",
         };
     }
-
-
-    public static function toSelectArray(): array
-    {
-        return [
-            self::Blog->value => self::Blog->title(),
-            self::Service->value => self::Service->title(),
-            self::Product->value => self::Product->title(),
-            self::Project->value => self::Project->title(),
-        ];
-    }
-
-    public function IMAGE_COLLECTION(): string
-    {
-        return match ($this) {
-            self::Product, self::Project => "images",
-            default => throw new \Exception('Unexpected match value'),
-        };
-    }
-
-    public function COVER_COLLECTION(): string
-    {
-        return match ($this) {
-            self::Category, self::Blog, self::Service, self::Brand, self::Reference, self::Product, self::Project, self::Slider, self::Popup => "cover",
-            self::Testimonial => "avatar",
-            self::Menu => "null",
-            default => throw new \Exception('Unexpected match value'),
-        };
-    }
-
-    public function DOCUMENT_COLLECTION(): string
-    {
-        return match ($this) {
-            self::Service, self::Project, self::Product => "documents",
-            default => throw new \Exception('Unexpected match value'),
-        };
-    }
 }
