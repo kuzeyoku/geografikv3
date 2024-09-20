@@ -18,12 +18,6 @@ class Page extends Model
 
     protected $with = ["translate"];
 
-    public function __construct(protected $locale)
-    {
-        parent::__construct();
-        $this->locale = session("locale");
-    }
-
     public function scopeActive($query)
     {
         return $query->whereStatus(StatusEnum::Active->value);
@@ -41,7 +35,7 @@ class Page extends Model
 
     public function getTitleAttribute()
     {
-        return $this->translate->where("lang", $this->locale)->pluck('title')->first();
+        return $this->translate->where("lang", session("locale"))->pluck('title')->first();
     }
 
     public function getDescriptionsAttribute()
@@ -51,16 +45,16 @@ class Page extends Model
 
     public function getDescriptionAttribute()
     {
-        return $this->translate->where("lang", $this->locale)->pluck('description')->first();
+        return $this->translate->where("lang", session("locale"))->pluck('description')->first();
     }
 
-    public function getMetaDescriptionAttribute()
+    public function getMetaDescriptionAttribute(): string
     {
         $description = $this->translate->where("lang", app()->getFallbackLocale())->pluck('description')->first();
         return Str::limit(strip_tags($description), 160);
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return route(ModuleEnum::Page->route() . ".show", [$this->id, $this->slug]);
     }
