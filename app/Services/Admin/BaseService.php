@@ -23,9 +23,9 @@ class BaseService
         return $this->module->route();
     }
 
-    public function all()
+    public function getAll()
     {
-        return $this->model->orderByDesc("id")->paginate(config("pagination.admin", 15));
+        return $this->model->orderByDesc("id")->paginate(setting("pagination", "admin"));
     }
 
     public function create(array $request): void
@@ -90,12 +90,6 @@ class BaseService
 
     public function getCategories(): array
     {
-        $categories = Category::whereStatus(StatusEnum::Active->value)
-            ->when($this->module !== null, function ($query) {
-                return $query->where("module", $this->module);
-            })
-            ->get();
-        $titles = $categories->pluck("titles." . app()->getFallbackLocale(), "id");
-        return $titles->toArray();
+        return Category::active()->module($this->module)->get()->pluck("titles." . app()->getFallbackLocale(), "id")->toArray();
     }
 }

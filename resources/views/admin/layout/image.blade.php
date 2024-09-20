@@ -10,8 +10,8 @@
         <div class="page-header">
             <div class="add-item d-flex">
                 <div class="page-title">
-                    <h4>@lang("admin/{$folder}.image")</h4>
-                    <h6>@lang("admin/{$folder}.image_description")</h6>
+                    <h4>@lang("admin/{$folder}.images")</h4>
+                    <h6>@lang("admin/{$folder}.images_description")</h6>
                 </div>
             </div>
             {{ html()->form('DELETE')->route("admin.{$route}.imageAllDelete", $item)->open() }}

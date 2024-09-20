@@ -9,6 +9,7 @@ return [
     "edit_description" => "Ürün bilgilerini düzenleyin",
     "list" => "Ürün Listesi",
     "images" => "Ürün Görselleri",
+    "images_description" => "Ürün görsellerini yönetin",
     "form_title" => "Ürün Başlığı",
     "form_title_placeholder" => "Ürün Başlığı Giriniz",
     "form_description" => "Açıklama",

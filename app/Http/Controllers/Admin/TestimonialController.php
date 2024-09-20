@@ -23,7 +23,7 @@ class TestimonialController extends Controller
 
     public function index()
     {
-        $items = $this->service->all();
+        $items = $this->service->getAll();
         return view(themeView("admin", "{$this->service->folder()}.index"), compact("items"));
     }
 

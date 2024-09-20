@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @method static active()
  */
 class Category extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'slug',
@@ -25,11 +24,9 @@ class Category extends Model implements HasMedia
         "order"
     ];
 
-    protected $locale;
-
     protected $with = ["translate"];
 
-    public function __construct()
+    public function __construct(protected $locale = null)
     {
         parent::__construct();
         $this->locale = session("locale");
@@ -50,32 +47,32 @@ class Category extends Model implements HasMedia
         return $query->orderBy("order", "asc");
     }
 
-    public function subCategories()
+    public function subCategories(): HasMany
     {
         return $this->hasMany(Category::class, "parent_id");
     }
 
-    public function translate()
+    public function translate(): HasMany
     {
         return $this->hasMany(CategoryTranslate::class);
     }
 
-    public function products()
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }
 
-    public function projects()
+    public function projects(): HasMany
     {
         return $this->hasMany(Project::class);
     }
 
-    public function services()
+    public function services(): HasMany
     {
         return $this->hasMany(Service::class);
     }
 
-    public function blogs()
+    public function blogs(): HasMany
     {
         return $this->hasMany(Blog::class);
     }
@@ -85,7 +82,7 @@ class Category extends Model implements HasMedia
         return $this->translate->where("lang", $this->locale)->pluck('title')->first();
     }
 
-    public function getTitlesAttribute()
+    public function getTitlesAttribute(): array
     {
         return $this->translate->pluck("title", "lang")->all();
     }
@@ -95,17 +92,17 @@ class Category extends Model implements HasMedia
         return $this->translate->where("lang", $this->locale)->pluck('description')->first();
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): array
     {
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return route($this->module . ".category", ["category" => $this, "slug" => $this->slug]);
     }
 
-    public static function boot()
+    public static function boot(): void
     {
         parent::boot();
         self::creating(function ($category) {
@@ -120,7 +117,7 @@ class Category extends Model implements HasMedia
         });
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }

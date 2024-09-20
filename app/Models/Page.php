@@ -4,25 +4,21 @@ namespace App\Models;
 
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Page extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'slug',
         'status',
         "quick_link",
     ];
 
-    protected $locale;
-
     protected $with = ["translate"];
 
-    public function __construct()
+    public function __construct(protected $locale)
     {
         parent::__construct();
         $this->locale = session("locale");
@@ -33,7 +29,7 @@ class Page extends Model
         return $query->whereStatus(StatusEnum::Active->value);
     }
 
-    public function translate()
+    public function translate(): HasMany
     {
         return $this->hasMany(PageTranslate::class);
     }
