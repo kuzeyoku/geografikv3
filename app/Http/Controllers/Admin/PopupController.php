@@ -41,11 +41,11 @@ class PopupController extends Controller
             $this->service->create($request->validated());
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->with("success",__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success", __("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->with("error",__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 
@@ -60,11 +60,11 @@ class PopupController extends Controller
             $this->service->update($request->validated(), $popup);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->with("success",__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success", __("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
                 ->withInput()
-                ->with("error",__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 
@@ -73,10 +73,10 @@ class PopupController extends Controller
         try {
             $this->service->statusUpdate($request->validated(), $popup);
             return back()
-                ->with("success",__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success", __("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
-                ->with("error",__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 
@@ -86,10 +86,10 @@ class PopupController extends Controller
             $this->service->delete($popup);
             return redirect()
                 ->route("admin.{$this->service->route()}.index")
-                ->with("success",__("admin/alert.default_success"));
-        } catch (Throwable $e) {
+                ->with("success", __("admin/alert.default_success"));
+        } catch (Throwable) {
             return back()
-                ->with("error",__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 }

@@ -15,7 +15,7 @@
                 </div>
             </div>
             {{ html()->form('DELETE')->route("admin.{$route}.imageAllDelete", $item)->open() }}
-            <a href="javascript:void(0);" class="btn btn-danger destroy-btn">{{ __('admin/general.all_delete') }}</a>
+            <a href="javascript:void(0);" class="btn btn-danger confirm-btn">{{ __('admin/general.all_delete') }}</a>
             {{ html()->form()->close() }}
         </div>
         <div class="card">
@@ -27,10 +27,10 @@
                     @foreach ($item->getMedia('images') as $image)
                         <div class="col-md-2">
                             <div class="p-2 border rounded position-relative mb-4">
-                                <img src="{{ $image->getUrl() }}" class="img-fluid">
+                                <img src="{{ $image->getUrl() }}" class="img-fluid" alt="">
                                 {{ html()->form('DELETE')->route("admin.{$route}.imageDelete", $image)->open() }}
                                 <button type="button"
-                                    class="btn btn-danger btn-sm position-absolute top-0 end-0 destroy-btn">{{ __('admin/general.delete') }}</button>
+                                    class="btn btn-danger btn-sm position-absolute top-0 end-0 confirm-btn">{{ __('admin/general.delete') }}</button>
                                 {{ html()->form()->close() }}
                             </div>
                         </div>

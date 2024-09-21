@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-lg-4">
             {{ html()->label(__("admin/{$folder}.form_category")) }}
-            {{ html()->select('category_id', $categories)->placeholder(__('admin/general.select'))->class('form-control')->placeholder(__('admin/general.select')) }}
+            {{ html()->select('category_id', $categories)->placeholder(__('admin/general.select'))->class('form-control') }}
         </div>
         <div class="col-lg-4">
             {{ html()->label(__('admin/general.order')) }}

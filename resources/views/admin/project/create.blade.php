@@ -12,7 +12,7 @@
         </div>
     @endforeach
     {{ html()->label(__("admin/{$folder}.form_category")) }}
-    {{ html()->select('category_id', $categories)->class('form-control')->placeholder(__('admin/general.select')) }}
+    {{ html()->select('category_id', $categories)->placeholder(__('admin/general.select'))->class('form-control') }}
     <div class="row">
         <div class="col-lg-6">
             {{ html()->label(__("admin/{$folder}.form_video")) }}

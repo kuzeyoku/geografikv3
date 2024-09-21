@@ -1,6 +1,6 @@
 @extends(themeView('admin', 'layout.edit'), ['tab' => true, 'item' => $project])
 @section('form')
-    {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->attribute('data-default-file', $project->getFirstMediaUrl($module->COVER_COLLECTION()))->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
+    {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->attribute('data-default-file', $project->getFirstMediaUrl())->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
     @foreach (languageList() as $lang)
         <div id="{{ $lang->code }}" class="tab-pane @if ($loop->first) active show @endif">
             {{ html()->label(__("admin/{$folder}.form_title")) }}
@@ -12,7 +12,7 @@
         </div>
     @endforeach
     {{ html()->label(__("admin/{$folder}.form_category")) }}
-    {{ html()->select('category_id', $categories, $project->category_id)->class('form-control')->placeholder(__('admin/general.select')) }}
+    {{ html()->select('category_id', $categories, $project->category_id)->placeholder(__('admin/general.select'))->class('form-control') }}
     <div class="row">
         <div class="col-lg-6">
             {{ html()->label(__("admin/{$folder}.form_video")) }}

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseService
 {
-    public function __construct(private readonly Model $model, private ModuleEnum $module)
+    public function __construct(private readonly Model $model, private readonly ModuleEnum $module)
     {
     }
 

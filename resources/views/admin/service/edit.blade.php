@@ -1,7 +1,7 @@
 @extends(themeView('admin', 'layout.edit'), ['tab' => true, 'item' => $service])
 @section('form')
-    {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->attribute('data-default-file', $service->getFirstMediaUrl($module->COVER_COLLECTION()))->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
-    {{ html()->file('document')->attribute('data-allowed-file-extensions', 'pdf doc docx xls xlsx ppt pptx')->attribute('data-default-file', $service->getFirstMediaUrl($module->DOCUMENT_COLLECTION()))->accept('.pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx')->class('dropify-document') }}
+    {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->attribute('data-default-file', $service->getFirstMediaUrl())->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
+    {{ html()->file('document')->attribute('data-allowed-file-extensions', 'pdf doc docx xls xlsx ppt pptx')->attribute('data-default-file', $service->getFirstMediaUrl("document"))->accept('.pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx')->class('dropify-document') }}
     @foreach (LanguageList() as $lang)
         <div id="{{ $lang->code }}" class="tab-pane @if ($loop->first) active show @endif">
             {{ html()->label(__("admin/{$folder}.form_title")) }}
@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-lg-4">
             {{ html()->label(__("admin/{$folder}.form_category")) }}
-            {{ html()->select('category_id', $categories, $service->category)->class('form-control')->placeholder(__('admin/general.select')) }}
+            {{ html()->select('category_id', $categories, $service->category)->placeholder(__('admin/general.select'))->class('form-control') }}
         </div>
         <div class="col-lg-4">
             {{ html()->label(__('admin/general.order')) }}

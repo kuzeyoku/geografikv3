@@ -14,45 +14,33 @@ class PopupService extends BaseService
         parent::__construct($popup, ModuleEnum::Popup);
     }
 
-    public function create($request)
+    public function create($request): void
     {
-        $request = [
-            "type" => $request->type,
-            "video" => $request->video,
-            "url" => $request->url,
-            "status" => $request->status,
-            "setting" => json_encode([
-                "time" => $request->time ?? 0,
-                "width" => $request->width ?? 600,
-                "closeOnEscape" => $request->closeOnEscape,
-                "closeButton" => $request->closeButton,
-                "overlayClose" => $request->overlayClose,
-                "pauseOnHover" => $request->pauseOnHover,
-                "fullScreenButton" => $request->fullScreenButton,
-                "color" => $request->color ?? "#88A0B9",
-            ])
-        ];
+        $request["settings"] = json_encode([
+            "time" => $request["time"] ?: 0,
+            "width" => $request["width"] ?: 600,
+            "closeOnEscape" => $request["closeOnEscape"],
+            "closeButton" => $request["closeButton"],
+            "overlayClose" => $request["overlayClose"],
+            "pauseOnHover" => $request["pauseOnHover"],
+            "fullScreenButton" => $request["fullScreenButton"],
+            "color" => $request["color"] ?: "#88A0B9",
+        ]);
         parent::create($request);
     }
 
-    public function update($request, Model $popup)
+    public function update($request, Model $item): void
     {
-        $request = [
-            "type" => $request->type,
-            "video" => $request->video,
-            "url" => $request->url,
-            "status" => $request->status,
-            "setting" => json_encode([
-                "time" => $request->time ?: 0,
-                "width" => $request->width ?: 600,
-                "closeOnEscape" => $request->closeOnEscape,
-                "closeButton" => $request->closeButton,
-                "overlayClose" => $request->overlayClose,
-                "pauseOnHover" => $request->pauseOnHover,
-                "fullScreenButton" => $request->fullScreenButton,
-                "color" => $request->color ?? "#88A0B9",
-            ])
-        ];
-        parent::update($request, $popup);
+        $request ["setting"] = json_encode([
+            "time" => $request["time"] ?: 0,
+            "width" => $request["width"] ?: 600,
+            "closeOnEscape" => $request["closeOnEscape"],
+            "closeButton" => $request["closeButton"],
+            "overlayClose" => $request["overlayClose"],
+            "pauseOnHover" => $request["pauseOnHover"],
+            "fullScreenButton" => $request["fullScreenButton"],
+            "color" => $request["color"] ?: "#88A0B9",
+        ]);
+        parent::update($request, $item);
     }
 }

@@ -294,8 +294,8 @@ $(document).ready(function () {
             from: 10,
             to: 0,
             timerEnd: function () {
-                this.css({ "text-decoration": "line-through" }).animate(
-                    { opacity: 0.5 },
+                this.css({"text-decoration": "line-through"}).animate(
+                    {opacity: 0.5},
                     500
                 );
             },
@@ -494,7 +494,7 @@ $(document).ready(function () {
     $(".counters").each(function () {
         var $this = $(this),
             countTo = $this.attr("data-count");
-        $({ countNum: $this.text() }).animate(
+        $({countNum: $this.text()}).animate(
             {
                 countNum: countTo,
             },
@@ -732,10 +732,10 @@ $(document).ready(function () {
                 .removeClass("active");
             $(
                 '.tabs_container .tab_content[data-tab="' +
-                    $theTab +
-                    '"], ul.tabs li[id="' +
-                    $theTab +
-                    '"]'
+                $theTab +
+                '"], ul.tabs li[id="' +
+                $theTab +
+                '"]'
             ).addClass("active");
         }
     });
@@ -1525,7 +1525,7 @@ $(document).ready(function () {
 
         var playerSettings = {
             controls: ["play-large"],
-            fullscreen: { enabled: false },
+            fullscreen: {enabled: false},
             resetOnEnd: true,
             hideControls: true,
             clickToPlay: true,
@@ -1582,6 +1582,7 @@ $(document).ready(function () {
     $(".dec").on("click", function () {
         updateValue(this, -1);
     });
+
     function updateValue(obj, delta) {
         var item = $(obj).parent().find("input");
         var newValue = parseInt(item.val(), 10) + delta;
@@ -1697,8 +1698,8 @@ if ($(".dropify-document").length > 0) {
 }
 
 $(".dropify-clear").one("click", function () {
-    var input = $(this).prev("input.dropify-image, input.dropify-document");
-    var inputName = input.attr("name") + "Delete";
+    const input = $(this).prev("input.dropify-image, input.dropify-document");
+    const inputName = input.attr("name") + "Delete";
     const deleteInput = $(
         '<input type="hidden" name="' + inputName + '" value="true">'
     );
@@ -1710,13 +1711,25 @@ $(".dropify-clear").one("click", function () {
 if ($(".dropzone").length > 0) {
     new Dropzone(".dropzone", {
         success: function (file, response) {
-            location.reload();
             showAlert("success", response.message);
+            setTimeout(function () {
+                location.reload();
+            }, 3000);
         },
         error: function (file, response) {
             showAlert("error", response.message);
             this.removeFile(file);
         },
+    });
+}
+
+function showAlert(icon, message) {
+    Swal.fire({
+        icon: icon,
+        title: message,
+        showConfirmButton: false,
+        timer: 3000,
+        position: "top-end",
     });
 }
 

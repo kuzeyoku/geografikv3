@@ -10,7 +10,7 @@
             'video' => __("admin/{$folder}.type_video"),
         ])->value($popup->type)->placeholder(__('admin/general.select'))->class('form-control')->id('type') }}
     <div id="image" style="display: none">
-        {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->attribute('data-default-file', $popup->getFirstMediaUrl($module->COVER_COLLECTION()))->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
+        {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->attribute('data-default-file', $popup->getFirstMediaUrl())->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
     </div>
     @foreach (languageList() as $key => $lang)
         <div id="{{ $lang->code }}" class="tab-pane @if ($loop->first) active show @endif">
@@ -28,7 +28,7 @@
     </div>
     <div class="row">
         <div class="col-lg-4">
-            {{ html()->label(__("admin/{$folder}.form_title")) }}
+            {{ html()->label(__("admin/{$folder}.form_time")) }}
             {{ html()->number('time', $popup->settings->time)->placeholder(__("admin/{$folder}.form_time_placeholder"))->class('form-control') }}
         </div>
         <div class="col-lg-4">

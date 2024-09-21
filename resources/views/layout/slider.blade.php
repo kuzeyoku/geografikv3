@@ -3,7 +3,7 @@
         <div class="swiper-wrapper">
             @foreach ($sliders as $slider)
                 <div class="single-slider slider-height swiper-slide slider-overlay" data-swiper-autoplay="5000">
-                    <div class="slide-bg" data-background="{{ $slider->getFirstMediaUrl('cover') }}"></div>
+                    <div class="slide-bg" data-background="{{ $slider->getFirstMediaUrl() }}"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-9">

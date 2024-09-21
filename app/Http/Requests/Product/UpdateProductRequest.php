@@ -32,6 +32,7 @@ class UpdateProductRequest extends FormRequest
             "status" => "required",
             "category_id" => "nullable",
             "image" => "image|mimes:png,jpeg,jpg,gif",
+            "document" => "file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx",
             "imageDelete" => "nullable",
             "video" => "nullable|active_url"
         ];

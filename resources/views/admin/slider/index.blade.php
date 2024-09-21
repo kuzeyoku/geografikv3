@@ -17,7 +17,7 @@
             @forelse ($items as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td><img class="table-image" src="{{ $item->getFirstMediaUrl($module->COVER_COLLECTION()) }}"></td>
+                    <td><img class="table-image" src="{{ $item->getFirstMediaUrl() }}"></td>
                     <td>{{ $item->titles[config('app.fallback_locale')] ?? null }}</td>
                     <td>{{ $item->created_at->diffForHumans() }}</td>
                     <td>{{ $item->updated_at->diffForHumans() }}</td>
