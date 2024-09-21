@@ -3,26 +3,25 @@
 namespace App\Models;
 
 use App\Enums\ModuleEnum;
-use App\Models\PopupTranslate;
+use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Popup extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         "type",
-        "image",
         "video",
         "url",
         "setting",
         "status"
     ];
 
-    protected $locale;
+    protected mixed $locale;
 
     protected $with = ["translate"];
 
@@ -32,17 +31,17 @@ class Popup extends Model implements HasMedia
         $this->locale = session("locale");
     }
 
-    public function translate()
+    public function translate(): HasMany
     {
         return $this->hasMany(PopupTranslate::class);
     }
 
     public function scopeActive($query)
     {
-        return $query->where("status", \App\Enums\StatusEnum::Active->value);
+        return $query->where("status", StatusEnum::Active->value);
     }
 
-    public function getTitlesAttribute()
+    public function getTitlesAttribute(): array
     {
         return $this->translate->pluck("title", "lang")->all();
     }
@@ -52,7 +51,7 @@ class Popup extends Model implements HasMedia
         return $this->translate->where("lang", $this->locale)->pluck('title')->first();
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): array
     {
         return $this->translate->pluck("description", "lang")->all();
     }
@@ -67,7 +66,7 @@ class Popup extends Model implements HasMedia
         return json_decode($this->setting);
     }
 
-    public function getModuleAttribute()
+    public function getModuleAttribute(): string
     {
         return ModuleEnum::Popup->title();
     }

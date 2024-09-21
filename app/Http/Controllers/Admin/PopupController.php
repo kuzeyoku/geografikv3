@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\View;
 use App\Http\Requests\GeneralStatusRequest;
 use App\Http\Requests\Popup\StorePopupRequest;
 use App\Http\Requests\Popup\UpdatePopupRequest;
+use function PHPUnit\Framework\throwException;
 
 class PopupController extends Controller
 {

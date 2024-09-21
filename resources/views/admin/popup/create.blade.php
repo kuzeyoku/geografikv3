@@ -60,7 +60,7 @@
         </div>
         <div class="col-lg-4">
             {{ html()->label(__("admin/{$folder}.form_color")) }}
-            {{ html()->input('color', 'color')->class('form-control form-control-color') }}
+            {{ html()->input('color', 'color',"#88A0B9")->class('form-control form-control-color') }}
         </div>
     </div>
     {{ html()->label(__('admin/general.status')) }}
@@ -69,7 +69,7 @@
 @push('script')
     <script>
         $("#type").on("change", function() {
-            var type = $(this).val();
+            const type = $(this).val();
             $("#" + type).show();
             $("#text, #image, #video").not("#" + type).hide();
         });

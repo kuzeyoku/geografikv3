@@ -1,6 +1,6 @@
 @extends(themeView("admin","layout.edit"),["tab"=>false,"item" => $testimonial])
 @section('form')
-    {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->attribute('data-default-file', $testimonial->getFirstMediaUrl("avatar"))->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
+    {{ html()->file('image')->attribute('data-allowed-file-extensions', 'png jpg jpeg gif')->attribute('data-default-file', $testimonial->getFirstMediaUrl())->accept('.png, .jpg, .jpeg, .gif')->class('dropify-image') }}
     <br>
     {{ html()->label(__("admin/{$folder}.form_name")) }}
     {{ html()->text('name', $testimonial->name)->placeholder(__("admin/{$folder}.form_name_placeholder"))->class('form-control') }}

@@ -70,11 +70,11 @@
 @push('script')
     <script>
         $(document).ready(function() {
-            var type = $("#type").val()
+            const type = $("#type").val();
             $("#" + type).show();
         });
         $("#type").on("change", function() {
-            var type = $(this).val();
+            const type = $(this).val();
             $("#" + type).show();
             $("#text, #image, #video").not("#" + type).hide();
         });

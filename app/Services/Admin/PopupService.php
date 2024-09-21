@@ -16,31 +16,27 @@ class PopupService extends BaseService
 
     public function create($request): void
     {
-        $request["settings"] = json_encode([
-            "time" => $request["time"] ?: 0,
-            "width" => $request["width"] ?: 600,
-            "closeOnEscape" => $request["closeOnEscape"],
-            "closeButton" => $request["closeButton"],
-            "overlayClose" => $request["overlayClose"],
-            "pauseOnHover" => $request["pauseOnHover"],
-            "fullScreenButton" => $request["fullScreenButton"],
-            "color" => $request["color"] ?: "#88A0B9",
-        ]);
+        $request["setting"] = $this->setToSetting($request);
         parent::create($request);
     }
 
     public function update($request, Model $item): void
     {
-        $request ["setting"] = json_encode([
-            "time" => $request["time"] ?: 0,
-            "width" => $request["width"] ?: 600,
+        $request ["setting"] = $this->setToSetting($request);
+        parent::update($request, $item);
+    }
+
+    private function setToSetting($request): string
+    {
+        return json_encode([
+            "time" => $request["time"] ?? 0,
+            "width" => $request["width"] ?? 600,
             "closeOnEscape" => $request["closeOnEscape"],
             "closeButton" => $request["closeButton"],
             "overlayClose" => $request["overlayClose"],
             "pauseOnHover" => $request["pauseOnHover"],
             "fullScreenButton" => $request["fullScreenButton"],
-            "color" => $request["color"] ?: "#88A0B9",
+            "color" => $request["color"] ?? "#88A0B9",
         ]);
-        parent::update($request, $item);
     }
 }
