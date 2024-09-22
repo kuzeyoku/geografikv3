@@ -12,8 +12,8 @@ class ServiceController extends Controller
     public function index()
     {
         SeoService::module(ModuleEnum::Service);
-        $services = Service::active()->order()->get();
-        return view("service.index", compact("services"));
+        $categories = Category::module(ModuleEnum::Service)->active()->order()->get();
+        return view("service.index", compact("categories"));
     }
 
     public function category(Category $category)

@@ -35,7 +35,7 @@
                                                     {{ __('admin/general.edit') }}
                                                 </a>
                                                 {{ html()->form('DELETE')->route("admin.{$route}.destroy", $menu)->class('d-inline')->open() }}
-                                                <a href="javascript:void(0);" class="btn btn-sm destroy-btn btn-danger">
+                                                <a href="javascript:void(0);" class="btn btn-sm confirm-btn btn-danger">
                                                     {{ __('admin/general.delete') }}
                                                 </a>
                                                 {{ html()->form()->close() }}

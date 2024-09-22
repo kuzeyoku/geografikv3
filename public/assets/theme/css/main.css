@@ -4916,7 +4916,7 @@ select {
 }
 
 .single__service-content {
-    padding: 10px 10px 30px 20px;
+    padding: 10px;
 }
 
 .single__service:hover .service__icon a {
@@ -10009,5 +10009,58 @@ input.main-search-input::placeholder {
 .copyright-list.st-2 li a:hover {
     opacity: 0.7;
 }
+.product-container {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
 
-/*# sourceMappingURL=main.css.map */
+.product-image img {
+    width: 100%;
+}
+
+.product-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transition: bottom 0.5s;
+    padding: 10px;
+    border-top: 1px solid #9b9b9b;
+}
+
+.product-image::after {
+    content: "";
+    /* Pseudo-element içeriği */
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+    /* Alttan yukarı doğru gradient */
+    border-radius: 5px;
+    /* .product-image ile aynı border-radius değerini kullanın */
+}
+
+.product-container:hover .product-title {
+    bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
+    /* Hover durumunda yukarı taşı */
+}
+
+.category-description p {
+    margin-bottom: 10px;
+}
+
+.category-description ul {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.category-description ul li {
+    list-style: disc;
+}

@@ -13,14 +13,14 @@ class ProductController extends Controller
     public function index()
     {
         SeoService::module(ModuleEnum::Product);
-        $categories = Category::where("module", ModuleEnum::Product)->active()->get();
+        $categories = Category::module(ModuleEnum::Product)->active()->order()->get();
         return view('product.index', compact("categories"));
     }
 
     public function category(Category $category)
     {
         SeoService::category($category);
-        $products = $category->products()->get();
+        $products = $category->products()->active()->order()->get();
         return view('product.category', compact("products", "category"));
     }
 

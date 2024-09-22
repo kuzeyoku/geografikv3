@@ -10,7 +10,7 @@ class PageController extends Controller
 {
     public function show(Page $page)
     {
-        SeoService::set($page);
+        SeoService::show($page);
         return view('page', compact('page'));
     }
 }

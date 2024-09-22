@@ -76,7 +76,7 @@
                         <div class="menu-bg-1">
                             <img src="{{ themeAsset('front', 'img/shape/menu-bg-1.png') }}" alt="">
                         </div>
-                        <div class="main-menu main-menu-1">
+                        <div class="main-menu main-menu-1 mr-40">
                             <nav id="mobile-menu">
                                 <ul>
                                     @foreach ($menu as $menu)

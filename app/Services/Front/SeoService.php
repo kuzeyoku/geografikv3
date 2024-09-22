@@ -32,8 +32,8 @@ class SeoService
         self::default();
         SEOTools::setTitle($category->title);
         SEOTools::setDescription($category->meta_description);
-        SEOTools::opengraph()->addImage($category->getFirstMediaUrl("cover") ?: asset("assets/common/cover.jpg"));
-        SEOTools::twitter()->setImage($category->getFirstMediaUrl("cover") ?: asset("assets/common/cover.jpg"));
+        SEOTools::opengraph()->addImage($category->getFirstMediaUrl() ?: asset("assets/common/cover.jpg"));
+        SEOTools::twitter()->setImage($category->getFirstMediaUrl() ?: asset("assets/common/cover.jpg"));
     }
 
     public static function show($item): void
@@ -41,7 +41,9 @@ class SeoService
         self::default();
         SEOTools::setTitle($item->title);
         SEOTools::setDescription($item->meta_description);
-        SEOTools::opengraph()->addImage($item->getFirstMediaUrl("cover") ?: asset("assets/common/cover.jpg"));
-        SEOTools::twitter()->setImage($item->getFirstMediaUrl("cover") ?: asset("assets/common/cover.jpg"));
+        if (method_exists($item, "hasMedia")) {
+            SEOTools::opengraph()->addImage($item->getFirstMediaUrl() ?: asset("assets/common/cover.jpg"));
+            SEOTools::twitter()->setImage($item->getFirstMediaUrl() ?: asset("assets/common/cover.jpg"));
+        }
     }
 }

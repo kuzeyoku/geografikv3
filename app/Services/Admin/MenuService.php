@@ -20,6 +20,7 @@ class MenuService extends BaseService
             route(ModuleEnum::Blog->Route() . ".index") => ModuleEnum::Blog->title(),
             route(ModuleEnum::Product->Route() . ".index") => ModuleEnum::Product->title(),
             route(ModuleEnum::Project->Route() . ".index") => ModuleEnum::Project->title(),
+            route(ModuleEnum::Service->Route() . ".index") => ModuleEnum::Service->title(),
             route("contact.index") => __("front/contact.txt1"),
         ];
         $pages = Page::active()->get()->pluck("title", "url")->toArray();
