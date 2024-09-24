@@ -10,14 +10,13 @@ use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
  * @method static active()
  */
 class Blog extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'slug',
@@ -64,12 +63,19 @@ class Blog extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
-    public function getPreviousAttribute()
+    public function getImageAttribute()
+    {
+        return cache()->remember("blog_image_" . $this->id, config("cache.time"), function () {
+            return $this->getFirstMediaUrl();
+        });
+    }
+
+    public function getPreviousAttribute(): Blog
     {
         return $this->where("id", ">", $this->id)->orderBy("id", "ASC")->first();
     }
 
-    public function getNextAttribute()
+    public function getNextAttribute(): Blog
     {
         return $this->where("id", "<", $this->id)->orderBy("id", "ASC")->first();
     }
@@ -79,7 +85,7 @@ class Blog extends Model implements HasMedia
         return $this->translate->where("lang", app()->getLocale())->pluck('title')->first();
     }
 
-    public function getTitlesAttribute()
+    public function getTitlesAttribute(): array
     {
         return $this->translate->pluck('title', "lang")->all();
     }
@@ -89,43 +95,43 @@ class Blog extends Model implements HasMedia
         return $this->translate->where("lang", app()->getLocale())->pluck('description')->first();
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): array
     {
         return $this->translate->pluck('description', "lang")->all();
     }
 
-    public function getTagsAttribute()
+    public function getTagsAttribute(): array
     {
         return $this->translate->pluck('tags', "lang")->all();
     }
 
-    public function getTagsToArrayAttribute()
+    public function getTagsToArrayAttribute(): array
     {
         return explode(",", $this->translate->pluck('tags', "lang")->first());
     }
 
-    public function getShortDescriptionAttribute()
+    public function getShortDescriptionAttribute(): string
     {
         return Str::limit(strip_tags($this->description), 90);
     }
 
-    public function getMetaDescriptionAttribute()
+    public function getMetaDescriptionAttribute(): string
     {
         $description = $this->translate->where("lang", app()->getFallbackLocale())->pluck('description')->first();
         return Str::limit(strip_tags($description), 160);
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return route(ModuleEnum::Blog->route() . ".show", [$this->id, $this->slug]);
     }
 
-    public function getCategoryUrlAttribute()
+    public function getCategoryUrlAttribute(): string
     {
         return route(ModuleEnum::Blog->route() . ".category", [$this->category->id, $this->category->slug]);
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }
@@ -135,7 +141,7 @@ class Blog extends Model implements HasMedia
         return ModuleEnum::Blog->singleTitle();
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
         static::creating(function ($model) {

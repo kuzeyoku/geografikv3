@@ -77,6 +77,12 @@ class Category extends Model implements HasMedia
         return $this->hasMany(Blog::class);
     }
 
+    public function getImageAttribute()
+    {
+        return cache()->remember("category_image_" . $this->id, config("cache.time"), function () {
+            return $this->getFirstMediaUrl();
+        });
+    }
     public function getTitleAttribute()
     {
         return $this->translate->where("lang", $this->locale)->pluck('title')->first();

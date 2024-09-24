@@ -4,15 +4,16 @@ namespace App\Models;
 
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         "status",
@@ -33,52 +34,59 @@ class Product extends Model implements HasMedia
         $this->locale = session("locale");
     }
 
-    public function scopeActive()
+    public function scopeActive($query)
     {
-        return $this->whereStatus(StatusEnum::Active->value);
+        return $query->whereStatus(StatusEnum::Active);
     }
 
-    public function scopeOrder()
+    public function scopeOrder($query)
     {
-        return $this->orderBy("order")->orderByDesc("id");
+        return $query->orderBy("order")->orderBy("id", "DESC");
     }
 
-    public function translate()
+    public function translate(): HasMany
     {
         return $this->hasMany(ProductTranslate::class);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function getTitlesAttribute()
+    public function getImageAttribute()
+    {
+        return cache()->remember("product_image_" . $this->id, config("cache.time"), function () {
+            return $this->getFirstMediaUrl();
+        });
+    }
+
+    public function getTitlesAttribute(): array
     {
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getTitleAttribute()
+    public function getTitleAttribute(): string
     {
         return $this->translate->where("lang", $this->locale)->pluck('title')->first();
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): array
     {
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getDescriptionAttribute()
+    public function getDescriptionAttribute(): string
     {
         return $this->translate->where("lang", $this->locale)->pluck('description')->first();
     }
 
-    public function getFeaturesAttribute()
+    public function getFeaturesAttribute(): array
     {
         return $this->translate->pluck("features", "lang")->all();
     }
 
-    public function getFeatureAttribute()
+    public function getFeatureAttribute(): array
     {
         $result = [];
         if (array_key_exists($this->locale, $this->features)) {

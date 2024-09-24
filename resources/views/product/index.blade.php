@@ -9,7 +9,7 @@
                         <a href="{{ $category->url }}">
                             <div class="product-container mb-55">
                                 <div class="product-image mb-75">
-                                    <img src="{{ $category->getFirstMediaUrl() }}" alt="{{$category->title}}">
+                                    <img src="{{ $category->image }}" alt="{{$category->title}}">
                                 </div>
                                 <div class="product-title">
                                     {{ $category->title }}

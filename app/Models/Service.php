@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Service extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         "status",
@@ -31,7 +33,6 @@ class Service extends Model implements HasMedia
         $this->locale = session("locale");
     }
 
-
     public function scopeActive($query)
     {
         return $query->whereStatus(StatusEnum::Active->value);
@@ -39,20 +40,20 @@ class Service extends Model implements HasMedia
 
     public function scopeOrder($query)
     {
-        return $query->orderBy("order");
+        return $query->orderBy("order")->orderBy("id", "DESC");
     }
 
-    public function translate()
+    public function translate(): HasMany
     {
         return $this->hasMany(ServiceTranslate::class);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function getTitlesAttribute()
+    public function getTitlesAttribute(): array
     {
         return $this->translate->pluck("title", "lang")->all();
     }
@@ -62,7 +63,7 @@ class Service extends Model implements HasMedia
         return $this->translate->where("lang", $this->locale)->pluck("title")->first();
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): array
     {
         return $this->translate->pluck("description", "lang")->all();
     }
@@ -72,18 +73,18 @@ class Service extends Model implements HasMedia
         return $this->translate->where("lang", $this->locale)->pluck("description")->first();
     }
 
-    public function getShortDescriptionAttribute()
+    public function getShortDescriptionAttribute(): string
     {
         return Str::limit(strip_tags($this->description), 100);
     }
 
-    public function getMetaDescriptionAttribute()
+    public function getMetaDescriptionAttribute(): string
     {
         $description = $this->translate->where("lang", app()->getFallbackLocale())->pluck('description')->first();
         return Str::limit(strip_tags($description), 160);
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return route(ModuleEnum::Service->route() . ".show", [$this, $this->slug]);
     }
@@ -93,7 +94,7 @@ class Service extends Model implements HasMedia
         return Service::active()->where("id", "!=", $this->id)->limit(5)->get();
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }
@@ -103,7 +104,7 @@ class Service extends Model implements HasMedia
         return ModuleEnum::Service->singleTitle();
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
         static::creating(function ($model) {

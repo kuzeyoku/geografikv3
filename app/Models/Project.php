@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +14,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         "slug",
@@ -40,30 +42,30 @@ class Project extends Model implements HasMedia
 
     public function scopeOrder($query)
     {
-        return $query->orderBy("order");
+        return $query->orderBy("order")->orderBy("id", "DESC");
     }
 
-    public function translate()
+    public function translate(): HasMany
     {
         return $this->hasMany(ProjectTranslate::class);
     }
 
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function getPreviousAttribute()
+    public function getPreviousAttribute(): Project
     {
         return $this->where("id", ">", $this->id)->orderBy("id", "ASC")->first();
     }
 
-    public function getNextAttribute()
+    public function getNextAttribute(): Project
     {
         return $this->where("id", "<", $this->id)->orderBy("id", "ASC")->first();
     }
 
-    public function getTitlesAttribute()
+    public function getTitlesAttribute(): array
     {
         return $this->translate->pluck("title", "lang")->all();
     }
@@ -73,7 +75,7 @@ class Project extends Model implements HasMedia
         return $this->translate->where("lang", $this->locale)->pluck("title")->first();
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): array
     {
         return $this->translate->pluck("description", "lang")->all();
     }
@@ -83,7 +85,7 @@ class Project extends Model implements HasMedia
         return $this->translate->where("lang", $this->locale)->pluck("description")->first();
     }
 
-    public function getFeaturesAttribute()
+    public function getFeaturesAttribute(): array
     {
         return $this->translate->pluck("features", "lang")->toArray();
     }

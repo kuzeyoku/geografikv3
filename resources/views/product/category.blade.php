@@ -9,7 +9,7 @@
                         <a href="{{ $product->url }}">
                             <div class="product-container mb-55">
                                 <div class="product-image">
-                                    <img src="{{ $product->getFirstMediaUrl() }}" alt="">
+                                    <img src="{{ $product->image }}" alt="{{ $product->title }}">
                                 </div>
                                 <div class="product-title">
                                     {{ $product->title }}
