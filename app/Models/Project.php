@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Project extends Model implements HasMedia
 {
@@ -80,7 +79,7 @@ class Project extends Model implements HasMedia
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getDescriptionAttribute()
+    public function getDescriptionAttribute(): string
     {
         return $this->translate->where("lang", $this->locale)->pluck("description")->first();
     }

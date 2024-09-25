@@ -4,12 +4,10 @@ namespace App\Models;
 
 use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class BlogComment extends Model
 {
-    use HasFactory;
-
     public $fillable = [
         "blog_id",
         "name",
@@ -19,7 +17,7 @@ class BlogComment extends Model
         "status"
     ];
 
-    public function blog()
+    public function blog(): BelongsTo
     {
         return $this->belongsTo(Blog::class);
     }
@@ -34,12 +32,12 @@ class BlogComment extends Model
         return $query->whereStatus(StatusEnum::Pending->value);
     }
 
-    public function getGravatarUrlAttribute()
+    public function getGravatarUrlAttribute(): string
     {
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email)));
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
         self::creating(function ($model) {

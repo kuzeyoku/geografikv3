@@ -4,15 +4,9 @@ namespace App\Models;
 
 use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-/**
- * @method static create(array $array)
- */
 class Message extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         "name",
         "email",
@@ -30,15 +24,14 @@ class Message extends Model
         return $query->whereStatus(StatusEnum::Unread);
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
-
         static::addGlobalScope('order', function ($builder) {
             $builder->orderByDesc('created_at');
         });

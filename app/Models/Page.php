@@ -28,22 +28,22 @@ class Page extends Model
         return $this->hasMany(PageTranslate::class);
     }
 
-    public function getTitlesAttribute()
+    public function getTitlesAttribute(): array
     {
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getTitleAttribute()
+    public function getTitleAttribute(): string
     {
         return $this->translate->where("lang", session("locale"))->pluck('title')->first();
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): array
     {
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getDescriptionAttribute()
+    public function getDescriptionAttribute(): string
     {
         return $this->translate->where("lang", session("locale"))->pluck('description')->first();
     }
@@ -59,17 +59,17 @@ class Page extends Model
         return route(ModuleEnum::Page->route() . ".show", [$this->id, $this->slug]);
     }
 
-    public static function toSelectArray()
+    public static function toSelectArray(): array
     {
         return self::active()->get()->pluck("title", "id")->all();
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
         static::creating(function ($model) {

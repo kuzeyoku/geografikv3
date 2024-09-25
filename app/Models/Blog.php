@@ -11,9 +11,6 @@ use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-/**
- * @method static active()
- */
 class Blog extends Model implements HasMedia
 {
     use InteractsWithMedia;
@@ -63,10 +60,10 @@ class Blog extends Model implements HasMedia
         return $this->belongsTo(User::class);
     }
 
-    public function getImageAttribute()
+    public function getImageAttribute(): string
     {
         return cache()->remember("blog_image_" . $this->id, config("cache.time"), function () {
-            return $this->getFirstMediaUrl();
+            return $this->getFirstMediaUrl() ?? asset("assets/common/images/noimage.jpg");
         });
     }
 

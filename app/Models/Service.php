@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Service extends Model implements HasMedia
 {
@@ -58,7 +57,7 @@ class Service extends Model implements HasMedia
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getTitleAttribute()
+    public function getTitleAttribute(): string
     {
         return $this->translate->where("lang", $this->locale)->pluck("title")->first();
     }
@@ -68,7 +67,7 @@ class Service extends Model implements HasMedia
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getDescriptionAttribute()
+    public function getDescriptionAttribute(): string
     {
         return $this->translate->where("lang", $this->locale)->pluck("description")->first();
     }
@@ -99,7 +98,7 @@ class Service extends Model implements HasMedia
         return StatusEnum::fromValue($this->status)->badge();
     }
 
-    public function getModuleAttribute()
+    public function getModuleAttribute(): string
     {
         return ModuleEnum::Service->singleTitle();
     }

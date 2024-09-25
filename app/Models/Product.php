@@ -103,28 +103,28 @@ class Product extends Model implements HasMedia
         return $result;
     }
 
-    public function getShortDescriptionAttribute()
+    public function getShortDescriptionAttribute(): string
     {
         return Str::limit(trim(strip_tags($this->description)), 100);
     }
 
-    public function getMetaDescriptionAttribute()
+    public function getMetaDescriptionAttribute(): string
     {
         $description = $this->translate->where("lang", app()->getFallbackLocale())->pluck('description')->first();
         return Str::limit(trim(strip_tags($description)), 160);
     }
 
-    public function getUrlAttribute()
+    public function getUrlAttribute(): string
     {
         return route(ModuleEnum::Product->route() . ".show", [$this->id, $this->slug]);
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }
 
-    protected static function boot()
+    protected static function boot(): void
     {
         parent::boot();
         static::creating(function ($model) {

@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use App\Enums\StatusEnum;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'title',
         'code',
@@ -21,7 +18,7 @@ class Language extends Model
         return $query->whereStatus(StatusEnum::Active->value);
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }

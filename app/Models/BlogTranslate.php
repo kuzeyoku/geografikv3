@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class BlogTranslate extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'blog_id',
         'lang',

@@ -4,14 +4,13 @@ namespace App\Models;
 
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Reference extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         "url",
@@ -30,12 +29,12 @@ class Reference extends Model implements HasMedia
         return $query->orderBy("order", "asc");
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }
 
-    public function getModuleAttribute()
+    public function getModuleAttribute(): string
     {
         return ModuleEnum::Reference->singleTitle();
     }

@@ -5,13 +5,13 @@ namespace App\Models;
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Slider extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use InteractsWithMedia;
 
     protected $fillable = [
         "button",
@@ -40,37 +40,37 @@ class Slider extends Model implements HasMedia
         return $query->orderBy("order");
     }
 
-    public function translate()
+    public function translate(): HasMany
     {
         return $this->hasMany(SliderTranslate::class);
     }
 
-    public function getTitleAttribute()
+    public function getTitleAttribute(): string
     {
         return $this->translate->where("lang", $this->locale)->pluck("title")->first();
     }
 
-    public function getTitlesAttribute()
+    public function getTitlesAttribute(): array
     {
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getDescriptionAttribute()
+    public function getDescriptionAttribute(): string
     {
         return $this->translate->where("lang", $this->locale)->pluck("description")->first();
     }
 
-    public function getDescriptionsAttribute()
+    public function getDescriptionsAttribute(): array
     {
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getStatusViewAttribute()
+    public function getStatusViewAttribute(): string
     {
         return StatusEnum::fromValue($this->status)->badge();
     }
 
-    public function getModuleAttribute()
+    public function getModuleAttribute(): string
     {
         return ModuleEnum::Slider->singleTitle();
     }

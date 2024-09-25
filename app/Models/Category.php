@@ -9,9 +9,6 @@ use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-/**
- * @method static active()
- */
 class Category extends Model implements HasMedia
 {
     use InteractsWithMedia;
