@@ -5,13 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ModuleEnum;
 use Throwable;
 use App\Models\Popup;
-use Illuminate\Http\Request;
 use App\Services\Admin\PopupService;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\GeneralStatusRequest;
 use App\Http\Requests\Popup\StorePopupRequest;
 use App\Http\Requests\Popup\UpdatePopupRequest;
-use function PHPUnit\Framework\throwException;
 
 class PopupController extends Controller
 {

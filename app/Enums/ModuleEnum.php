@@ -11,6 +11,7 @@ enum ModuleEnum: string
     case Language = 'language';
     case Blog = "blog";
     case Category = "category";
+    case Sector = "sector";
     case Service = "service";
     case Brand = "brand";
     case Reference = "reference";
@@ -42,6 +43,7 @@ enum ModuleEnum: string
             self::Language => 'globe',
             self::Blog => "edit-3",
             self::Category => "list",
+            self::Sector => "grid",
             self::Service => "bookmark",
             self::Brand => "tag",
             self::Reference => "refresh-cw",
@@ -64,6 +66,7 @@ enum ModuleEnum: string
             self::Language => "language",
             self::Blog => "blog",
             self::Category => "category",
+            self::Sector => "sector",
             self::Service => "service",
             self::Brand => "brand",
             self::Reference => "reference",
@@ -86,6 +89,7 @@ enum ModuleEnum: string
             self::Language => "language",
             self::Blog => "blog",
             self::Category => "category",
+            self::Sector => "sector",
             self::Service => "service",
             self::Brand => "brand",
             self::Reference => "reference",

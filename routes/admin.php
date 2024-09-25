@@ -68,6 +68,11 @@ Route::prefix(config("system.admin", "admin"))->name('admin.')->group(function (
         Route::controller(App\Http\Controllers\Admin\CategoryController::class)->prefix("category")->group(function () {
             Route::put("/{category}/status-update", "statusUpdate")->name("category.status_update");
         });
+        //Sector Routes
+        Route::resource("sector", App\Http\Controllers\Admin\SectorController::class)->names('sector');
+        Route::controller(App\Http\Controllers\Admin\SectorController::class)->prefix("sector")->group(function () {
+            Route::put("/{sector}/status-update", "statusUpdate")->name("sector.status_update");
+        });
         //Service routes
         Route::resource("service", App\Http\Controllers\Admin\ServiceController::class)->names('service');
         Route::controller(App\Http\Controllers\Admin\ServiceController::class)->prefix("service")->group(function () {

@@ -3,19 +3,17 @@
         <div class="swiper-wrapper">
             @foreach ($sliders as $slider)
                 <div class="single-slider slider-height swiper-slide slider-overlay" data-swiper-autoplay="5000">
-                    <div class="slide-bg" data-background="{{ $slider->getFirstMediaUrl() }}"></div>
+                    <div class="slide-bg" data-background="{{ $slider->image }}"></div>
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-9">
                                 <div class="hero-content">
                                     <div class="hero-bg-shape" data-animation="fadeInUp" data-delay=".3s">
                                         <div class="hero-s-1">
-                                            <img src="{{ themeAsset('front', 'img/shape/hero-s-1.png') }}"
-                                                alt="">
+                                            <img src="{{ themeAsset('front', 'img/shape/hero-s-1.png') }}" alt="">
                                         </div>
                                         <div class="hero-s-2">
-                                            <img src="{{ themeAsset('fron', 'img/shape/hero-s-2.png') }}"
-                                                alt="">
+                                            <img src="{{ themeAsset('fron', 'img/shape/hero-s-2.png') }}" alt="">
                                         </div>
                                     </div>
                                     <p data-animation="fadeInUp" data-delay=".6s">{{ $slider->title }}</p>

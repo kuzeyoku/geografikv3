@@ -142,6 +142,23 @@
                                 </ul>
                             </li>
                         @endif
+                        @if(config("module.sector.status"))
+                            <li class="submenu">
+                                <a href="javascript:void(0);"
+                                   class="@if (request()->segment(2) == App\Enums\ModuleEnum::Sector->value) subdrop active @endif">
+                                    <i data-feather="{{ App\Enums\ModuleEnum::Sector->icon() }}"></i>
+                                    <span>{{ App\Enums\ModuleEnum::Sector->menuTitle() }}</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul>
+                                    @foreach (App\Services\Admin\SidebarService::getMenu(App\Enums\ModuleEnum::Sector->value) as $key => $value)
+                                        <li>
+                                            <a href="{{ route('admin.' . App\Enums\ModuleEnum::Sector->route() . '.' . $key) }}">{{ $value }}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endif
                         @if (config('module.service.status'))
                             <li class="submenu">
                                 <a href="javascript:void(0);"

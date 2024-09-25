@@ -8,7 +8,8 @@
             </div>
         </div>
         <div class="portfolio-slide-wrapper p-relative">
-            <div class="swiper-container portfolio-slide swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+            <div
+                class="swiper-container portfolio-slide swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
                 <div class="swiper-wrapper" aria-live="off">
                     <div class="swiper-slide">
                         <div class="portfolio-slide-single p-relative mb-30">
@@ -24,7 +25,7 @@
                         <div class="swiper-slide">
                             <div class="portfolio-slide-single p-relative mb-30">
                                 <a href="{{ $category->url }}">
-                                    <img src="{{ $category->getFirstMediaUrl('cover') }}" alt="{{$category->title}}">
+                                    <img src="{{ $category->image }}" alt="{{ $category->title }}">
                                     <div class="portfolio-slide-title">
                                         {{ $category->title }}
                                     </div>

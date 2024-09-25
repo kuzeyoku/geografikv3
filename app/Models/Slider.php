@@ -20,15 +20,7 @@ class Slider extends Model implements HasMedia
         "order"
     ];
 
-    protected $locale;
-
     protected $with = ["translate"];
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->locale = session("locale");
-    }
 
     public function scopeActive($query)
     {
@@ -45,9 +37,16 @@ class Slider extends Model implements HasMedia
         return $this->hasMany(SliderTranslate::class);
     }
 
-    public function getTitleAttribute(): string
+    public function getImageAttribute(): string
     {
-        return $this->translate->where("lang", $this->locale)->pluck("title")->first();
+        return cache()->rememberForever("slider_image_" . $this->id, function () {
+            return $this->getFirstMediaUrl() ?? asset("assets/common/images/noimage.jpg");
+        });
+    }
+
+    public function getTitleAttribute(): string|null
+    {
+        return $this->translate->where("lang", session("locale"))->pluck("title")->first();
     }
 
     public function getTitlesAttribute(): array
@@ -55,9 +54,9 @@ class Slider extends Model implements HasMedia
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getDescriptionAttribute(): string
+    public function getDescriptionAttribute(): string|null
     {
-        return $this->translate->where("lang", $this->locale)->pluck("description")->first();
+        return $this->translate->where("lang", session("locale"))->pluck("description")->first();
     }
 
     public function getDescriptionsAttribute(): array

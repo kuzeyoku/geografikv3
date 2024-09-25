@@ -47,6 +47,11 @@ class SidebarService
                     "create" => __("admin/" . ModuleEnum::Category->route() . ".create"),
                     "index" => __("admin/" . ModuleEnum::Category->route() . ".list"),
                 ];
+            case ModuleEnum::Sector->value:
+                return [
+                    "create" => __("admin/" . ModuleEnum::Sector->route() . ".create"),
+                    "index" => __("admin/" . ModuleEnum::Sector->route() . ".list"),
+                ];
             case ModuleEnum::Service->value:
                 return [
                     "create" => __("admin/" . ModuleEnum::Service->route() . ".create"),
