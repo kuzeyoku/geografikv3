@@ -2,7 +2,7 @@
 @section('content')
     @include('layout.slider')
     @include('layout.brand')
-    @include('layout.service')
+    @include('layout.sector')
     @include('layout.about')
     @include('layout.counter')
     @include('layout.principles')

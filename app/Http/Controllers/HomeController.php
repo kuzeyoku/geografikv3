@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Project;
+use App\Models\Sector;
 use App\Models\Slider;
 use App\Models\Testimonial;
 use App\Services\Front\SeoService;
@@ -42,8 +43,8 @@ class HomeController extends Controller
             return Blog::active()->order()->limit(3)->get();
         });
 
-        $data["service_categories"] = Cache::remember("service_category_home_" . app()->getLocale(), config("cache.time"), function () {
-            return Category::active()->module(ModuleEnum::Service->value)->order()->get();
+        $data["sectors"] = Cache::remember("sector_home_" . app()->getLocale(), config("cache.time"), function () {
+            return Sector::active()->order()->get();
         });
         return view("index", $data);
     }

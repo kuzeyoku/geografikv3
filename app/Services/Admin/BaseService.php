@@ -25,7 +25,7 @@ class BaseService
 
     public function getAll()
     {
-        return $this->model->orderByDesc("id")->paginate(setting("pagination", "admin"));
+        return $this->model->orderBy("id", "DESC")->paginate(setting("pagination", "admin"));
     }
 
     public function create(array $request): void

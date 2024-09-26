@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('sector_translates', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sector_id')->constrained("sectors")->cascadeOnDelete();
+            $table->foreignId('sector_id')->constrained()->cascadeOnDelete();
             $table->string('lang', 10)->index();
             $table->foreign('lang')->references('code')->on('languages')->cascadeOnDelete();
             $table->string('title', 255)->nullable();

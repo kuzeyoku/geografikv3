@@ -11,23 +11,13 @@
             <div
                 class="swiper-container portfolio-slide swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
                 <div class="swiper-wrapper" aria-live="off">
-                    <div class="swiper-slide">
-                        <div class="portfolio-slide-single p-relative mb-30">
-                            <a href="{{ route('product.index') }}">
-                                <img src="{{asset("assets/theme/img/product.jpg")}}" alt=""/>
-                                <div class="portfolio-slide-title">
-                                    @lang("front/product.txt1")
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    @foreach ($service_categories as $category)
+                    @foreach ($sectors as $sector)
                         <div class="swiper-slide">
                             <div class="portfolio-slide-single p-relative mb-30">
-                                <a href="{{ $category->url }}">
-                                    <img src="{{ $category->image }}" alt="{{ $category->title }}">
+                                <a href="{{ $sector->url }}">
+                                    <img src="{{ $sector->image }}" alt="{{ $sector->title }}">
                                     <div class="portfolio-slide-title">
-                                        {{ $category->title }}
+                                        {{ $sector->title }}
                                     </div>
                                 </a>
                             </div>

@@ -8,7 +8,9 @@ class SectorTranslate extends Model
 {
     protected $fillable = [
         'sector_id',
-        'language',
+        'lang',
         'title',
     ];
+
+    public $timestamps = false;
 }

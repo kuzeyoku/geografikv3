@@ -12,8 +12,6 @@ Route::middleware(CountVisitors::class, Maintenance::class)->group(function () {
         Route::post("/setLocale", [App\Http\Controllers\LanguageController::class, "set"])->name("language.set");
     }
 
-    Route::post("/newsletter", [App\Http\Controllers\NewsletterController::class, "store"])->name("newsletter.store");
-
     Route::get("/contact", [App\Http\Controllers\ContactController::class, "index"])->name("contact.index");
 
     Route::post("/contact/send", [App\Http\Controllers\ContactController::class, "send"])->name("contact.send");
@@ -21,8 +19,6 @@ Route::middleware(CountVisitors::class, Maintenance::class)->group(function () {
     Route::get("/sitemap.xml", [App\Http\Controllers\SitemapController::class, "index"])->name("sitemap.index");
 
     Route::get("/page/{page}/{slug}", [App\Http\Controllers\PageController::class, "show"])->name("page.show");
-
-    Route::get("/calculator", [App\Http\Controllers\CalculatorController::class, "index"])->name("calculator.index");
 
     if (config("module.blog.status")) {
         Route::controller(App\Http\Controllers\BlogController::class)->prefix("blog")->group(function () {
