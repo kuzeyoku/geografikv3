@@ -32,6 +32,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         SeoService::show($product);
-        return view('product.show', compact('product'));
+        $otherProducts = Cache::remember('otherProducts_' . $product->id, config("cache.time"), function () use ($product) {
+            return $product->category->products()->active()->whereNot('id', $product->id)->order()->get();
+        });
+        return view('product.show', compact('product', 'otherProducts'));
     }
 }

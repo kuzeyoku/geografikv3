@@ -23,13 +23,13 @@
 
     $(".search-trigger").on("click", function (e) {
         e.preventDefault();
-        $searchWrap.animate({ opacity: "toggle" }, 500);
+        $searchWrap.animate({opacity: "toggle"}, 500);
         $navSearch.add($searchClose).addClass("open");
     });
 
     $(".search-close").on("click", function (e) {
         e.preventDefault();
-        $searchWrap.animate({ opacity: "toggle" }, 500);
+        $searchWrap.animate({opacity: "toggle"}, 500);
         $navSearch.add($searchClose).removeClass("open");
     });
 
@@ -305,7 +305,7 @@
         // filter items on button click
         $(".portfolio-button").on("click", "button", function () {
             var filterValue = $(this).attr("data-filter");
-            $grid.isotope({ filter: filterValue });
+            $grid.isotope({filter: filterValue});
         });
 
         //for menu active class
@@ -318,10 +318,9 @@
 
     // back to top
     $("#scrollToTop").on("click", function () {
-        $("body, html").animate({ scrollTop: 0 }, 500);
+        $("body, html").animate({scrollTop: 0}, 500);
         return false;
     });
-
     // scrollToTop
     $.scrollUp({
         scrollName: "scrollUp", // Element ID

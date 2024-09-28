@@ -1,7 +1,4 @@
 <?php
-/**
- * @see https://github.com/artesaos/seotools
- */
 
 return [
     'meta' => [

@@ -40,7 +40,7 @@ class Menu extends Model
 
     public function getTitleAttribute(): string|null
     {
-        return $this->translate->where("lang", session("lcoale"))->pluck('title')->first();
+        return $this->translate->where("lang", session("locale"))->pluck('title')->first();
     }
 
     public static function boot(): void

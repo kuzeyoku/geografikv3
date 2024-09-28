@@ -22,8 +22,7 @@
     </div>
     <div class="portfolio-container">
         <div class="portfolio-inner">
-            <div
-                class="swiper-container portfolio-active swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+            <div class="swiper-container portfolio-active swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
                 <div class="swiper-wrapper">
                     @foreach ($projects as $project)
                         <div class="swiper-slide">
