@@ -16,15 +16,7 @@ class Menu extends Model
 
     public $timestamps = false;
 
-    protected $locale;
-
     protected $with = ["translate", "subMenu"];
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->locale = session("locale");
-    }
 
     public function translate(): HasMany
     {
@@ -46,9 +38,9 @@ class Menu extends Model
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getTitleAttribute(): string
+    public function getTitleAttribute(): string|null
     {
-        return $this->translate->where("lang", $this->locale)->pluck('title')->first();
+        return $this->translate->where("lang", session("lcoale"))->pluck('title')->first();
     }
 
     public static function boot(): void

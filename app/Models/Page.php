@@ -33,7 +33,7 @@ class Page extends Model
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getTitleAttribute(): string
+    public function getTitleAttribute(): string|null
     {
         return $this->translate->where("lang", session("locale"))->pluck('title')->first();
     }

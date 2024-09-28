@@ -8,7 +8,7 @@ use App\Http\Middleware\CountVisitors;
 Route::middleware(CountVisitors::class, Maintenance::class)->group(function () {
     Route::get("/", [App\Http\Controllers\HomeController::class, "index"])->name("home");
 
-    if (config("system.multilanguage", StatusEnum::Passive->value) == StatusEnum::Active->value) {
+    if (setting("system", "multilanguage") == StatusEnum::Active->value) {
         Route::post("/setLocale", [App\Http\Controllers\LanguageController::class, "set"])->name("language.set");
     }
 

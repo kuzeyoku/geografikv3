@@ -5,11 +5,13 @@
                 <div class="col-lg-9">
                     <div class="grb__cta header-cta">
                         <ul>
-                            <li>
-                                <div class="cta__content">
-                                    @include('common.language_selector')
-                                </div>
-                            </li>
+                            @if(setting("system","multilanguage") == \App\Enums\StatusEnum::Active->value)
+                                <li>
+                                    <div class="cta__content">
+                                        @include('common.language_selector')
+                                    </div>
+                                </li>
+                            @endif
                             <li>
                                 <div class="cta__icon">
                                     <span><i class="fas fa-phone-alt"></i></span>
