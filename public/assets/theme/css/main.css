@@ -5222,7 +5222,12 @@ select {
 }
 
 .service-details-content > p {
-    margin-bottom: 43px;
+    margin-bottom: 10px;
+}
+
+.service-details-content ul li {
+    list-style: disc;
+    margin-left: 20px;
 }
 
 .execute-list {

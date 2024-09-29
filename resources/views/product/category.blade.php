@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-    @include('layout.breadcrumb', ['title' => __('front/product.txt1'), "parent" => __('front/product.txt1'), "parent_url" => route('product.index')])
+    @include('layout.breadcrumb', ['title' => $category->title, "parent" => __('front/product.txt1'), "parent_url" => route('product.index')])
     <section class="portfolio-main pt-120">
         <div class="container">
             <div class="row wow fadeInUp">

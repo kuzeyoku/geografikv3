@@ -52,12 +52,19 @@ class Service extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
+    public function getImageAttribute(): string
+    {
+        return \Cache::remember("service_image_" . $this->id, config("cache.time"), function () {
+            return $this->getFirstMediaUrl() ?? asset("assets/img/default.jpg");
+        });
+    }
+
     public function getTitlesAttribute(): array
     {
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getTitleAttribute(): string
+    public function getTitleAttribute(): string|null
     {
         return $this->translate->where("lang", $this->locale)->pluck("title")->first();
     }
@@ -67,7 +74,7 @@ class Service extends Model implements HasMedia
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getDescriptionAttribute(): string
+    public function getDescriptionAttribute(): string|null
     {
         return $this->translate->where("lang", $this->locale)->pluck("description")->first();
     }

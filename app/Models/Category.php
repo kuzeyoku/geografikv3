@@ -23,12 +23,6 @@ class Category extends Model implements HasMedia
 
     protected $with = ["translate"];
 
-    public function __construct(protected $locale = null)
-    {
-        parent::__construct();
-        $this->locale = session("locale");
-    }
-
     public function scopeActive($query)
     {
         return $query->whereStatus(StatusEnum::Active->value);
@@ -80,9 +74,10 @@ class Category extends Model implements HasMedia
             return $this->getFirstMediaUrl();
         });
     }
+
     public function getTitleAttribute()
     {
-        return $this->translate->where("lang", $this->locale)->pluck('title')->first();
+        return $this->translate->where("lang", session("locale"))->pluck('title')->first();
     }
 
     public function getTitlesAttribute(): array
@@ -92,7 +87,7 @@ class Category extends Model implements HasMedia
 
     public function getDescriptionAttribute()
     {
-        return $this->translate->where("lang", $this->locale)->pluck('description')->first();
+        return $this->translate->where("lang", session("locale"))->pluck('description')->first();
     }
 
     public function getDescriptionsAttribute(): array
