@@ -18,6 +18,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        SeoService::index();
         $data["brands"] = Cache::remember("brand_home_" . app()->getLocale(), config("cache.time"), function () {
             return Brand::active()->order()->get();
         });
