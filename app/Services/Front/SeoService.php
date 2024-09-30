@@ -2,7 +2,6 @@
 
 namespace App\Services\Front;
 
-use App\Models\ThemeAsset;
 use Artesaos\SEOTools\Facades\SEOTools;
 
 class SeoService
@@ -16,15 +15,15 @@ class SeoService
     public static function index(): void
     {
         self::default();
-        SEOTools::setTitle(config("general.title"));
-        SEOTools::setDescription(config("general.description"));
+        SEOTools::setTitle(setting("general", "title"));
+        SEOTools::setDescription(setting("general", "description"));
     }
 
     public static function module($module): void
     {
         self::default();
-        SEOTools::setTitle(__("front/$module->value.meta_title") ?: config("general.title"));
-        SEOTools::setDescription(__("front/$module->value.meta_description") ?: config("general.description"));
+        SEOTools::setTitle(__("front/$module->value.meta_title") ?: setting("general", "title"));
+        SEOTools::setDescription(__("front/$module->value.meta_description") ?: setting("general", "description"));
     }
 
     public static function category($category): void
