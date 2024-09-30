@@ -57,7 +57,7 @@ class Product extends Model implements HasMedia
     public function getImageAttribute()
     {
         return cache()->remember("product_image_" . $this->id, config("cache.time"), function () {
-            return $this->getFirstMediaUrl();
+            return $this->getFirstMediaUrl() ?? asset("assets/common/images/noimage.jpg");
         });
     }
 

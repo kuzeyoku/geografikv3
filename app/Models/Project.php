@@ -54,6 +54,13 @@ class Project extends Model implements HasMedia
         return $this->belongsTo(Category::class);
     }
 
+    public function getImageAttribute(): string
+    {
+        return cache()->remember("project_image_" . $this->id, config("cache.time"), function () {
+            return $this->getFirstMediaUrl() ?? asset("assets/common/images/noimage.jpg");
+        });
+    }
+
     public function getPreviousAttribute(): Project
     {
         return $this->where("id", ">", $this->id)->orderBy("id", "ASC")->first();
