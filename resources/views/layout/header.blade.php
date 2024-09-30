@@ -45,7 +45,7 @@
                             @foreach (setting("social") as $key => $value)
                                 @if (setting("social",$key))
                                     <li>
-                                        <a href="{{setting("social",$key)}}">
+                                        <a onclick="return!window.open(this.href)" href="{{setting("social",$key)}}">
                                             <i class="fab fa-{{ $key }}"></i>
                                         </a>
                                     </li>
@@ -150,7 +150,7 @@
                         @foreach (setting("social") as $key => $value)
                             @if (setting("social",$key))
                                 <li>
-                                    <a href="{{setting("social",$key)}}">
+                                    <a onclick="return!window.open(this.href)" href="{{setting("social",$key)}}">
                                         <i class="fab fa-{{ $key }}"></i>
                                     </a>
                                 </li>
