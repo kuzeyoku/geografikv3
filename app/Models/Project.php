@@ -76,7 +76,7 @@ class Project extends Model implements HasMedia
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getTitleAttribute()
+    public function getTitleAttribute():string|null
     {
         return $this->translate->where("lang", $this->locale)->pluck("title")->first();
     }
@@ -86,7 +86,7 @@ class Project extends Model implements HasMedia
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getDescriptionAttribute(): string
+    public function getDescriptionAttribute(): string|null
     {
         return $this->translate->where("lang", $this->locale)->pluck("description")->first();
     }
