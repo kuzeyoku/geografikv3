@@ -18,31 +18,34 @@
             </div>
         </div>
     </section>
-    <div class="container">
-        <div class="related-shots-inner">
-            <h3>@lang("front/product.txt4")</h3>
-        </div>
-        <div class="portfolio-inner">
-            <div class="swiper-container portfolio-active swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
-                <div class="swiper-wrapper">
-                    @foreach($otherProducts as $item)
-                        <div class="swiper-slide">
-                            <a href="{{ $item->url }}">
-                                <div class="product-container mb-55">
-                                    <div class="product-image">
-                                        <img src="{{ $item->image }}" alt="{{ $item->title }}">
+    @if($otherProducts->isNotEmpty())
+        <div class="container">
+            <div class="related-shots-inner">
+                <h3>@lang("front/product.txt4")</h3>
+            </div>
+            <div class="portfolio-inner">
+                <div
+                    class="swiper-container portfolio-active swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+                    <div class="swiper-wrapper">
+                        @foreach($otherProducts as $item)
+                            <div class="swiper-slide">
+                                <a href="{{ $item->url }}">
+                                    <div class="product-container mb-55">
+                                        <div class="product-image">
+                                            <img src="{{ $item->image }}" alt="{{ $item->title }}">
+                                        </div>
+                                        <div class="product-title">
+                                            {{ $item->title }}
+                                        </div>
                                     </div>
-                                    <div class="product-title">
-                                        {{ $item->title }}
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 @endsection
 @push("style")
     <link rel="stylesheet" href="{{ themeAsset("front","css/product.css") }}">
