@@ -6,7 +6,7 @@
             <div class="portfolio-details-content">
                 <div class="wow fadeInUp">
                     <div class="portfolio-details-title mb-25">
-                        <h4>{{$project->title}}</h4>
+                        <h4>{{ $project->title }}</h4>
                     </div>
                 </div>
                 <div class="portfolio-details-img">
@@ -14,7 +14,7 @@
                         <div class="col-lg-8">
                             <div class="portfolio-details-img-left">
                                 <div class="portfolio-details-single-img">
-                                    <img src="{{$project->getFirstMediaUrl("cover")}}" alt="{{$project->title}}">
+                                    <img src="{{ $project->image }}" alt="{{$project->title}}">
                                 </div>
                             </div>
                             {!! $project->description !!}
