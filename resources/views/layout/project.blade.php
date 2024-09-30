@@ -29,7 +29,7 @@
                             <div class="single-portfolio">
                                 <div class="portfolio-img">
                                     <a href="{{ $project->url }}"><img
-                                            src="{{ $project->getFirstMediaUrl('cover') }}" alt=""></a>
+                                            src="{{ $project->image }}" alt="{{ $project->title }}"></a>
                                 </div>
                                 <div class="portfolio-content">
                                     <h5><a href="{{ $project->url }}">{{ $project->title }}</a></h5>
