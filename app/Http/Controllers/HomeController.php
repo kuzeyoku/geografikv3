@@ -47,6 +47,8 @@ class HomeController extends Controller
         $data["about"] = Cache::remember("about_home_" . app()->getLocale(), config("cache.time"), function () {
             return Page::find(setting("information", "about_page"));
         });
+
+        dd($data["about"]);
         return view("index", $data);
     }
 }
