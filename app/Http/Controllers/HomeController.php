@@ -6,6 +6,7 @@ use App\Enums\ModuleEnum;
 use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Page;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\Sector;
@@ -27,11 +28,6 @@ class HomeController extends Controller
             return Slider::active()->order()->get();
         });
 
-        $data["products"] = Cache::remember("product_home_" . app()->getLocale(), config("cache.time"), function () {
-            $product = Product::active()->order()->get();
-            return $product->whereIn("category_id", [2, 3]);
-        });
-
         $data["projects"] = Cache::remember("project_home_" . app()->getLocale(), config("cache.time"), function () {
             return Project::active()->order()->limit(6)->get();
         });
@@ -46,6 +42,10 @@ class HomeController extends Controller
 
         $data["sectors"] = Cache::remember("sector_home_" . app()->getLocale(), config("cache.time"), function () {
             return Sector::active()->order()->get();
+        });
+
+        $data["about"] = Cache::remember("about_home_" . app()->getLocale(), config("cache.time"), function () {
+            return Page::find(config("information.about"));
         });
         return view("index", $data);
     }
