@@ -43,12 +43,10 @@
                             <p>@lang('front/about.txt6')</p>
                         </li>
                     </ul>
-                    @if ($about)
                         <div class="about__btn st-1">
                             <a href="{{ $about?->url }}" class="grb-btn st-1">@lang('front/about.txt7')<i
                                     class="fas fa-arrow-right"></i></a>
                         </div>
-                    @endif
                 </div>
             </div>
         </div>
