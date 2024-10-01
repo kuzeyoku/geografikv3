@@ -1,13 +1,23 @@
 @extends('layout.main')
 @section('content')
     @include('layout.slider')
-    @include('layout.brand')
-    @include('layout.sector')
+    @if(config("module.brand.status"))
+        @include('layout.brand')
+    @endif
+    @if(config("module.sector.status"))
+        @include('layout.sector')
+    @endif
     @include('layout.about')
     @include('layout.counter')
     @include('layout.principles')
     @include('layout.hire-area')
-    @include('layout.project')
-    @include('layout.testimonial')
-    @include('layout.blog')
+    @if(config("module.project.status"))
+        @include('layout.project')
+    @endif
+    @if(config("module.testimonial.status"))
+        @include('layout.testimonial')
+    @endif
+    @if(config("module.blog.status"))
+        @include('layout.blog')
+    @endif
 @endsection
