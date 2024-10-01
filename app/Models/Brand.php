@@ -34,4 +34,10 @@ class Brand extends Model implements HasMedia
         return StatusEnum::fromValue($this->status)->badge();
     }
 
+    public function getImageAttribute()
+    {
+        return cache()->remember("brand_image_{$this->id}", config("cache.time"), function () {
+            return $this->getFirstMediaUrl() ?? asset("assets/common/images/noimage.jpg");
+        });
+    }
 }
