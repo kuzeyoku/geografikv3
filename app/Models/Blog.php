@@ -67,12 +67,12 @@ class Blog extends Model implements HasMedia
         });
     }
 
-    public function getPreviousAttribute(): Blog
+    public function getPreviousAttribute(): Blog|null
     {
         return $this->where("id", ">", $this->id)->orderBy("id", "ASC")->first();
     }
 
-    public function getNextAttribute(): Blog
+    public function getNextAttribute(): Blog|null
     {
         return $this->where("id", "<", $this->id)->orderBy("id", "ASC")->first();
     }

@@ -44,7 +44,7 @@ return [
         "status" => true,
     ],
     "testimonial" => [
-        "status" => true,
+        "status" => false,
     ],
     "popup" => [
         "status" => true,

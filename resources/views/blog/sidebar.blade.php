@@ -25,7 +25,7 @@
                     <li class="bs-post-single">
                         <div class="bs-post-img">
                             <a href="{{$post->url}}">
-                                <img src="{{$post->getFirstMediaUrl("cover")}}" alt="{{$post->title}}">
+                                <img src="{{$post->image}}" alt="{{$post->title}}">
                             </a>
                         </div>
                         <div class="bs-post-content">

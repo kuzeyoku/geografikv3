@@ -1,4 +1,4 @@
-<section class="blog-area pt-120 pb-90">
+<section class="blog-area grey-bg pt-120 pb-90">
     <div class="container">
         <div class="row wow fadeInUp align-items-center counter-head">
             <div class="col-lg-6 col-md-8">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="blog-img">
                             <a href="{{ $blog->url }}">
-                                <img src="{{ $blog->getFirstMediaUrl('cover') }}" alt="{{$blog->title}}">
+                                <img src="{{ $blog->image }}" alt="{{$blog->title}}">
                             </a>
                         </div>
                         <div class="blog-content">

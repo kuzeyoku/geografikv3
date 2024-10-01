@@ -10,7 +10,7 @@
                             <div class="blog-main-single mb-60">
                                 <div class="bms-img mb-30">
                                     <a href="{{$blog->url}}">
-                                        <img src="{{$blog->getFirstMediaUrl("cover")}}" alt="{{$blog->title}}">
+                                        <img src="{{$blog->image}}" alt="{{$blog->title}}">
                                     </a>
                                 </div>
                                 <div class="bms-content">

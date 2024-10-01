@@ -8,7 +8,7 @@
                     <div class="blog-main">
                         <div class="blog-main-single bm-details">
                             <div class="bms-img mb-20">
-                                <img src="{{$blog->getFirstMediaUrl("cover")}}"
+                                <img src="{{$blog->image}}"
                                      alt="{{$blog->title}}">
                             </div>
                             <div class="bms-title">
