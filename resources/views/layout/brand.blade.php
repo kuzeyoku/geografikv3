@@ -7,10 +7,10 @@
                         @foreach ($brands as $brand)
                             <div class="swiper-slide">
                                 <div class="single-brand">
-                                    <a href="{{ $brand->url }}">
+                                    <a onclick="return!window.open(this.href)" href="{{ $brand->url }}">
                                         <img src="{{ $brand->image }}" alt="{{ $brand->title }}">
                                     </a>
-                                    <a href="{{ $brand->url }}">
+                                    <a onclick="return!window.open(this.href)" href="{{ $brand->url }}">
                                         <img src="{{ $brand->image }}" alt="{{ $brand->title }}">
                                     </a>
                                 </div>
