@@ -7,7 +7,7 @@
                         <div class="swiper-slide">
                             <div class="single-brand">
                                 <a href="{{ $brand->url }}">
-                                    <img src="{{ $brand->getFirstMediaUrl('cover') }}" alt="{{ $brand->title }}">
+                                    <img src="{{ $brand->image }}" alt="{{ $brand->title }}">
                                 </a>
                             </div>
                         </div>
