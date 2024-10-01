@@ -1,4 +1,4 @@
-<section class="hire-area" data-background="{{ setting('asset','hire_area') }}">
+<section class="hire-area" data-background="@setting("asset","hire-area")">
     <div class="container">
         <div class="row wow fadeInUp justify-content-center">
             <div class="col-lg-9 col-md-12">
