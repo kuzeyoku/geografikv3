@@ -19,8 +19,8 @@
                                     <p data-animation="fadeInUp" data-delay=".6s">{{ $slider->title }}</p>
                                     <h1 data-animation="fadeInUp" data-delay=".9s">{{ $slider->description }}</h1>
                                     @if ($slider->button)
-                                        <div class="hero-btn" data-animation="fadeInUp" data-delay="1.2s">
-                                            <a href="{{ $slider->button }}" class="btn">Detaylar</a>
+                                        <div class="hero-content-btn" data-animation="fadeInUp" data-delay="1.2s">
+                                            <a href="{{ $slider->button }}" class="grd-btn">@lang("front/slider.txt1")</a>
                                         </div>
                                     @endif
                                     @if ($slider->video)
