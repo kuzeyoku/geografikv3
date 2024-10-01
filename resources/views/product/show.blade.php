@@ -2,7 +2,7 @@
 @section("content")
     @include("layout.breadcrumb",["title" => $product->title, "parent" => __("front/product.txt1"),"parent_url" => route("product.index")])
     {!! $product->description !!}
-    <section class="hire-area pd-hire-area" data-background="@setting("asset","hire_area")">
+    <section class="hire-area" data-background="@setting("asset","hire_area")">
         <div class="pd-hire-inner">
             <div class="row wow fadeInUp justify-content-center">
                 <div class="col-lg-8 col-md-11">
