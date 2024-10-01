@@ -31,7 +31,7 @@
                         </div>
                         <div class="blog-img">
                             <a href="{{ $blog->url }}">
-                                <img src="{{ $blog->getFirstMediaUrl('cover') }}" alt="{{$blog->title}}">
+                                <img src="{{ $blog->image }}" alt="{{$blog->title}}">
                             </a>
                         </div>
                         <div class="blog-content">
