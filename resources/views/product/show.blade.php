@@ -2,7 +2,7 @@
 @section("content")
     @include("layout.breadcrumb",["title" => $product->title, "parent" => __("front/product.txt1"),"parent_url" => route("product.index")])
     {!! $product->description !!}
-    <section class="hire-area" data-background="@setting("asset","hire_area")">
+    <section class="hire-area pd-hire-area">
         <div class="pd-hire-inner">
             <div class="row wow fadeInUp justify-content-center">
                 <div class="col-lg-8 col-md-11">
@@ -24,7 +24,7 @@
                 <h3>@lang("front/product.txt4")</h3>
             </div>
             <div class="portfolio-inner">
-                <div  class="swiper-container portfolio-active swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
+                <div class="swiper-container portfolio-active swiper-container-initialized swiper-container-horizontal swiper-container-pointer-events">
                     <div class="swiper-wrapper">
                         @foreach($otherProducts as $item)
                             <div class="swiper-slide">
