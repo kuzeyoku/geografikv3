@@ -40,7 +40,9 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                            <h4><a href="{{$blog->url}}">{{$blog->title}}</a></h4>
+                                            <h4>
+                                                <a href="{{$blog->url}}">{{\Illuminate\Support\Str::limit($blog->title,50)}}</a>
+                                            </h4>
                                         </div>
                                     </div>
                                     <p>{{$blog->short_description}}</p>
