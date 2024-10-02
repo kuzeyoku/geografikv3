@@ -109,7 +109,7 @@ class Blog extends Model implements HasMedia
 
     public function getShortDescriptionAttribute(): string
     {
-        return Str::limit(strip_tags($this->description), 250);
+        return Str::limit(strip_tags($this->description), 220);
     }
 
     public function getMetaDescriptionAttribute(): string
