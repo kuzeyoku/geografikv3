@@ -41,6 +41,7 @@
 <script src="{{ themeAsset('front', 'js/plugins.js') }}"></script>
 <script src="{{ themeAsset('front', 'js/main.js') }}"></script>
 @stack('script')
+@include('common.cookie_alert')
 </body>
 
 </html>
