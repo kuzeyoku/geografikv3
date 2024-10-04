@@ -16,19 +16,18 @@
 .cookie img {
     width: 80px;
     height: 80px;
-    margin-bottom: 20px
 }
 
 .cookie .title {
     font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px
 }
 
 .cookie .description {
     font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 20px
+}
+
+.cookie img, .cookie .title, .cookie .description {
+    margin-bottom: 20px;
 }
 
 .cookie a {
@@ -89,6 +88,7 @@
 
     .cookie .cookie-btn {
         padding: 2px 15px;
-        font-size: 10px
+        font-size: 10px;
+        border: none;
     }
 }
