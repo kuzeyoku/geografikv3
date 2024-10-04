@@ -1711,7 +1711,7 @@ $(".dropify-clear").one("click", function () {
 if ($(".dropzone").length > 0) {
     new Dropzone(".dropzone", {
         success: function (file, response) {
-            showAlert(response.status, response.message);
+            showAlert("success", response.message);
             setTimeout(function () {
                 location.reload();
             }, 3000);
