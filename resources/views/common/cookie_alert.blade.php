@@ -1,7 +1,4 @@
 @if (setting('information','cookie_notification_status') == App\Enums\StatusEnum::Active->value)
-    @push("style")
-        <link rel="stylesheet" href="{{ themeAsset('common', 'css/cookie.css') }}">
-    @endpush
     @empty($_COOKIE['cookie_notification'])
         <div class="cookie" id="cookie-notification" style="display:none">
             <img src="{{ themeAsset('common', 'images/cookie.svg') }}" alt="cookie">
