@@ -16,40 +16,40 @@ class ContactService
     /**
      * @throws Exception
      */
-    public static function sendMail(Request $request): void
+    public static function sendMail(array $data): void
     {
-        ValidationService::checkRecaptcha($request);
-        self::checkBlocked($request);
-        self::createMessage($request);
+        ValidationService::checkRecaptcha($data);
+        self::checkBlocked($data);
+        self::createMessage($data);
         self::setEmailSettings();
         Mail::to(setting("contact", "email"))
-            ->send(new \App\Mail\Contact($request));
+            ->send(new \App\Mail\Contact($data));
     }
 
     /**
      * @throws Exception
      */
-    private static function checkBlocked($request): void
+    private static function checkBlocked($data): void
     {
-        $blockedUser = BlockedUser::where("email", $request->email)
-            ->orWhere("ip", $request->ip())
+        $blockedUser = BlockedUser::where("email", $data["email"])
+            ->orWhere("ip", request()->ip())
             ->exists();
         if ($blockedUser) {
             throw new Exception(__("front/contact.blocked"));
         }
     }
 
-    private static function createMessage($request): void
+    private static function createMessage($data): void
     {
         Message::create([
-            "name" => $request->name,
-            "phone" => $request->phone,
-            "email" => $request->email,
-            "subject" => $request->subject,
-            "message" => $request->message,
+            "name" => $data["name"],
+            "phone" => $data["phone"],
+            "email" => $data["email"],
+            "subject" => $data["subject"],
+            "message" => $data["message"],
             "status" => StatusEnum::Unread->value,
-            "ip" => $request->ip(),
-            "user_agent" => $request->userAgent(),
+            "ip" => request()->ip(),
+            "user_agent" => request()->userAgent(),
             //"consent" => $request->terms
         ]);
     }

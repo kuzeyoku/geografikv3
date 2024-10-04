@@ -14,17 +14,14 @@ class Contact extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $request;
-
-    public function __construct(Request $request)
+    public function __construct(protected array $data)
     {
-        $this->request = $request;
     }
 
     public function envelope(): Envelope
     {
-        $replyTo = [new Address($this->request->email)];
-        $subject = config("general.title") . " İletişim";
+        $replyTo = [new Address($this->data["email"])];
+        $subject = setting("general", "title") . " İletişim";
 
         return new Envelope(replyTo: $replyTo, subject: $subject);
     }
@@ -34,11 +31,11 @@ class Contact extends Mailable
         return new Content(
             markdown: 'emails.contact',
             with: [
-                'name' => $this->request->name,
-                'email' => $this->request->email,
-                'phone' => $this->request->phone,
-                "subject" => $this->request->subject,
-                "message" => $this->request->message
+                'name' => $this->data["name"],
+                'email' => $this->data["email"],
+                'phone' => $this->data["phone"],
+                "subject" => $this->data["subject"],
+                "message" => $this->data["message"]
             ]
         );
     }

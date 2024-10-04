@@ -20,7 +20,7 @@ class ContactController extends Controller
     public function send(ContactRequest $request)
     {
         try {
-            ContactService::sendMail($request);
+            ContactService::sendMail($request->validated());
             return back()
                 ->with("success", __("front/contact.send_success"));
         } catch (\Exception $e) {
