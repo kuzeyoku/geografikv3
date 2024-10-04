@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ themeAsset('front', 'css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ themeAsset('front', 'css/main.css') }}">
     @if(setting("information", "cookie_notification_status") == App\Enums\StatusEnum::Active->value)
-        <link rel="stylesheet" href="{{themeAsset("front","common/css/cookie.css")}}">
+        <link rel="stylesheet" href="{{themeAsset("common","css/cookie.css")}}">
     @endif
     @stack('style')
 </head>
