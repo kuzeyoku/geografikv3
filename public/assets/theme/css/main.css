@@ -4759,6 +4759,7 @@ select {
 
 .about-details ul li {
     list-style: disc;
+    margin-left: 20px;
 }
 
 .about-details-box {
