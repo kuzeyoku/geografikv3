@@ -1,5 +1,6 @@
 ﻿@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
 body {
     font-family: "Roboto", sans-serif;
     font-size: 15px;
@@ -4756,6 +4757,10 @@ select {
     }
 }
 
+.about-details ul li {
+    list-style: disc;
+}
+
 .about-details-box {
     background-size: cover;
     background-repeat: no-repeat;
@@ -4869,7 +4874,7 @@ select {
     border-radius: 30px;
 }
 
-.single__service img{
+.single__service img {
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
 }
@@ -9973,6 +9978,7 @@ input.main-search-input::placeholder {
 .copyright-list.st-2 li a:hover {
     opacity: 0.7;
 }
+
 .product-container {
     text-align: center;
     position: relative;
