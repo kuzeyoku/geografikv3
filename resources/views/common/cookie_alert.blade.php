@@ -13,6 +13,7 @@
             <button class="cookie-btn" id="cookie-accept">{{ __('front/cookie.txt3') }}</button>
         </div>
         @push('script')
+            <script src="{{ themeAsset("common","js/jquery.cookie.js") }}"></script>
             <script>
                 $(document).ready(function () {
                     $("#cookie-notification").show("slow");
