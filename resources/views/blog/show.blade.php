@@ -125,6 +125,12 @@
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <script>
             function onSubmit(token) {
+                const form = document.getElementById("comment-form");
+                if (form.checkValidity()) {
+                    form.submit();
+                } else {
+                    form.reportValidity();
+                }
                 document.getElementById("comment-form").submit();
             }
         </script>
