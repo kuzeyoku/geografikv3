@@ -7,7 +7,7 @@
             </div>
             <div class="description">
                 {!! __('front/cookie.txt2', [
-                    'url' => $cookiePolicyPageLink,
+                    'url' => $cookie_policy_page_url,
                 ]) !!}
             </div>
             <button class="cookie-btn" id="cookie-accept">{{ __('front/cookie.txt3') }}</button>

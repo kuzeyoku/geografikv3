@@ -24,7 +24,8 @@ class CookieProvider extends ServiceProvider
                 return \App\Models\Page::find(setting("information", "cookie_policy_page"));
             });
             view()->composer("common.cookie_alert", function ($view) use ($page) {
-                $view->with(compact("page"));
+                $cookie_policy_page_url = $page?->url ?? "#";
+                $view->with(compact("cookie_policy_page_url"));
             });
         }
     }
