@@ -105,7 +105,7 @@
                                             {{html()->textarea("comment")->placeholder(__("front/blog.txt15"))->required()}}
                                         </div>
                                     </div>
-                                    {{html()->button(__('front/blog.txt16'))->class("grb-btn comment-btn g-recaptcha")->data("sitekey",setting("integration","recaptcha_site_key"))->data("callback","onSubmit")}}
+                                    {{html()->button(__('front/blog.txt16'))->class("grb-btn comment-btn g-recaptcha")->data("sitekey",setting("integration","recaptcha_site_key"))->data("callback","onSubmit")->data("action","submit")}}
                                     {{html()->form()->close()}}
                                 </div>
                             </div>
@@ -131,7 +131,6 @@
                 } else {
                     form.reportValidity();
                 }
-                document.getElementById("comment-form").submit();
             }
         </script>
     @endpush
