@@ -10,14 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Maintenance
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     */
     public function handle(Request $request, Closure $next): Response
     {
-        if (config("maintenance.status", StatusEnum::Passive->value) == StatusEnum::Active->value && !Auth::check()) {
+        if (setting("maintenance", "status") == StatusEnum::Active->value && !Auth::check()) {
             return redirect()->route("maintenance");
         } else {
             return $next($request);
