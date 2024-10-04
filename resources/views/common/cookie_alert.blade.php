@@ -12,18 +12,20 @@
             </div>
             <button class="cookie-btn" id="cookie-accept">{{ __('front/cookie.txt3') }}</button>
         </div>
-        <script>
-            $(document).ready(function () {
-                $("#cookie-notification").show("slow");
-            });
-
-            $(document).on("click", "#cookie-accept", function () {
-                $.cookie("cookie_notification", "accepted", {
-                    expires: 1,
-                    path: "/"
+        @push('script')
+            <script>
+                $(document).ready(function () {
+                    $("#cookie-notification").show("slow");
                 });
-                $("#cookie-notification").hide("slow");
-            });
-        </script>
+
+                $(document).on("click", "#cookie-accept", function () {
+                    $.cookie("cookie_notification", "accepted", {
+                        expires: 1,
+                        path: "/"
+                    });
+                    $("#cookie-notification").hide("slow");
+                });
+            </script>
+        @endpush
     @endempty
 @endif
