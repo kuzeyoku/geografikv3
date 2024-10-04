@@ -89,7 +89,7 @@
                                 @endif
                                 <div class="post-comment-form mb-30">
                                     <h4>@lang("front/blog.txt12") </h4>
-                                    {{html()->form()->route("blog.comment_store",$blog)->open()}}
+                                    {{html()->form()->route("blog.comment_store",$blog)->id("comment-form")->open()}}
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="post-input">
@@ -105,11 +105,7 @@
                                             {{html()->textarea("comment")->placeholder(__("front/blog.txt15"))->required()}}
                                         </div>
                                     </div>
-                                    {{ html()->submit(__('front/blog.txt16'))->class('grb-btn comment-btn g-recaptcha')->attributes([
-                                        'data-sitekey' => config('recaptcha.site_key'),
-                                        'data-callback' => 'comment-form',
-                                        'data-action' => 'submit',
-                                    ]) }}
+                                    {{html()->button(__('front/blog.txt16'))->class("grb-btn comment-btn g-recaptcha")->data("sitekey",setting("integration","recaptcha_site_key"))->data("callback","onSubmit")->data("action","submit")}}
                                     {{html()->form()->close()}}
                                 </div>
                             </div>
@@ -123,3 +119,14 @@
         </div>
     </div>
 @endsection
+@include('common.alert')
+@if (setting("integration","recaptcha_status") == App\Enums\StatusEnum::Active->value)
+    @push('script')
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+            function onSubmit(token) {
+                document.getElementById("comment-form").submit();
+            }
+        </script>
+    @endpush
+@endif
