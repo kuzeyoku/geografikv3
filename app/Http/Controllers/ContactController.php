@@ -26,7 +26,7 @@ class ContactController extends Controller
         } catch (\Exception $e) {
             return back()
                 ->withInput()
-                ->with("error", $e->getMessage());
+                ->with("error", __("front/contact.send_error"));
         }
     }
 }
