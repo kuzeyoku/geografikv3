@@ -19,6 +19,6 @@ class CookieProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+//
     }
 }

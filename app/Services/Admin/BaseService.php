@@ -32,10 +32,7 @@ class BaseService
     {
         $item = $this->model->create($request);
         $this->translations($item, $request);
-        if (method_exists($item, 'hasMedia')) {
-            $fileService = new FileService("image");
-            $fileService->upload($item, $request);
-        }
+        $this->fileUpload($item, $request);
         // Log::channel("custom_info")->info(auth()->user()->name . " tarafından bir " . $this->module->name . " içeriği oluşturuldu. " . $item->title);
     }
 
@@ -43,10 +40,7 @@ class BaseService
     {
         $item->update($request);
         $this->translations($item, $request);
-        if (method_exists($item, 'hasMedia')) {
-            $fileService = new FileService("image");
-            $fileService->upload($item, $request);
-        }
+        $this->fileUpload($item, $request);
     }
 
     public function translations($item, $request): void
@@ -65,6 +59,18 @@ class BaseService
                     ]
                 );
             });
+        }
+    }
+
+    public function fileUpload($item, $request): void
+    {
+        if (array_key_exists("image", $request) && $request["image"]->isValid()) {
+            $fileService = new FileService("image", $request);
+            $fileService->upload($item);
+        }
+        if (array_key_exists("document", $request) && $request["document"]->isValid()) {
+            $fileService = new FileService("document", $request, "document");
+            $fileService->upload($item);
         }
     }
 
