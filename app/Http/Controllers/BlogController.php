@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ModuleEnum;
-use App\Enums\StatusEnum;
 use App\Http\Requests\CommentRequest;
 use App\Models\Blog;
 use App\Models\BlogComment;

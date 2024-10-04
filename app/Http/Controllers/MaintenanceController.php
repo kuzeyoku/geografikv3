@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StatusEnum;
-use App\Services\Front\SeoService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class MaintenanceController extends Controller
 {
