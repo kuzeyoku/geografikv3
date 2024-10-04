@@ -66,11 +66,7 @@
                         </div>
                     </div>
                     <div class="form-login">
-                        {{ html()->submit(__('admin/auth.login'))->class('btn btn-login g-recaptcha')->attributes([
-                                'data-sitekey' => config('integration.recaptcha_site_key'),
-                                'data-callback' => 'onSubmit',
-                                'data-action' => 'submit',
-                            ]) }}
+                        {{ html()->submit(__('admin/auth.login'))->class('btn btn-login g-recaptcha')->data("sitekey",setting("integration","recaptcha_site_key"))->data("callback","onSubmit")->data("action","submit") }}
                     </div>
                     <div class="my-4 d-flex justify-content-center align-items-center copyright-text">
                         <p>@lang("admin/{$folder}.copyright", ['year' => date('Y')])</p>
