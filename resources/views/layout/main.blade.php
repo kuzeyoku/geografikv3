@@ -26,6 +26,7 @@
     @yield('content')
 </main>
 @include('layout.footer')
+@include('common.cookie_alert')
 <script src="{{ themeAsset('front', 'js/vendor/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ themeAsset('front', 'js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ themeAsset('front', 'js/swiper-bundle.js') }}"></script>
@@ -41,7 +42,5 @@
 <script src="{{ themeAsset('front', 'js/plugins.js') }}"></script>
 <script src="{{ themeAsset('front', 'js/main.js') }}"></script>
 @stack('script')
-@include('common.cookie_alert')
 </body>
-
 </html>
