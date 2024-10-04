@@ -70,15 +70,13 @@ class ProductController extends Controller
     public function imageStore(ImageProductRequest $request, Product $product): object
     {
         try {
-            $fileService = new FileService("file", $request->validated(), "images");
+            $fileService = new FileService("file", "images");
             $fileService->upload($product, $request->validated());
             return (object)[
-                "status" => "success",
                 "message" => __("admin/alert.default_success")
             ];
         } catch (Throwable $e) {
             return (object)[
-                "status" => "error",
                 "message" => __("admin/alert.default_error")
             ];
         }

@@ -28,11 +28,11 @@ function themeAsset($folder, $file): string
     return asset("assets/" . config("template.{$folder}.asset") . "/" . $file);
 }
 
-function setting($category, $key = null, $default = null): mixed
+function setting($category, $key = null): mixed
 {
     $settings = App\Services\Front\SettingService::toArray();
     if (is_null($key)) {
         return $settings[$category] ?? [];
     }
-    return $settings[$category][$key] ?? $default;
+    return $settings[$category][$key] ?? null;
 }

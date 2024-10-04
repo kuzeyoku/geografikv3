@@ -9,6 +9,7 @@ use App\Models\BlogComment;
 use App\Models\Category;
 use App\Services\Front\SeoService;
 use App\Services\Front\SettingService;
+use App\Services\RecaptchaService;
 use App\Services\ValidationService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
@@ -20,17 +21,17 @@ class BlogController extends Controller
     {
         SeoService::module(ModuleEnum::Blog);
         if (SettingService::cacheIsActive()) {
-            $cacheKey = ModuleEnum::Blog->value . "_list_" . (Paginator::resolveCurrentPage() ?: 1) . "_" . app()->getLocale();
+            $cacheKey = ModuleEnum::Blog . "_list_" . (Paginator::resolveCurrentPage() ?: 1) . "_" . app()->getLocale();
             $data = Cache::remember($cacheKey, config("cache.time"), function () {
                 return [
-                    "blogs" => Blog::active()->order()->paginate(setting("pagination", "front", 10)),
+                    "blogs" => Blog::active()->order()->paginate(config("pagination.front", 10)),
                     "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
                     "categories" => Category::whereModule(ModuleEnum::Blog)->active()->get(),
                 ];
             });
         } else {
             $data = [
-                "blogs" => Blog::active()->order()->paginate(setting("pagination", "front", 10))->onEachSide(1),
+                "blogs" => Blog::active()->order()->paginate(config("pagination.front", 10))->onEachSide(1),
                 "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
                 "categories" => Category::active()->whereModule(ModuleEnum::Blog)->get(),
             ];
@@ -75,6 +76,9 @@ class BlogController extends Controller
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     private function ipControl(CommentRequest $request)
     {
         $data = BlogComment::whereIp($request->ip())->orderBy("created_at", "DESC")->first();
