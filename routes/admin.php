@@ -4,7 +4,7 @@ use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix(config("system.admin", "admin"))->name('admin.')->group(function () {
+Route::prefix(setting("system", "admin", "admin"))->name('admin.')->group(function () {
     //Auth Routes
     Route::controller(\App\Http\Controllers\Admin\AuthController::class)->prefix("auth")->group(function () {
         Route::get('login', 'login')->name('auth.login');
