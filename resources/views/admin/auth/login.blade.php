@@ -34,7 +34,7 @@
                     <div class="form-login">
                         {{ html()->label(__("admin/{$folder}.email")) }}
                         <div class="form-addons">
-                            {{ html()->email('email')->class('form-control mb-0')->placeholder(__("admin/{$folder}.email_placeholder")) }}
+                            {{ html()->email('email')->class('form-control mb-0')->placeholder(__("admin/{$folder}.email_placeholder"))->required() }}
                             <img src="{{ themeAsset('admin', 'img/icons/mail.svg') }}" alt="img">
                         </div>
                         @error('email')
@@ -44,7 +44,7 @@
                     <div class="form-login">
                         {{ html()->label(__("admin/{$folder}.password")) }}
                         <div class="pass-group">
-                            {{ html()->password('password')->class('form-control pass-input mb-0')->placeholder(__("admin/{$folder}.password_placeholder")) }}
+                            {{ html()->password('password')->class('form-control pass-input mb-0')->placeholder(__("admin/{$folder}.password_placeholder"))->required() }}
                             @svg('fas-eye-slash', 'fas toggle-password' )
                         </div>
                         @error('password')
