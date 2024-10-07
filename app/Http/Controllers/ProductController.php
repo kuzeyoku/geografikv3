@@ -34,8 +34,8 @@ class ProductController extends Controller
     {
         SeoService::show($product);
         $otherProducts = SettingService::cacheIsActive()
-            ? Cache::remember(ModuleEnum::Product->value . "_" . $product->id . "_other_" . "_" . app()->getLocale(), config("cache.time"), fn() => $product->category->products()->active()->whereNot('id', $product->id)->order()->get())
-            : $product->category->products()->active()->whereNot('id', $product->id)->order()->get();
+            ? Cache::remember(ModuleEnum::Product->value . "_" . $product->id . "_other_" . "_" . app()->getLocale(), config("cache.time"), fn() => $product->category->products()->active()->whereKeyNot($product)->order()->get())
+            : $product->category->products()->active()->whereKeyNot($product->id)->order()->get();
         return view('product.show', compact('product', 'otherProducts'));
     }
 }
