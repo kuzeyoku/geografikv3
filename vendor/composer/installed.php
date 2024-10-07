@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'c2149896a6af20f299b57db01d71da6c5bc5e59e',
+        'reference' => 'fe675efaae43d4744608f43dc1a0866d59960225',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -424,7 +424,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'c2149896a6af20f299b57db01d71da6c5bc5e59e',
+            'reference' => 'fe675efaae43d4744608f43dc1a0866d59960225',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -634,15 +634,6 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'outhebox/blade-flags' => array(
-            'pretty_version' => '1.5.1',
-            'version' => '1.5.1.0',
-            'reference' => 'fc630fc31f99fd43033338d79604bf153767c70b',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../outhebox/blade-flags',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'owenvoke/blade-fontawesome' => array(
             'pretty_version' => 'v2.6.0',
             'version' => '2.6.0.0',
@@ -835,8 +826,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
