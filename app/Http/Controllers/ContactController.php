@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactRequest;
+use App\Http\Requests\Contact\ContactRequest;
 use App\Models\Slider;
 use App\Services\CacheService;
 use App\Services\Front\ContactService;
