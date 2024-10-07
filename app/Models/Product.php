@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ModuleEnum;
 use App\Enums\StatusEnum;
+use App\Services\CacheService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
@@ -24,15 +25,7 @@ class Product extends Model implements HasMedia
         "order"
     ];
 
-    protected $locale;
-
     protected $with = ["translate", "category"];
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->locale = session("locale");
-    }
 
     public function scopeActive($query)
     {
@@ -56,9 +49,7 @@ class Product extends Model implements HasMedia
 
     public function getImageAttribute()
     {
-        return cache()->remember("product_image_" . $this->id, config("cache.time"), function () {
-            return $this->getFirstMediaUrl() ?? asset("assets/common/images/noimage.jpg");
-        });
+        return CacheService::cacheQuery("product_image_" . $this->id, fn() => $this->getFirstMediaUrl() ?? asset("assets/common/images/noimage.jpg"));
     }
 
     public function getTitlesAttribute(): array
@@ -66,9 +57,9 @@ class Product extends Model implements HasMedia
         return $this->translate->pluck("title", "lang")->all();
     }
 
-    public function getTitleAttribute(): string
+    public function getTitleAttribute(): string|null
     {
-        return $this->translate->where("lang", $this->locale)->pluck('title')->first();
+        return $this->translate->where("lang", session("locale"))->pluck('title')->first();
     }
 
     public function getDescriptionsAttribute(): array
@@ -76,9 +67,9 @@ class Product extends Model implements HasMedia
         return $this->translate->pluck("description", "lang")->all();
     }
 
-    public function getDescriptionAttribute(): string
+    public function getDescriptionAttribute(): string|null
     {
-        return $this->translate->where("lang", $this->locale)->pluck('description')->first();
+        return $this->translate->where("lang", session("locale"))->pluck('description')->first();
     }
 
     public function getFeaturesAttribute(): array
@@ -89,11 +80,10 @@ class Product extends Model implements HasMedia
     public function getFeatureAttribute(): array
     {
         $result = [];
-        if (array_key_exists($this->locale, $this->features)) {
-            $featuresLine = array_filter(explode("\r\n", $this->features[$this->locale]), function ($item) {
+        if (array_key_exists(session("locale"), $this->features)) {
+            $featuresLine = array_filter(explode("\r\n", $this->features[session("locale")]), function ($item) {
                 return !empty($item);
             });
-            $result = [];
             array_map(function ($item) use (&$result) {
                 list($key, $value) = explode(":", $item);
                 $result[$key] = $value;

@@ -8,10 +8,7 @@ class LanguageController extends Controller
 {
     public function set(SetLanguageRequest $request)
     {
-        $request->validate([
-            "locale" => "required|string|exists:languages,code",
-        ]);
-        session()->put("locale", $request->locale);
+        session()->put("locale", $request->get("locale"));
         return back();
     }
 }

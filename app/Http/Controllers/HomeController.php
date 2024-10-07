@@ -10,6 +10,7 @@ use App\Models\Project;
 use App\Models\Sector;
 use App\Models\Slider;
 use App\Models\Testimonial;
+use App\Services\CacheService;
 use App\Services\Front\SettingService;
 use App\Services\Front\SeoService;
 use Illuminate\Support\Facades\Cache;
@@ -25,9 +26,7 @@ class HomeController extends Controller
         $data["testimonials"] = $this->getModuleData(ModuleEnum::Testimonial, Testimonial::class);
         $data["blogs"] = $this->getModuleData(ModuleEnum::Blog, Blog::class, 3);
         $data["sectors"] = $this->getModuleData(ModuleEnum::Sector, Sector::class);
-        $data["about"] = Cache::remember("about_home_" . app()->getLocale(), config("cache.time"), function () {
-            return Page::find(setting("information", "about_page"));
-        });
+        $data["about"] = CacheService::cacheQuery("about_home", fn() => Page::find(SettingService::get("information", "about_page")));
         return view("index", $data);
     }
 
@@ -37,6 +36,6 @@ class HomeController extends Controller
         if ($limit > 0) {
             $query->limit($limit);
         }
-        return SettingService::cacheIsActive() ? Cache::remember($module->value . "_home_" . app()->getLocale(), config("cache.time"), fn() => $query->get()) : $query->get();
+        return CacheService::cacheQuery($module->value . "_home", fn() => $query->get());
     }
 }

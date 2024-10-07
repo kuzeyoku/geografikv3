@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Category;
+use App\Services\CacheService;
 
 class SitemapController extends Controller
 {
@@ -15,17 +16,17 @@ class SitemapController extends Controller
     {
         $data = array();
         if (config("module.page.status"))
-            $data["pages"] = Page::active()->get();
+            $data["pages"] = CacheService::cacheQuery("sitemap_pages", fn() => Page::active()->get());
         if (config("module.blog.status"))
-            $data["posts"] = Blog::active()->get();
+            $data["posts"] = CacheService::cacheQuery("sitemap_posts", fn() => Blog::active()->get());
         if (config("module.category.status"))
-            $data["categories"] = Category::active()->get();
+            $data["categories"] = CacheService::cacheQuery("sitemap_categories", fn() => Category::active()->get());
         if (config("module.service.status"))
-            $data["services"] = Service::active()->get();
+            $data["services"] = CacheService::cacheQuery("sitemap_services", fn() => Service::active()->get());
         if (config("module.project.status"))
-            $data["projects"] = Project::active()->get();
+            $data["projects"] = CacheService::cacheQuery("sitemap_projects", fn() => Project::active()->get());
         if (config("module.product.status"))
-            $data["products"] = Product::active()->get();
+            $data["products"] = CacheService::cacheQuery("sitemap_products", fn() => Product::active()->get());
         $view = view("common.sitemap", $data)->render();
         return response($view)->header("Content-Type", "text/xml");
     }

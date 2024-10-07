@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
 use App\Models\Slider;
+use App\Services\CacheService;
 use App\Services\Front\ContactService;
 use App\Services\Front\SeoService;
 
@@ -13,7 +14,7 @@ class ContactController extends Controller
     public function index()
     {
         SeoService::index();
-        $slider = Slider::active()->order()->get();
+        $slider = CacheService::cacheQuery("slider_contact", fn() => Slider::active()->order()->get());
         return view('contact', compact('slider'));
     }
 

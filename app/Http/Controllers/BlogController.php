@@ -7,17 +7,17 @@ use App\Http\Requests\CommentRequest;
 use App\Models\Blog;
 use App\Models\BlogComment;
 use App\Models\Category;
+use App\Services\CacheService;
 use App\Services\Front\SeoService;
-use App\Services\Front\SettingService;
 use App\Services\ValidationService;
-use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
     public function index()
     {
         SeoService::module(ModuleEnum::Blog);
-        $data = SettingService::cacheIsActive() ? Cache::remember(ModuleEnum::Blog->value . "_index_" . app()->getLocale(), config("cache.time"), fn() => $this->getBlogData()) : $this->getBlogData();
+        $cacheKey = ModuleEnum::Blog->value . "_index";
+        $data = CacheService::cacheQuery($cacheKey, fn() => $this->getBlogData());
         return view(ModuleEnum::Blog->folder() . ".index", $data);
     }
 
@@ -25,7 +25,8 @@ class BlogController extends Controller
     {
         SeoService::show($blog);
         $blog->increment("view_count");
-        $data = SettingService::cacheIsActive() ? Cache::remember(ModuleEnum::Blog->value . "_detail_" . $blog->id . "_" . app()->getLocale(), config("cache.time"), fn() => $this->getBlogDetailData($blog)) : $this->getBlogDetailData($blog);
+        $cacheKey = ModuleEnum::Blog->value . "_" . $blog->id . "_detail";
+        $data = CacheService::cacheQuery($cacheKey, fn() => $this->getBlogDetailData($blog));
         return view(ModuleEnum::Blog->folder() . ".show", $data);
     }
 

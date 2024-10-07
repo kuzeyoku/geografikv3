@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Front\ThemeService;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,22 +22,17 @@ class ThemeProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer(["common.popup"], function ($view) {
-            $popup = \App\Services\Front\ThemeService::getPopup();
+            $popup = ThemeService::getPopup();
             $view->with(compact("popup"));
         });
 
-        View::composer("layout.about", function ($view) {
-            $about = \App\Services\Front\ThemeService::getAbout();
-            $view->with(compact("about"));
-        });
-
         View::composer("layout.header", function ($view) {
-            $menu = \App\Services\Front\ThemeService::getMenu();
+            $menu = ThemeService::getMenu();
             $view->with(compact("menu"));
         });
 
         View::composer('layout.footer', function ($view) {
-            $footer = \App\Services\Front\ThemeService::getFooter();
+            $footer = ThemeService::getFooter();
             $view->with(compact("footer"));
         });
     }

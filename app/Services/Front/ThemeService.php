@@ -2,55 +2,30 @@
 
 namespace App\Services\Front;
 
-use App\Models\ThemeAsset;
-use App\Services\Admin\SettingService;
-use Illuminate\Support\Facades\Cache;
+use App\Enums\ModuleEnum;
+use App\Enums\StatusEnum;
+use App\Models\Category;
+use App\Models\Menu;
+use App\Models\Page;
+use App\Models\Popup;
+use App\Services\CacheService;
 
 class ThemeService
 {
-    public static function get($file)
-    {
-        return self::getThemeAssets()->where("name", $file)->getFirstMediaUrl($file);
-    }
-
-    public static function getThemeAssets()
-    {
-        return Cache::remember('theme_assets', config("cache.time"), function () {
-            return ThemeAsset::all();
-        });
-    }
-
     public static function getPopup()
     {
-        return Cache::remember('popup_' . app()->getLocale(), 3600, function () {
-            return \App\Models\Popup::active()->first();
-        });
-    }
-
-    public static function getAbout()
-    {
-        return Cache::rememberForever('about_' . app()->getLocale(), function () {
-            if (config('information.about_page')) {
-                return \App\Models\Page::find(config('information.about_page'));
-            }
-        });
+        return CacheService::cacheQuery("popup", fn() => Popup::active()->first());
     }
 
     public static function getMenu()
     {
-        return Cache::rememberForever('menu_' . app()->getLocale(), function () {
-            return \App\Models\Menu::order()->get();
-        });
+        return CacheService::cacheQuery("menu", fn() => Menu::order()->get());
     }
 
-    public static function getFooter()
+    public static function getFooter(): array
     {
-        $footer["quickLinks"] = Cache::rememberForever("footer_quick_links_" . app()->getLocale(), function () {
-            return \App\Models\Page::active()->where("quick_link", \App\Enums\StatusEnum::Yes->value)->get();
-        });
-        $footer["product_categories"] = Cache::rememberForever("footer_product_categories_" . app()->getLocale(), function () {
-            return \App\Models\Category::module(\App\Enums\ModuleEnum::Product)->active()->get();
-        });
+        $footer["quickLinks"] = CacheService::cacheQuery("footer_quick_links", fn() => Page::active()->where("quick_link", StatusEnum::Yes->value)->get());
+        $footer["product_categories"] = CacheService::cacheQuery("footer_product_categories", fn() => Category::module(ModuleEnum::Product)->active()->get());
         return $footer;
     }
 }
