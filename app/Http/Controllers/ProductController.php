@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ModuleEnum;
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\Front\SettingService;
 use App\Services\Front\SeoService;
 use Illuminate\Support\Facades\Cache;
 
@@ -14,27 +15,27 @@ class ProductController extends Controller
     public function index()
     {
         SeoService::module(ModuleEnum::Product);
-        $categories = Cache::remember('categories', config("cache.time"), function () {
-            return Category::module(ModuleEnum::Product)->active()->order()->get();
-        });
+        $categories = SettingService::cacheIsActive()
+            ? Cache::remember(ModuleEnum::Product->value . "_index_" . app()->getLocale(), config("cache.time"), fn() => Category::module(ModuleEnum::Product)->active()->order()->get())
+            : Category::module(ModuleEnum::Product)->active()->order()->get();
         return view('product.index', compact("categories"));
     }
 
     public function category(Category $category)
     {
         SeoService::category($category);
-        $products = Cache::remember('products_' . $category->id, config("cache.time"), function () use ($category) {
-            return $category->products()->active()->order()->get();
-        });
+        $products = SettingService::cacheIsActive()
+            ? Cache::remember(ModuleEnum::Product->value . "_" . $category->id . "_" . app()->getLocale(), config("cache.time"), fn() => $category->products()->active()->order()->get())
+            : $category->products()->active()->order()->get();
         return view('product.category', compact("products", "category"));
     }
 
     public function show(Product $product)
     {
         SeoService::show($product);
-        $otherProducts = Cache::remember('otherProducts_' . $product->id, config("cache.time"), function () use ($product) {
-            return $product->category->products()->active()->whereNot('id', $product->id)->order()->get();
-        });
+        $otherProducts = SettingService::cacheIsActive()
+            ? Cache::remember(ModuleEnum::Product->value . "_" . $product->id . "_other_" . "_" . app()->getLocale(), config("cache.time"), fn() => $product->category->products()->active()->whereNot('id', $product->id)->order()->get())
+            : $product->category->products()->active()->whereNot('id', $product->id)->order()->get();
         return view('product.show', compact('product', 'otherProducts'));
     }
 }

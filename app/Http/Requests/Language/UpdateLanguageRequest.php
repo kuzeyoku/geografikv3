@@ -12,13 +12,6 @@ class UpdateLanguageRequest extends FormRequest
         return true;
     }
 
-    protected $folder;
-
-    public function __construct()
-    {
-        $this->folder = ModuleEnum::Language->folder();
-    }
-
     public function rules(): array
     {
         return [
@@ -30,7 +23,7 @@ class UpdateLanguageRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            "title" => __("admin/{$this->folder}.form_title"),
+            "title" => __("admin/{ModuleEnum::Language->folder()}.form_title"),
             "status" => __("admin/general.status")
         ];
     }

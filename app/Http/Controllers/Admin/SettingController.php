@@ -25,10 +25,10 @@ class SettingController extends Controller
         try {
             $this->service->update($request);
             return back()
-                ->with("success",__("admin/alert.default_success"));
+                ->with("success", __("admin/alert.default_success"));
         } catch (Throwable $e) {
             return back()
-                ->with("error",__("admin/alert.default_error"));
+                ->with("error", __("admin/alert.default_error"));
         }
     }
 }

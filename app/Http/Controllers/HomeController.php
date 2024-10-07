@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Enums\ModuleEnum;
 use App\Models\Blog;
 use App\Models\Brand;
-use App\Models\Category;
 use App\Models\Page;
-use App\Models\Product;
 use App\Models\Project;
 use App\Models\Sector;
 use App\Models\Slider;
 use App\Models\Testimonial;
+use App\Services\Front\SettingService;
 use App\Services\Front\SeoService;
 use Illuminate\Support\Facades\Cache;
 
@@ -20,34 +19,24 @@ class HomeController extends Controller
     public function index()
     {
         SeoService::index();
-        $data["brands"] = Cache::remember("brand_home_" . app()->getLocale(), config("cache.time"), function () {
-            return Brand::active()->order()->get();
-        });
-
-        $data["sliders"] = Cache::remember("slider_home_" . app()->getLocale(), config("cache.time"), function () {
-            return Slider::active()->order()->get();
-        });
-
-        $data["projects"] = Cache::remember("project_home_" . app()->getLocale(), config("cache.time"), function () {
-            return Project::active()->order()->limit(6)->get();
-        });
-
-        $data["testimonials"] = Cache::remember("testimonial_home_" . app()->getLocale(), config("cache.time"), function () {
-            return Testimonial::active()->order()->get();
-        });
-
-        $data["blogs"] = Cache::remember("blog_home_" . app()->getLocale(), config("cache.time"), function () {
-            return Blog::active()->order()->limit(3)->get();
-        });
-
-        $data["sectors"] = Cache::remember("sector_home_" . app()->getLocale(), config("cache.time"), function () {
-            return Sector::active()->order()->get();
-        });
-
+        $data["brands"] = $this->getModuleData(ModuleEnum::Brand, Brand::class);
+        $data["sliders"] = $this->getModuleData(ModuleEnum::Slider, Slider::class);
+        $data["projects"] = $this->getModuleData(ModuleEnum::Project, Project::class, 6);
+        $data["testimonials"] = $this->getModuleData(ModuleEnum::Testimonial, Testimonial::class);
+        $data["blogs"] = $this->getModuleData(ModuleEnum::Blog, Blog::class, 3);
+        $data["sectors"] = $this->getModuleData(ModuleEnum::Sector, Sector::class);
         $data["about"] = Cache::remember("about_home_" . app()->getLocale(), config("cache.time"), function () {
             return Page::find(setting("information", "about_page"));
         });
-
         return view("index", $data);
+    }
+
+    private function getModuleData(ModuleEnum $module, $model, $limit = 0)
+    {
+        $query = $model::active()->order();
+        if ($limit > 0) {
+            $query->limit($limit);
+        }
+        return SettingService::cacheIsActive() ? Cache::remember($module->value . "_home_" . app()->getLocale(), config("cache.time"), fn() => $query->get()) : $query->get();
     }
 }

@@ -52,11 +52,11 @@ class SettingService
 
     public static function cacheIsActive(): bool
     {
-        return config("cache.status", StatusEnum::Passive->value) == StatusEnum::Active->value;
+        return setting("cache", "status", StatusEnum::Passive->value) == StatusEnum::Active->value;
     }
 
     public static function recaptchaIsActive(): bool
     {
-        return config("recaptcha.status", StatusEnum::Passive->value) == StatusEnum::Active->value;
+        return setting("recaptcha", "status", StatusEnum::Passive->value) == StatusEnum::Active->value;
     }
 }

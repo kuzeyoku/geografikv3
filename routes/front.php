@@ -54,4 +54,6 @@ Route::middleware(CountVisitors::class, Maintenance::class)->group(function () {
     }
 });
 
-Route::get("maintenance", [App\Http\Controllers\MaintenanceController::class, "index"])->name("maintenance");
+if (setting("maintenance.status") == StatusEnum::Active->value) {
+    Route::get("maintenance", [App\Http\Controllers\MaintenanceController::class, "index"])->name("maintenance");
+}

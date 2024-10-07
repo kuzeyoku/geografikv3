@@ -10,63 +10,33 @@ use App\Models\Category;
 use App\Services\Front\SeoService;
 use App\Services\Front\SettingService;
 use App\Services\ValidationService;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
-
     public function index()
     {
         SeoService::module(ModuleEnum::Blog);
-        if (SettingService::cacheIsActive()) {
-            $cacheKey = ModuleEnum::Blog->value . "_list_" . (Paginator::resolveCurrentPage() ?: 1) . "_" . app()->getLocale();
-            $data = Cache::remember($cacheKey, config("cache.time"), function () {
-                return [
-                    "blogs" => Blog::active()->order()->paginate(setting("pagination", "front", 10)),
-                    "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
-                    "categories" => Category::whereModule(ModuleEnum::Blog)->active()->get(),
-                ];
-            });
-        } else {
-            $data = [
-                "blogs" => Blog::active()->order()->paginate(setting("pagination", "front", 10))->onEachSide(1),
-                "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
-                "categories" => Category::active()->whereModule(ModuleEnum::Blog)->get(),
-            ];
-        }
+        $data = SettingService::cacheIsActive() ? Cache::remember(ModuleEnum::Blog->value . "_index_" . app()->getLocale(), config("cache.time"), fn() => $this->getBlogData()) : $this->getBlogData();
         return view(ModuleEnum::Blog->folder() . ".index", $data);
     }
 
     public function show(Blog $blog)
     {
         SeoService::show($blog);
-        $cacheKey = ModuleEnum::Blog->value . "_detail_" . $blog->id . "_" . app()->getLocale();
         $blog->increment("view_count");
-        if (SettingService::cacheIsActive()) {
-            $data = Cache::remember($cacheKey, config("cache.time"), function () use ($blog) {
-                return [
-                    "blog" => $blog,
-                    "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
-                    "categories" => Category::active()->whereModule(ModuleEnum::Blog->value)->get(),
-                    "comments" => $blog->comments()->approved()->paginate(5),
-                ];
-            });
-        } else {
-            $data = [
-                "blog" => $blog,
-                "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
-                "categories" => Category::active()->whereModule(ModuleEnum::Blog->value)->get(),
-                "comments" => $blog->comments()->approved()->paginate(5),
-            ];
-        }
+        $data = SettingService::cacheIsActive() ? Cache::remember(ModuleEnum::Blog->value . "_detail_" . $blog->id . "_" . app()->getLocale(), config("cache.time"), fn() => $this->getBlogDetailData($blog)) : $this->getBlogDetailData($blog);
         return view(ModuleEnum::Blog->folder() . ".show", $data);
     }
 
     public function comment_store(CommentRequest $request, Blog $blog)
     {
-        ValidationService::checkRecaptcha($request->validated());
-        $this->ipControl($request);
+        try {
+            ValidationService::checkRecaptcha($request->validated());
+            $this->ipControl($request->ip());
+        } catch (\Exception $e) {
+            return back()->withInput()->with("error", $e->getMessage());
+        }
         try {
             $blog->comments()->create($request->validated());
             return back()->with("success", __("front/blog.comment_success"));
@@ -75,12 +45,31 @@ class BlogController extends Controller
         }
     }
 
-    private function ipControl(CommentRequest $request)
+    private function ipControl($ip)
     {
-        $data = BlogComment::whereIp($request->ip())->orderBy("created_at", "DESC")->first();
-        if ($data) {
-            if ($data->created_at->diffInMinutes(\Carbon\Carbon::now()) < 15)
+        $comment = BlogComment::whereIp($ip)->latest()->first();
+        if ($comment) {
+            if ($comment->created_at->diffInMinutes(\Carbon\Carbon::now()) < 15)
                 throw new \Exception(__("front/blog.comment_ip_block"));
         }
+    }
+
+    private function getBlogData()
+    {
+        return [
+            "blogs" => Blog::active()->order()->paginate(setting("pagination", "front", 10)),
+            "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
+            "categories" => Category::whereModule(ModuleEnum::Blog)->active()->get(),
+        ];
+    }
+
+    public function getBlogDetailData(Blog $blog)
+    {
+        return [
+            "blog" => $blog,
+            "popularPosts" => Blog::active()->viewOrder()->take(5)->get(),
+            "categories" => Category::active()->whereModule(ModuleEnum::Blog->value)->get(),
+            "comments" => $blog->comments()->approved()->paginate(5),
+        ];
     }
 }
