@@ -17,15 +17,18 @@
     <link rel="stylesheet" href="{{ themeAsset('front', 'css/meanmenu.css') }}">
     <link rel="stylesheet" href="{{ themeAsset('front', 'css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ themeAsset('front', 'css/main.css') }}">
+    @if(setting("information", "cookie_notification_status") == App\Enums\StatusEnum::Active->value)
+        <link rel="stylesheet" href="{{themeAsset("common","css/cookie.css")}}">
+    @endif
     @stack('style')
 </head>
-
 <body>
 @include('layout.header')
 <main>
     @yield('content')
 </main>
 @include('layout.footer')
+@include('common.cookie_alert')
 <script src="{{ themeAsset('front', 'js/vendor/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ themeAsset('front', 'js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ themeAsset('front', 'js/swiper-bundle.js') }}"></script>
@@ -42,5 +45,4 @@
 <script src="{{ themeAsset('front', 'js/main.js') }}"></script>
 @stack('script')
 </body>
-
 </html>

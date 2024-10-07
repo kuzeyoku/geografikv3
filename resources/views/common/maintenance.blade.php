@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ themeAsset('admin', 'css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ themeAsset('admin', 'css/style.css') }}">
 </head>
+
 <body class="error-page">
 <div id="global-loader">
     <div class="whirly-loader"></div>
@@ -38,9 +39,10 @@
 <script src="{{ themeAsset('admin', 'js/script.js') }}"></script>
 <script>
     if ($(".comming-soon-pg").length > 0) {
-        const date = '{{ $date }}';
-        new setCountDown(date);
-    }
-</script>
+        var date = '{{ $date }}';
+            new setCountDown(date);
+        }
+    </script>
 </body>
+
 </html>

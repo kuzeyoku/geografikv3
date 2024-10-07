@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 
 class FileService
 {
-    public function __construct(private string $input, private readonly array $request, private string $collection = "default")
+    public function __construct(private string $input, private array $request, private string $collection = "default")
     {
     }
 

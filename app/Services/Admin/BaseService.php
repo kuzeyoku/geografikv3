@@ -43,7 +43,7 @@ class BaseService
         $this->fileUpload($item, $request);
     }
 
-    private function translations($item, $request): void
+    public function translations($item, $request): void
     {
         if (method_exists($item, 'translate')) {
             languageList()->each(function ($lang) use ($item, $request) {

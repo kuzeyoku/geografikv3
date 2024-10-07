@@ -1,0 +1,94 @@
+.cookie {
+    position: fixed;
+    left: 32px;
+    top: auto;
+    right: auto;
+    bottom: 32px;
+    z-index: 10;
+    padding: 32px;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgb(0 0 0 / .2);
+    text-align: center;
+    width: 400px
+}
+
+.cookie img {
+    width: 80px;
+    height: 80px;
+}
+
+.cookie .title {
+    font-size: 20px;
+}
+
+.cookie .description {
+    font-size: 16px;
+}
+
+.cookie img, .cookie .title, .cookie .description {
+    margin-bottom: 20px;
+}
+
+.cookie a {
+    color: #f44336;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600
+}
+
+.cookie a:hover {
+    text-decoration: underline
+}
+
+.cookie .cookie-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #f44336;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer
+}
+
+.cookie .cookie-btn:hover {
+    background-color: #fd7a70
+}
+
+@media only screen and (max-width: 767px) {
+    .cookie {
+        width: 80%;
+        left: 8px;
+        right: 8px;
+        bottom: 8px;
+        padding: 10px
+    }
+
+    .cookie img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 5px
+    }
+
+    .cookie .title {
+        font-size: 14px;
+        margin: 0
+    }
+
+    .cookie .description {
+        font-size: 12px;
+        margin-bottom: 10px
+    }
+
+    .cookie a {
+        font-size: 12px
+    }
+
+    .cookie .cookie-btn {
+        padding: 2px 15px;
+        font-size: 10px;
+        border: none;
+    }
+}
