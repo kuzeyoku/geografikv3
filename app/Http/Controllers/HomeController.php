@@ -11,9 +11,7 @@ use App\Models\Sector;
 use App\Models\Slider;
 use App\Models\Testimonial;
 use App\Services\CacheService;
-use App\Services\Front\SettingService;
 use App\Services\Front\SeoService;
-use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -26,7 +24,7 @@ class HomeController extends Controller
         $data["testimonials"] = $this->getModuleData(ModuleEnum::Testimonial, Testimonial::class);
         $data["blogs"] = $this->getModuleData(ModuleEnum::Blog, Blog::class, 3);
         $data["sectors"] = $this->getModuleData(ModuleEnum::Sector, Sector::class);
-        $data["about"] = CacheService::cacheQuery("about_home", fn() => Page::find(SettingService::get("information", "about_page")));
+        $data["about"] = CacheService::cacheQuery("about_home", fn() => Page::find(setting("information", "about_page")));
         return view("index", $data);
     }
 
