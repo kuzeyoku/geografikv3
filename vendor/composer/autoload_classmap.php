@@ -3419,6 +3419,7 @@ return array(
     'NunoMaduro\\Collision\\Provider' => $vendorDir . '/nunomaduro/collision/src/Provider.php',
     'NunoMaduro\\Collision\\SolutionsRepositories\\NullSolutionsRepository' => $vendorDir . '/nunomaduro/collision/src/SolutionsRepositories/NullSolutionsRepository.php',
     'NunoMaduro\\Collision\\Writer' => $vendorDir . '/nunomaduro/collision/src/Writer.php',
+    'OutheBox\\BladeFlags\\BladeFlagsServiceProvider' => $vendorDir . '/outhebox/blade-flags/src/BladeFlagsServiceProvider.php',
     'Override' => $vendorDir . '/symfony/polyfill-php83/Resources/stubs/Override.php',
     'OwenVoke\\BladeFontAwesome\\Actions\\CompileSvgsAction' => $vendorDir . '/owenvoke/blade-fontawesome/src/Actions/CompileSvgsAction.php',
     'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider' => $vendorDir . '/owenvoke/blade-fontawesome/src/BladeFontAwesomeServiceProvider.php',
