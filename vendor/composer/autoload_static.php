@@ -18,12 +18,12 @@ class ComposerStaticInita8a35a754cf2000a0499c05db90d4ebc
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '29ffe97919493792170d47eb03a68da9' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/helpers.php',
         '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '2203a247e6fda86070a5e4e07aed533a' => __DIR__ . '/..' . '/symfony/clock/Resources/now.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        '29ffe97919493792170d47eb03a68da9' => __DIR__ . '/..' . '/blade-ui-kit/blade-icons/src/helpers.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
@@ -217,6 +217,7 @@ class ComposerStaticInita8a35a754cf2000a0499c05db90d4ebc
         'O' => 
         array (
             'OwenVoke\\BladeFontAwesome\\' => 26,
+            'OutheBox\\BladeFlags\\' => 20,
         ),
         'N' => 
         array (
@@ -532,6 +533,10 @@ class ComposerStaticInita8a35a754cf2000a0499c05db90d4ebc
         'OwenVoke\\BladeFontAwesome\\' => 
         array (
             0 => __DIR__ . '/..' . '/owenvoke/blade-fontawesome/src',
+        ),
+        'OutheBox\\BladeFlags\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/outhebox/blade-flags/src',
         ),
         'NunoMaduro\\Collision\\' => 
         array (
@@ -4114,6 +4119,7 @@ class ComposerStaticInita8a35a754cf2000a0499c05db90d4ebc
         'NunoMaduro\\Collision\\Provider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Provider.php',
         'NunoMaduro\\Collision\\SolutionsRepositories\\NullSolutionsRepository' => __DIR__ . '/..' . '/nunomaduro/collision/src/SolutionsRepositories/NullSolutionsRepository.php',
         'NunoMaduro\\Collision\\Writer' => __DIR__ . '/..' . '/nunomaduro/collision/src/Writer.php',
+        'OutheBox\\BladeFlags\\BladeFlagsServiceProvider' => __DIR__ . '/..' . '/outhebox/blade-flags/src/BladeFlagsServiceProvider.php',
         'Override' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/Override.php',
         'OwenVoke\\BladeFontAwesome\\Actions\\CompileSvgsAction' => __DIR__ . '/..' . '/owenvoke/blade-fontawesome/src/Actions/CompileSvgsAction.php',
         'OwenVoke\\BladeFontAwesome\\BladeFontAwesomeServiceProvider' => __DIR__ . '/..' . '/owenvoke/blade-fontawesome/src/BladeFontAwesomeServiceProvider.php',
