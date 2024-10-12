@@ -23,7 +23,7 @@ class ProjectController extends Controller
     {
         SeoService::show($project);
         $cacheKey = ModuleEnum::Product->value . "_" . $project->id . "_other";
-        $otherProjects = CacheService::cacheQuery($cacheKey, fn() => $project->category->projects()->active()->whereKeyNot($project)->order()->get());
+        $otherProjects = CacheService::cacheQuery($cacheKey, fn() => Project::whereKeyNot($project->id)->active()->get());
         return view('project.show', compact('project', "otherProjects"));
     }
 }
