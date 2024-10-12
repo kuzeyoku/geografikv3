@@ -14,7 +14,6 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
-        "outhebox/blade-flags": "^1.5",
         "owenvoke/blade-fontawesome": "^2.4",
         "spatie/laravel-html": "^3.9",
         "spatie/laravel-medialibrary": "^11.0.0"
