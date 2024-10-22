@@ -46,7 +46,7 @@ class BlogController extends Controller
         }
     }
 
-    private function ipControl($ip)
+    private function ipControl($ip): void
     {
         $comment = BlogComment::whereIp($ip)->latest()->first();
         if ($comment) {
@@ -55,7 +55,7 @@ class BlogController extends Controller
         }
     }
 
-    private function getBlogData()
+    private function getBlogData(): array
     {
         return [
             "blogs" => Blog::active()->order()->paginate(setting("pagination", "front", 10)),
@@ -64,7 +64,7 @@ class BlogController extends Controller
         ];
     }
 
-    public function getBlogDetailData(Blog $blog)
+    public function getBlogDetailData(Blog $blog): array
     {
         return [
             "blog" => $blog,
