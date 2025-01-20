@@ -15,7 +15,7 @@
             @forelse ($items as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td><img width="50" src="{{ $item->getFirstMediaUrl("cover") }}"></td>
+                    <td><img width="50" src="{{ $item->image }}"></td>
                     <td>{{ $item->created_at->diffForHumans() }}</td>
                     <td>{{ $item->updated_at->diffForHumans() }}</td>
                     @include(themeView('admin', 'layout.status'))
