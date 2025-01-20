@@ -20,4 +20,7 @@
     @if(config("module.blog.status"))
         @include('layout.blog')
     @endif
+    @if(config("module.reference.status"))
+        @include("layout.reference")
+    @endif
 @endsection
