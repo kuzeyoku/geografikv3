@@ -38,4 +38,11 @@ class Reference extends Model implements HasMedia
     {
         return ModuleEnum::Reference->singleTitle();
     }
+
+    public function getImageAttribute(): string
+    {
+        return cache()->remember("reference_image" . $this->id, config("cache.time"), function () {
+            return $this->getFirstMediaUrl() ?? asset("assets/common/images/noimage.jpg");
+        });
+    }
 }
